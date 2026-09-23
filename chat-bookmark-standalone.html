@@ -1,0 +1,1512 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Chat Bookmark Preview</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Chat Bookmark Preview" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Chat Bookmark Preview&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;chat-bookmark-demo&quot; aria-label=&quot;Gmail Chat 收藏流程草稿&quot;&gt;
+&lt;style&gt;
+#chat-bookmark-demo{--cb-bg:light-dark(#f6f8fc,#202124);--cb-paper:light-dark(#fff,#292a2d);--cb-ink:light-dark(#202124,#e8eaed);--cb-muted:light-dark(#5f6368,#bdc1c6);--cb-line:light-dark(#e0e3e7,#494b50);--cb-blue:light-dark(#0b57d0,#a8c7fa);--cb-active:light-dark(#e8f0fe,#303f58);font:14px/1.55 Arial,sans-serif;color:var(--cb-ink);background:var(--cb-bg);border:1px solid var(--cb-line);border-radius:14px;overflow:hidden}
+#chat-bookmark-demo *{box-sizing:border-box}#chat-bookmark-demo button,#chat-bookmark-demo input,#chat-bookmark-demo select,#chat-bookmark-demo textarea{font:inherit;color:inherit}#chat-bookmark-demo button{cursor:pointer;border:0;background:transparent;border-radius:8px;padding:8px 10px;text-align:left}#chat-bookmark-demo button:hover{background:var(--cb-active)}#chat-bookmark-demo .top{padding:14px 18px;display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--cb-line)}#chat-bookmark-demo .brand{font-size:20px;font-weight:500}#chat-bookmark-demo .searchbar{flex:1;background:var(--cb-active);padding:8px 16px;border-radius:24px;color:var(--cb-muted)}#chat-bookmark-demo .small{font-size:12px;color:var(--cb-muted)}#chat-bookmark-demo .layout{display:grid;grid-template-columns:150px minmax(0,1fr) 310px;min-height:570px}#chat-bookmark-demo nav{padding:20px 10px}#chat-bookmark-demo nav div{padding:10px;border-radius:22px}#chat-bookmark-demo .active{background:var(--cb-active);color:var(--cb-blue)}#chat-bookmark-demo main{background:var(--cb-paper);padding:20px;min-width:0}#chat-bookmark-demo h2{font-size:18px;font-weight:500;margin:0}#chat-bookmark-demo .head{display:flex;justify-content:space-between;align-items:center;gap:8px}#chat-bookmark-demo .message{margin-top:28px;padding:12px;border-radius:12px;background:var(--cb-bg);border:1px solid transparent}#chat-bookmark-demo .message.selected{border-color:var(--cb-blue);background:var(--cb-active)}#chat-bookmark-demo .message p{margin:10px 0}#chat-bookmark-demo .menu{background:var(--cb-paper);border:1px solid var(--cb-line);border-radius:10px;padding:6px;box-shadow:0 4px 16px #0002;margin:6px 0 0 auto;width:min(100%,240px)}#chat-bookmark-demo .menu button{display:block;width:100%}#chat-bookmark-demo .reply{margin:24px 0 0 18px;padding-left:16px;border-left:2px solid var(--cb-line)}#chat-bookmark-demo aside{border-left:1px solid var(--cb-line);padding:18px;background:var(--cb-paper);min-width:0}#chat-bookmark-demo input,#chat-bookmark-demo textarea,#chat-bookmark-demo select{width:100%;padding:9px 10px;background:var(--cb-paper);border:1px solid var(--cb-line);border-radius:8px;min-width:0}#chat-bookmark-demo label{display:block;margin:16px 0 6px}#chat-bookmark-demo .primary{background:var(--cb-blue);color:light-dark(#fff,#182b49);text-align:center}#chat-bookmark-demo .primary:hover{background:var(--cb-blue);opacity:.9}#chat-bookmark-demo .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}#chat-bookmark-demo .item{display:block;width:100%;margin:4px 0;padding:10px}#chat-bookmark-demo .item span{display:block}#chat-bookmark-demo .group{color:var(--cb-muted);margin:20px 0 6px;font-weight:500}#chat-bookmark-demo .footer{border-top:1px solid var(--cb-line);margin-top:24px;padding-top:12px}#chat-bookmark-demo [hidden]{display:none!important}#chat-bookmark-demo .status{padding:10px 18px;border-top:1px solid var(--cb-line);color:var(--cb-blue);min-height:42px}#chat-bookmark-demo .collapsed{grid-template-columns:150px minmax(0,1fr)}#chat-bookmark-demo .note{white-space:pre-wrap;overflow-wrap:anywhere}#chat-bookmark-demo .item{overflow-wrap:anywhere}#chat-bookmark-demo .month{margin-top:10px}#chat-bookmark-demo .compact .item{padding:5px 10px}#chat-bookmark-demo .compact .item .small{display:none}@media(max-width:800px){#chat-bookmark-demo .layout{grid-template-columns:minmax(0,1fr) 290px}#chat-bookmark-demo nav{display:none}#chat-bookmark-demo .collapsed{grid-template-columns:1fr}#chat-bookmark-demo .searchbar{display:none}}@media(max-width:580px){#chat-bookmark-demo .layout{grid-template-columns:1fr}#chat-bookmark-demo aside{border-left:0;border-top:1px solid var(--cb-line)}#chat-bookmark-demo .top{gap:10px;flex-wrap:wrap}#chat-bookmark-demo main{padding:16px}#chat-bookmark-demo input,#chat-bookmark-demo textarea,#chat-bookmark-demo select{font-size:16px}}
+
+#chat-bookmark-demo .browserbar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--cb-bg);border-bottom:1px solid var(--cb-line)}
+#chat-bookmark-demo .address{flex:1;min-width:0;background:var(--cb-paper);border-radius:18px;padding:6px 14px;overflow-wrap:anywhere}
+#chat-bookmark-demo .positionbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--cb-line)}
+#chat-bookmark-demo .positionbar label{margin:0}#chat-bookmark-demo .positionbar select{width:auto}
+#chat-bookmark-demo .workspace{display:grid;grid-template-columns:minmax(0,1fr) 320px;align-items:stretch}
+#chat-bookmark-demo .gmail{min-width:0}#chat-bookmark-demo .layout{grid-template-columns:135px minmax(0,1fr);min-height:620px}
+#chat-bookmark-demo .workspace.left{grid-template-columns:320px minmax(0,1fr)}
+#chat-bookmark-demo .workspace.left aside{grid-column:1;grid-row:1;border-left:0;border-right:1px solid var(--cb-line)}
+#chat-bookmark-demo .workspace.left .gmail{grid-column:2;grid-row:1}
+#chat-bookmark-demo .workspace.closed{grid-template-columns:1fr}#chat-bookmark-demo .workspace.closed .gmail{grid-column:1}
+#chat-bookmark-demo details{margin:12px 0}#chat-bookmark-demo summary{cursor:pointer;padding:8px 0;color:var(--cb-muted)}
+#chat-bookmark-demo .item.chosen{background:var(--cb-active)}#chat-bookmark-demo .bookmark-row{display:flex;align-items:center;gap:3px}#chat-bookmark-demo .bookmark-row .item{flex:1;min-width:0}
+@media(max-width:850px){#chat-bookmark-demo .layout{grid-template-columns:1fr}#chat-bookmark-demo nav{display:none}}
+@media(max-width:600px){#chat-bookmark-demo .workspace,#chat-bookmark-demo .workspace.left{grid-template-columns:1fr}#chat-bookmark-demo .workspace.left .gmail,#chat-bookmark-demo .workspace.left aside{grid-column:1;grid-row:auto}#chat-bookmark-demo aside{border-top:1px solid var(--cb-line)}#chat-bookmark-demo .layout{min-height:0}#chat-bookmark-demo .browserbar{flex-wrap:wrap}}
+
+#chat-bookmark-demo .workspace{height:650px;min-height:0;overflow:hidden}
+#chat-bookmark-demo .gmail{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#chat-bookmark-demo .layout{min-height:0;flex:1;overflow:auto}
+#chat-bookmark-demo aside{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:14px}
+#chat-bookmark-demo #cb-list{display:flex;flex-direction:column;flex:1;min-height:0}
+#chat-bookmark-demo #cb-list&gt;label{margin-top:8px}#chat-bookmark-demo #cb-list&gt;input,#chat-bookmark-demo #cb-list&gt;select,#chat-bookmark-demo #cb-list&gt;.head,#chat-bookmark-demo #cb-list&gt;.footer{flex-shrink:0}
+#chat-bookmark-demo #cb-items{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable}
+#chat-bookmark-demo .footer{margin-top:10px;padding-top:8px}
+#chat-bookmark-demo #cb-form,#chat-bookmark-demo #cb-manage,#chat-bookmark-demo #cb-transfer{overflow:auto;min-height:0;flex:1;overscroll-behavior:contain}
+#chat-bookmark-demo .bookmark-row{gap:0}#chat-bookmark-demo .item{margin:0;padding:7px 5px;width:auto}
+#chat-bookmark-demo .item span{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#chat-bookmark-demo .note-toggle{flex-shrink:0;padding:7px;width:30px;text-align:center}
+#chat-bookmark-demo .bookmark-note{padding:5px 8px 12px 30px;background:var(--cb-bg);border-radius:6px;margin-bottom:5px;min-width:0}
+#chat-bookmark-demo .bookmark-note p{margin:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+#chat-bookmark-demo .room-line,#chat-bookmark-demo #cb-form&gt;.small,#chat-bookmark-demo #cb-room{display:block;min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#chat-bookmark-demo #cb-room{flex:1}#chat-bookmark-demo details{margin:4px 0}#chat-bookmark-demo summary{padding:6px 0}
+#chat-bookmark-demo .category-row{padding:10px 0;border-bottom:1px solid var(--cb-line)}#chat-bookmark-demo .category-actions{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+#chat-bookmark-demo #cb-category-new{flex:1;width:120px}#chat-bookmark-demo #cb-category-feedback{overflow-wrap:anywhere}
+@media(max-width:600px){#chat-bookmark-demo .workspace,#chat-bookmark-demo .workspace.left{height:auto;overflow:visible}#chat-bookmark-demo .gmail{height:340px}#chat-bookmark-demo aside{height:620px}}
+@media(pointer:coarse){#chat-bookmark-demo .note-toggle{min-width:44px;min-height:44px}#chat-bookmark-demo .item{min-height:44px}}
+
+#chat-bookmark-demo #cb-deleted{flex-shrink:0;padding:8px;margin-top:8px;background:var(--cb-active);border-radius:8px;display:flex;gap:8px;align-items:center}
+#chat-bookmark-demo #cb-deleted-text{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#chat-bookmark-demo .delete-bookmark{color:light-dark(#b3261e,#f2b8b5)}
+&lt;/style&gt;
+&lt;div class=&quot;browserbar&quot;&gt;&lt;span&gt;←　→　↻&lt;/span&gt;&lt;span class=&quot;address&quot;&gt;mail.google.com / Chat&lt;/span&gt;&lt;button id=&quot;cb-toggle&quot; aria-expanded=&quot;true&quot;&gt;☆ Bookmark&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;positionbar&quot;&gt;&lt;label for=&quot;cb-position&quot;&gt;側欄位置預覽&lt;/label&gt;&lt;select id=&quot;cb-position&quot;&gt;&lt;option value=&quot;right&quot;&gt;瀏覽器最右側&lt;/option&gt;&lt;option value=&quot;left&quot;&gt;瀏覽器最左側&lt;/option&gt;&lt;/select&gt;&lt;span class=&quot;small&quot;&gt;示意切換 · 正式版由 Chrome 設定決定&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;workspace&quot; id=&quot;cb-workspace&quot;&gt;&lt;div class=&quot;gmail&quot;&gt;&lt;header class=&quot;top&quot;&gt;&lt;span class=&quot;brand&quot;&gt;M Gmail&lt;/span&gt;&lt;div class=&quot;searchbar&quot;&gt;搜尋郵件與對話&lt;/div&gt;&lt;span class=&quot;small&quot;&gt;互動草稿 · 示意資料&lt;/span&gt;&lt;span class=&quot;small&quot;&gt;H&lt;/span&gt;&lt;/header&gt;
+&lt;div class=&quot;layout&quot; id=&quot;cb-layout&quot;&gt;
+&lt;nav aria-label=&quot;Gmail 導覽&quot;&gt;&lt;div&gt;郵件&lt;/div&gt;&lt;div class=&quot;active&quot;&gt;Chat&lt;/div&gt;&lt;div&gt;Meet&lt;/div&gt;&lt;div class=&quot;small&quot;&gt;聊天室&lt;/div&gt;&lt;div class=&quot;active&quot;&gt;產品開發&lt;/div&gt;&lt;div&gt;技術交流&lt;/div&gt;&lt;div&gt;行政公告&lt;/div&gt;&lt;/nav&gt;
+&lt;main&gt;&lt;div class=&quot;head&quot;&gt;&lt;h2 id=&quot;cb-room&quot;&gt;產品開發&lt;/h2&gt;&lt;span class=&quot;small&quot;&gt;討論串&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;small&quot;&gt;2026 年 9 月 22 日&lt;/div&gt;
+&lt;article class=&quot;message selected&quot; id=&quot;cb-message&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;span&gt;Hazel &lt;span class=&quot;small&quot;&gt;10:24&lt;/span&gt;&lt;/span&gt;&lt;button id=&quot;cb-more&quot; aria-label=&quot;開啟訊息右鍵選單&quot;&gt;⋯&lt;/button&gt;&lt;/div&gt;&lt;p id=&quot;cb-text&quot;&gt;之後開發新功能，我們先整理 OpenSpec proposal，確認範圍後再開始實作。相關流程都集中在這串討論。&lt;/p&gt;&lt;span class=&quot;small&quot;&gt;8 則回覆 · 最近回覆 11:08&lt;/span&gt;
+&lt;div class=&quot;menu&quot; id=&quot;cb-menu&quot; hidden aria-label=&quot;訊息右鍵選單&quot;&gt;&lt;button id=&quot;cb-collect&quot;&gt;☆ 收藏此討論到 Bookmark&lt;/button&gt;&lt;button id=&quot;cb-dismiss&quot;&gt;關閉選單&lt;/button&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;div class=&quot;reply&quot;&gt;&lt;span&gt;Mina &lt;span class=&quot;small&quot;&gt;10:31&lt;/span&gt;&lt;/span&gt;&lt;p&gt;好，之後流程有調整，也直接回覆這串。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;reply&quot;&gt;&lt;span&gt;你 &lt;span class=&quot;small&quot;&gt;11:08&lt;/span&gt;&lt;/span&gt;&lt;p&gt;收到，這串我會留著方便之後查。&lt;/p&gt;&lt;/div&gt;
+&lt;/main&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;aside id=&quot;cb-side&quot; aria-label=&quot;Bookmark 側欄&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;h2&gt;☆ Bookmark&lt;/h2&gt;&lt;button id=&quot;cb-close&quot; aria-label=&quot;收合收藏側欄&quot;&gt;✕&lt;/button&gt;&lt;/div&gt;
+&lt;section id=&quot;cb-list&quot;&gt;&lt;label for=&quot;cb-search&quot;&gt;我的討論收藏&lt;/label&gt;&lt;input id=&quot;cb-search&quot; placeholder=&quot;搜尋標題、筆記…&quot;&gt;&lt;select id=&quot;cb-month&quot; class=&quot;month&quot; aria-label=&quot;收藏月份&quot;&gt;&lt;option value=&quot;all&quot;&gt;全部月份&lt;/option&gt;&lt;option value=&quot;2026/09&quot;&gt;2026 / 09&lt;/option&gt;&lt;option value=&quot;2026/08&quot;&gt;2026 / 08&lt;/option&gt;&lt;option value=&quot;2026/07&quot;&gt;2026 / 07&lt;/option&gt;&lt;option value=&quot;2026/06&quot;&gt;2026 / 06&lt;/option&gt;&lt;/select&gt;&lt;div class=&quot;head&quot;&gt;&lt;p class=&quot;small&quot; id=&quot;cb-count&quot;&gt;&lt;/p&gt;&lt;button id=&quot;cb-manage-open&quot;&gt;管理分類&lt;/button&gt;&lt;/div&gt;&lt;div id=&quot;cb-items&quot;&gt;&lt;/div&gt;&lt;div id=&quot;cb-deleted&quot; hidden role=&quot;status&quot;&gt;&lt;span id=&quot;cb-deleted-text&quot;&gt;&lt;/span&gt;&lt;button id=&quot;cb-undo&quot; type=&quot;button&quot;&gt;復原&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;footer row&quot;&gt;&lt;button id=&quot;cb-import&quot;&gt;匯入收藏&lt;/button&gt;&lt;button id=&quot;cb-export&quot;&gt;匯出收藏&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;form id=&quot;cb-form&quot; hidden&gt;&lt;p id=&quot;cb-form-heading&quot;&gt;收藏討論&lt;/p&gt;&lt;span class=&quot;small&quot;&gt;來源：產品開發 · 2026/09/22&lt;/span&gt;&lt;label for=&quot;cb-title&quot;&gt;標題&lt;/label&gt;&lt;input id=&quot;cb-title&quot; required value=&quot;OpenSpec 開發流程討論&quot;&gt;&lt;label for=&quot;cb-category&quot;&gt;分類&lt;/label&gt;&lt;select id=&quot;cb-category&quot;&gt;&lt;option&gt;未分類&lt;/option&gt;&lt;option selected&gt;專案&lt;/option&gt;&lt;option&gt;技術&lt;/option&gt;&lt;option&gt;行政&lt;/option&gt;&lt;/select&gt;&lt;label for=&quot;cb-note&quot;&gt;筆記（選填）&lt;/label&gt;&lt;textarea id=&quot;cb-note&quot; rows=&quot;3&quot; placeholder=&quot;寫下你之後會想起的線索&quot;&gt;開發前先確認 proposal；流程調整都在這串。&lt;/textarea&gt;&lt;label&gt;&lt;input id=&quot;cb-pin&quot; type=&quot;checkbox&quot; style=&quot;width:auto&quot;&gt; 置頂這串討論&lt;/label&gt;&lt;div class=&quot;row footer&quot;&gt;&lt;button type=&quot;submit&quot; class=&quot;primary&quot;&gt;儲存收藏&lt;/button&gt;&lt;button type=&quot;button&quot; id=&quot;cb-cancel&quot;&gt;取消&lt;/button&gt;&lt;/div&gt;&lt;/form&gt;
+&lt;section id=&quot;cb-manage&quot; hidden&gt;&lt;div class=&quot;head&quot;&gt;&lt;h3&gt;管理分類&lt;/h3&gt;&lt;button id=&quot;cb-manage-back&quot;&gt;返回&lt;/button&gt;&lt;/div&gt;&lt;form id=&quot;cb-category-add&quot;&gt;&lt;label for=&quot;cb-category-new&quot;&gt;新增分類&lt;/label&gt;&lt;div class=&quot;row&quot;&gt;&lt;input id=&quot;cb-category-new&quot; placeholder=&quot;分類名稱&quot; required maxlength=&quot;40&quot;&gt;&lt;button class=&quot;primary&quot; type=&quot;submit&quot;&gt;新增&lt;/button&gt;&lt;/div&gt;&lt;/form&gt;&lt;p class=&quot;small&quot;&gt;刪除分類會將收藏移到「未分類」，保留所有筆記。置頂是顯示狀態，不是分類。&lt;/p&gt;&lt;div id=&quot;cb-category-rows&quot;&gt;&lt;/div&gt;&lt;p id=&quot;cb-category-feedback&quot; role=&quot;status&quot;&gt;&lt;/p&gt;&lt;/section&gt;&lt;section id=&quot;cb-transfer&quot; hidden&gt;&lt;h3 id=&quot;cb-transfer-title&quot;&gt;匯出收藏&lt;/h3&gt;&lt;div id=&quot;cb-transfer-items&quot;&gt;&lt;/div&gt;&lt;div class=&quot;footer row&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;cb-transfer-confirm&quot;&gt;確認&lt;/button&gt;&lt;button id=&quot;cb-transfer-back&quot;&gt;返回&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;/aside&gt;&lt;/div&gt;&lt;div class=&quot;status&quot; id=&quot;cb-status&quot; aria-live=&quot;polite&quot;&gt;右鍵點訊息或按「⋯」，即可試用收藏流程。&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(()=&gt;{
+const root=document.getElementById(&#x27;chat-bookmark-demo&#x27;),q=id=&gt;root.querySelector(&#x27;#cb-&#x27;+id);
+const entries=[{&quot;id&quot;: 10, &quot;title&quot;: &quot;Git 規範討論&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;commit 格式、分支命名與 PR 審查約定&quot;, &quot;room&quot;: &quot;技術交流&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: true}, {&quot;id&quot;: 11, &quot;title&quot;: &quot;請假與代理人安排&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;請假前記得列交接項目，代理人需回覆確認&quot;, &quot;room&quot;: &quot;行政公告&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 12, &quot;title&quot;: &quot;九月版本發布追蹤&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;週四驗收，週五上線；阻塞問題統一回這串&quot;, &quot;room&quot;: &quot;產品開發&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: true}, {&quot;id&quot;: 13, &quot;title&quot;: &quot;登入流程與多帳號切換的邊界情境&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;帳號切換後應清除哪些暫存資料&quot;, &quot;room&quot;: &quot;產品開發&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 14, &quot;title&quot;: &quot;OpenSpec proposal 撰寫範例&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;Mina 提供的範例與 review 注意事項&quot;, &quot;room&quot;: &quot;產品開發&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 15, &quot;title&quot;: &quot;付款失敗後重試與避免重複扣款的確認流程&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;逾時不能直接視為失敗，要查詢交易狀態&quot;, &quot;room&quot;: &quot;支付整合&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 16, &quot;title&quot;: &quot;新版首頁設計稿回饋&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;確認手機尺寸下的按鈕排序&quot;, &quot;room&quot;: &quot;設計協作&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 17, &quot;title&quot;: &quot;七月需求訪談整理&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;使用者常找不到歷史紀錄的原因&quot;, &quot;room&quot;: &quot;產品開發&quot;, &quot;month&quot;: &quot;2026/07&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 18, &quot;title&quot;: &quot;客戶驗收問題與修正排程&quot;, &quot;category&quot;: &quot;專案&quot;, &quot;note&quot;: &quot;先處理阻擋驗收的三個問題&quot;, &quot;room&quot;: &quot;客戶交付&quot;, &quot;month&quot;: &quot;2026/06&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 19, &quot;title&quot;: &quot;API 錯誤碼與提示文案&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;401 要重新登入；409 保留輸入並提示衝突&quot;, &quot;room&quot;: &quot;技術交流&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 20, &quot;title&quot;: &quot;WebSocket 斷線重連策略&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;重試間隔與 session 恢復討論&quot;, &quot;room&quot;: &quot;後端開發&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 21, &quot;title&quot;: &quot;React 狀態管理選擇&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;哪些狀態留在元件，哪些需要跨頁共享&quot;, &quot;room&quot;: &quot;前端開發&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 22, &quot;title&quot;: &quot;測試資料與 mock 的整理方式&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;測試資料盡量保留真實邊界情境&quot;, &quot;room&quot;: &quot;品質測試&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 23, &quot;title&quot;: &quot;部署環境變數命名&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;開發與正式環境的設定差異&quot;, &quot;room&quot;: &quot;平台維運&quot;, &quot;month&quot;: &quot;2026/07&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 24, &quot;title&quot;: &quot;資料庫 migration 回滾方式&quot;, &quot;category&quot;: &quot;技術&quot;, &quot;note&quot;: &quot;有資料轉換時的備份與恢復步驟&quot;, &quot;room&quot;: &quot;後端開發&quot;, &quot;month&quot;: &quot;2026/06&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 25, &quot;title&quot;: &quot;新人帳號與設備申請&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;先開通公司信箱，再申請各系統權限&quot;, &quot;room&quot;: &quot;行政公告&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 26, &quot;title&quot;: &quot;出差報帳與發票注意事項&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;住宿與交通憑證分開附上&quot;, &quot;room&quot;: &quot;行政公告&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 27, &quot;title&quot;: &quot;辦公室門禁異常處理&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;下班時間聯絡窗口&quot;, &quot;room&quot;: &quot;行政公告&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 28, &quot;title&quot;: &quot;每週例會時間調整&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;星期三下午改到星期四上午&quot;, &quot;room&quot;: &quot;團隊日常&quot;, &quot;month&quot;: &quot;2026/07&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 29, &quot;title&quot;: &quot;教育訓練補助申請&quot;, &quot;category&quot;: &quot;行政&quot;, &quot;note&quot;: &quot;課程前先確認主管同意與預算&quot;, &quot;room&quot;: &quot;行政公告&quot;, &quot;month&quot;: &quot;2026/06&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 30, &quot;title&quot;: &quot;上次提到的工具清單&quot;, &quot;category&quot;: &quot;未分類&quot;, &quot;note&quot;: &quot;先收藏，之後整理用途&quot;, &quot;room&quot;: &quot;團隊日常&quot;, &quot;month&quot;: &quot;2026/09&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 31, &quot;title&quot;: &quot;值得再研究的無障礙案例&quot;, &quot;category&quot;: &quot;未分類&quot;, &quot;note&quot;: &quot;鍵盤操作與焦點順序的參考&quot;, &quot;room&quot;: &quot;設計協作&quot;, &quot;month&quot;: &quot;2026/08&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 32, &quot;title&quot;: &quot;同事分享的效能追查步驟&quot;, &quot;category&quot;: &quot;未分類&quot;, &quot;note&quot;: &quot;先觀察 network，再看 render 次數&quot;, &quot;room&quot;: &quot;前端開發&quot;, &quot;month&quot;: &quot;2026/07&quot;, &quot;pin&quot;: false}, {&quot;id&quot;: 33, &quot;title&quot;: &quot;跨組合作窗口&quot;, &quot;category&quot;: &quot;未分類&quot;, &quot;note&quot;: &quot;不同服務的負責人與提問聊天室&quot;, &quot;room&quot;: &quot;團隊日常&quot;, &quot;month&quot;: &quot;2026/06&quot;, &quot;pin&quot;: false}];
+let current={id:3,title:&#x27;OpenSpec 開發流程討論&#x27;,category:&#x27;專案&#x27;,note:&#x27;開發前先確認 proposal；流程調整都在這串。&#x27;,room:&#x27;產品開發&#x27;,month:&#x27;2026/09&#x27;,pin:false},mode=&#x27;export&#x27;;
+const categories=[&#x27;專案&#x27;,&#x27;技術&#x27;,&#x27;行政&#x27;,&#x27;未分類&#x27;],expandedNotes=new Set(),opened=new Set([&#x27;置頂&#x27;,&#x27;專案&#x27;,&#x27;技術&#x27;,&#x27;行政&#x27;,&#x27;未分類&#x27;]);
+const roomNames={&#x27;產品開發&#x27;:&#x27;產品研發中心｜跨部門專案需求與版本進度追蹤討論區&#x27;,&#x27;技術交流&#x27;:&#x27;工程團隊｜前後端技術規範與疑難問題交流聊天室&#x27;,&#x27;行政公告&#x27;:&#x27;人力資源與行政管理處｜全體同仁公告與作業諮詢&#x27;};entries.forEach(e=&gt;e.room=roomNames[e.room]||e.room);current.room=roomNames[current.room];
+const deletedBookmarks=[];
+function status(t){q(&#x27;status&#x27;).textContent=t}
+function panel(open){q(&#x27;side&#x27;).hidden=!open;q(&#x27;workspace&#x27;).classList.toggle(&#x27;closed&#x27;,!open);q(&#x27;toggle&#x27;).setAttribute(&#x27;aria-expanded&#x27;,String(open))}
+function show(which){[&#x27;list&#x27;,&#x27;form&#x27;,&#x27;transfer&#x27;,&#x27;manage&#x27;].forEach(x=&gt;q(x).hidden=x!==which)}
+function edit(e){current=e;syncCategories();panel(true);show(&#x27;form&#x27;);q(&#x27;title&#x27;).value=e.title;q(&#x27;category&#x27;).value=e.category;q(&#x27;note&#x27;).value=e.note;q(&#x27;pin&#x27;).checked=e.pin;q(&#x27;form-heading&#x27;).textContent=entries.some(x=&gt;x.id===e.id)?&#x27;編輯收藏&#x27;:&#x27;收藏討論&#x27;;q(&#x27;form&#x27;).querySelector(&#x27;.small&#x27;).textContent=&#x27;來源：&#x27;+e.room+&#x27; · &#x27;+e.month;q(&#x27;menu&#x27;).hidden=true}
+function render(){
+ const scrollTop=q(&#x27;items&#x27;).scrollTop;q(&#x27;items&#x27;).replaceChildren();
+ const term=q(&#x27;search&#x27;).value.toLowerCase(),month=q(&#x27;month&#x27;).value;
+ const filtered=entries.filter(e=&gt;(e.title+&#x27; &#x27;+e.note+&#x27; &#x27;+e.category+&#x27; &#x27;+e.room).toLowerCase().includes(term)&amp;&amp;(month===&#x27;all&#x27;||e.month===month));
+ q(&#x27;count&#x27;).textContent=filtered.length+&#x27; / &#x27;+entries.length+&#x27; 筆收藏&#x27;;
+ [&#x27;置頂&#x27;,...categories].forEach(cat=&gt;{
+ const group=filtered.filter(e=&gt;cat===&#x27;置頂&#x27;?e.pin:!e.pin&amp;&amp;e.category===cat);if(!group.length)return;
+ const d=document.createElement(&#x27;details&#x27;),s=document.createElement(&#x27;summary&#x27;);s.textContent=cat+&#x27; · &#x27;+group.length;d.open=term||month!==&#x27;all&#x27;||opened.has(cat);d.ontoggle=()=&gt;{if(d.open)opened.add(cat);else opened.delete(cat)};d.append(s);
+ group.forEach(e=&gt;{
+ const row=document.createElement(&#x27;div&#x27;);row.className=&#x27;bookmark-row&#x27;;
+ const fold=document.createElement(&#x27;button&#x27;);fold.className=&#x27;note-toggle&#x27;;fold.textContent=expandedNotes.has(e.id)?&#x27;▾&#x27;:&#x27;▸&#x27;;fold.setAttribute(&#x27;aria-label&#x27;,&#x27;展開或收合筆記：&#x27;+e.title);fold.setAttribute(&#x27;aria-expanded&#x27;,String(expandedNotes.has(e.id)));fold.setAttribute(&#x27;aria-controls&#x27;,&#x27;cb-note-&#x27;+e.id);
+ const b=document.createElement(&#x27;button&#x27;);b.className=&#x27;item&#x27;+(e.id===current.id?&#x27; chosen&#x27;:&#x27;&#x27;);b.setAttribute(&#x27;aria-label&#x27;,&#x27;跳到討論串：&#x27;+e.title);b.setAttribute(&#x27;data-tooltip&#x27;,e.title);const t=document.createElement(&#x27;span&#x27;);t.textContent=e.title;b.append(t);
+ b.onclick=()=&gt;{current=e;q(&#x27;room&#x27;).textContent=e.room;q(&#x27;room&#x27;).setAttribute(&#x27;data-tooltip&#x27;,e.room);q(&#x27;text&#x27;).textContent=e.title+&#x27;：&#x27;+e.note;q(&#x27;message&#x27;).querySelector(&#x27;.head &gt; span&#x27;).textContent=&#x27;示意討論內容&#x27;;q(&#x27;message&#x27;).querySelector(&#x27;:scope &gt; .small&#x27;).textContent=&#x27;已定位收藏的訊息&#x27;;q(&#x27;menu&#x27;).hidden=true;root.querySelectorAll(&#x27;.reply&#x27;).forEach(el=&gt;el.hidden=true);render();status(&#x27;已模擬直接跳到「&#x27;+e.title+&#x27;」，沒有中間確認步驟。&#x27;)};
+ const note=document.createElement(&#x27;div&#x27;);note.id=&#x27;cb-note-&#x27;+e.id;note.className=&#x27;bookmark-note&#x27;;note.hidden=!expandedNotes.has(e.id);
+ const room=document.createElement(&#x27;div&#x27;);room.className=&#x27;small room-line&#x27;;room.textContent=&#x27;來源：&#x27;+e.room;room.setAttribute(&#x27;data-tooltip&#x27;,e.room);room.setAttribute(&#x27;aria-label&#x27;,&#x27;來源聊天室：&#x27;+e.room);
+ const monthLabel=document.createElement(&#x27;div&#x27;);monthLabel.className=&#x27;small&#x27;;monthLabel.textContent=&#x27;收藏月份：&#x27;+e.month;
+ const body=document.createElement(&#x27;p&#x27;);body.textContent=e.note||&#x27;尚未填寫筆記&#x27;;
+ const ed=document.createElement(&#x27;button&#x27;);ed.textContent=&#x27;編輯收藏&#x27;;ed.onclick=()=&gt;edit(e);
+ const remove=document.createElement(&#x27;button&#x27;);remove.textContent=&#x27;刪除收藏&#x27;;remove.className=&#x27;delete-bookmark&#x27;;remove.setAttribute(&#x27;aria-label&#x27;,&#x27;刪除收藏：&#x27;+e.title);remove.onclick=()=&gt;{const index=entries.findIndex(item=&gt;item.id===e.id);if(index&lt;0)return;deletedBookmarks.push({item:{...entries[index]},index});entries.splice(index,1);expandedNotes.delete(e.id);render();renderUndo();q(&#x27;undo&#x27;).focus();status(&#x27;已刪除收藏，Google Chat 原討論不受影響。&#x27;)};
+ note.append(room,monthLabel,body,ed,remove);
+ fold.onclick=()=&gt;{note.hidden=!note.hidden;if(note.hidden)expandedNotes.delete(e.id);else expandedNotes.add(e.id);fold.textContent=note.hidden?&#x27;▸&#x27;:&#x27;▾&#x27;;fold.setAttribute(&#x27;aria-expanded&#x27;,String(!note.hidden))};
+ row.append(fold,b);d.append(row,note)});q(&#x27;items&#x27;).append(d)});
+ q(&#x27;items&#x27;).scrollTop=scrollTop;
+ if(!filtered.length)q(&#x27;items&#x27;).textContent=&#x27;沒有符合的收藏&#x27;;q(&#x27;collect&#x27;).textContent=entries.some(e=&gt;e.id===current.id)?&#x27;☆ 已收藏 · 編輯 Bookmark&#x27;:&#x27;☆ 收藏此討論到 Bookmark&#x27;;
+}
+q(&#x27;toggle&#x27;).onclick=()=&gt;panel(q(&#x27;side&#x27;).hidden);q(&#x27;close&#x27;).onclick=()=&gt;panel(false);q(&#x27;position&#x27;).onchange=()=&gt;q(&#x27;workspace&#x27;).classList.toggle(&#x27;left&#x27;,q(&#x27;position&#x27;).value===&#x27;left&#x27;);
+q(&#x27;message&#x27;).oncontextmenu=e=&gt;{e.preventDefault();q(&#x27;menu&#x27;).hidden=false};q(&#x27;more&#x27;).onclick=()=&gt;q(&#x27;menu&#x27;).hidden=false;q(&#x27;dismiss&#x27;).onclick=()=&gt;q(&#x27;menu&#x27;).hidden=true;q(&#x27;collect&#x27;).onclick=()=&gt;edit(current);q(&#x27;cancel&#x27;).onclick=()=&gt;show(&#x27;list&#x27;);
+q(&#x27;form&#x27;).onsubmit=e=&gt;{e.preventDefault();const title=q(&#x27;title&#x27;).value.trim();if(!title){q(&#x27;title&#x27;).setCustomValidity(&#x27;請填寫標題&#x27;);q(&#x27;title&#x27;).reportValidity();return}const item={...current,title,category:q(&#x27;category&#x27;).value,note:q(&#x27;note&#x27;).value,pin:q(&#x27;pin&#x27;).checked};const i=entries.findIndex(x=&gt;x.id===item.id);if(i&gt;=0)entries[i]=item;else entries.unshift(item);current=item;opened.add(item.pin?&#x27;置頂&#x27;:item.category);q(&#x27;search&#x27;).value=&#x27;&#x27;;q(&#x27;month&#x27;).value=&#x27;all&#x27;;show(&#x27;list&#x27;);render();status(&#x27;已暫存「&#x27;+title+&#x27;」；草稿重新整理後會還原。&#x27;)};q(&#x27;title&#x27;).oninput=()=&gt;q(&#x27;title&#x27;).setCustomValidity(&#x27;&#x27;);q(&#x27;search&#x27;).oninput=render;q(&#x27;month&#x27;).onchange=render;
+function transfer(type){mode=type;show(&#x27;transfer&#x27;);q(&#x27;transfer-title&#x27;).textContent=type===&#x27;export&#x27;?&#x27;匯出收藏&#x27;:&#x27;匯入預覽 · Mina 的收藏包&#x27;;q(&#x27;transfer-items&#x27;).replaceChildren();const items=type===&#x27;export&#x27;?entries:[{title:&#x27;專案上線檢查清單&#x27;}];items.forEach(e=&gt;{const l=document.createElement(&#x27;label&#x27;),c=document.createElement(&#x27;input&#x27;);c.type=&#x27;checkbox&#x27;;c.checked=true;c.style.width=&#x27;auto&#x27;;l.append(c,document.createTextNode(&#x27; &#x27;+e.title));q(&#x27;transfer-items&#x27;).append(l)});q(&#x27;transfer-confirm&#x27;).textContent=type===&#x27;export&#x27;?&#x27;模擬匯出&#x27;:&#x27;確認匯入&#x27;}
+q(&#x27;export&#x27;).onclick=()=&gt;transfer(&#x27;export&#x27;);q(&#x27;import&#x27;).onclick=()=&gt;transfer(&#x27;import&#x27;);q(&#x27;transfer-back&#x27;).onclick=()=&gt;show(&#x27;list&#x27;);q(&#x27;transfer-confirm&#x27;).onclick=()=&gt;{const count=q(&#x27;transfer-items&#x27;).querySelectorAll(&#x27;input:checked&#x27;).length;if(mode===&#x27;import&#x27;&amp;&amp;count&amp;&amp;!categories.includes(&#x27;專案&#x27;))categories.unshift(&#x27;專案&#x27;);if(mode===&#x27;import&#x27;&amp;&amp;count&amp;&amp;!entries.some(e=&gt;e.id===4))entries.push({id:4,title:&#x27;專案上線檢查清單&#x27;,category:&#x27;專案&#x27;,note:&#x27;Mina 分享的上線步驟&#x27;,room:&#x27;產品開發&#x27;,month:&#x27;2026/09&#x27;,pin:false});show(&#x27;list&#x27;);render();status(mode===&#x27;export&#x27;?&#x27;已模擬匯出 &#x27;+count+&#x27; 筆（不產生檔案）。&#x27;:&#x27;已模擬匯入；重複項目不會再新增。&#x27;)};render();
+
+function syncCategories(){const selected=q(&#x27;category&#x27;).value;q(&#x27;category&#x27;).replaceChildren();categories.forEach(cat=&gt;{const o=document.createElement(&#x27;option&#x27;);o.value=cat;o.textContent=cat;q(&#x27;category&#x27;).append(o)});q(&#x27;category&#x27;).value=categories.includes(selected)?selected:&#x27;未分類&#x27;}
+function validCategory(name,old){if(!name)return &#x27;請填寫分類名稱&#x27;;if(name===&#x27;置頂&#x27;||(name!==old&amp;&amp;categories.includes(name)))return &#x27;這個分類名稱已存在或為保留名稱&#x27;;return &#x27;&#x27;}
+function feedback(text){q(&#x27;category-feedback&#x27;).textContent=text}
+function manage(){q(&#x27;category-rows&#x27;).replaceChildren();categories.forEach(cat=&gt;{
+ const row=document.createElement(&#x27;div&#x27;);row.className=&#x27;category-row&#x27;;const count=entries.filter(e=&gt;e.category===cat).length;
+ if(cat===&#x27;未分類&#x27;){row.textContent=&#x27;未分類 · &#x27;+count+&#x27; 筆（系統分類）&#x27;;q(&#x27;category-rows&#x27;).append(row);return}
+ const input=document.createElement(&#x27;input&#x27;);input.value=cat;input.maxLength=40;input.setAttribute(&#x27;aria-label&#x27;,&#x27;編輯分類名稱：&#x27;+cat);const actions=document.createElement(&#x27;div&#x27;);actions.className=&#x27;category-actions&#x27;;const save=document.createElement(&#x27;button&#x27;);save.textContent=&#x27;儲存名稱&#x27;;const del=document.createElement(&#x27;button&#x27;);del.textContent=&#x27;刪除分類&#x27;;const tally=document.createElement(&#x27;span&#x27;);tally.className=&#x27;small&#x27;;tally.textContent=count+&#x27; 筆&#x27;;
+ save.onclick=()=&gt;{const name=input.value.trim(),error=validCategory(name,cat);if(error){feedback(error);return}categories[categories.indexOf(cat)]=name;entries.forEach(e=&gt;{if(e.category===cat)e.category=name});if(current.category===cat)current.category=name;if(opened.has(cat)){opened.delete(cat);opened.add(name)}syncCategories();manage();render();feedback(&#x27;已將「&#x27;+cat+&#x27;」改名為「&#x27;+name+&#x27;」&#x27;)};
+ del.onclick=()=&gt;{categories.splice(categories.indexOf(cat),1);entries.forEach(e=&gt;{if(e.category===cat)e.category=&#x27;未分類&#x27;});if(current.category===cat)current.category=&#x27;未分類&#x27;;opened.delete(cat);opened.add(&#x27;未分類&#x27;);syncCategories();manage();render();feedback(&#x27;已刪除「&#x27;+cat+&#x27;」，&#x27;+count+&#x27; 筆收藏已移至未分類。&#x27;)};actions.append(save,del,tally);row.append(input,actions);q(&#x27;category-rows&#x27;).append(row)})}
+q(&#x27;manage-open&#x27;).onclick=()=&gt;{show(&#x27;manage&#x27;);manage();feedback(&#x27;&#x27;)};q(&#x27;manage-back&#x27;).onclick=()=&gt;show(&#x27;list&#x27;);
+q(&#x27;category-add&#x27;).onsubmit=e=&gt;{e.preventDefault();const name=q(&#x27;category-new&#x27;).value.trim(),error=validCategory(name);if(error){feedback(error);return}categories.splice(categories.length-1,0,name);q(&#x27;category-new&#x27;).value=&#x27;&#x27;;syncCategories();manage();render();feedback(&#x27;已新增「&#x27;+name+&#x27;」，可在編輯收藏時選用。&#x27;)};syncCategories();
+
+function renderUndo(){q(&#x27;deleted&#x27;).hidden=!deletedBookmarks.length;if(deletedBookmarks.length){const last=deletedBookmarks[deletedBookmarks.length-1];q(&#x27;deleted-text&#x27;).textContent=&#x27;已刪除「&#x27;+last.item.title+&#x27;」&#x27;;q(&#x27;deleted-text&#x27;).setAttribute(&#x27;data-tooltip&#x27;,&#x27;已刪除「&#x27;+last.item.title+&#x27;」&#x27;);q(&#x27;undo&#x27;).setAttribute(&#x27;aria-label&#x27;,&#x27;復原收藏：&#x27;+last.item.title)}}
+q(&#x27;undo&#x27;).onclick=()=&gt;{const removed=deletedBookmarks.pop();if(!removed)return;const item=removed.item;if(!categories.includes(item.category))item.category=&#x27;未分類&#x27;;if(!entries.some(e=&gt;e.id===item.id))entries.splice(Math.min(removed.index,entries.length),0,item);opened.add(item.pin?&#x27;置頂&#x27;:item.category);expandedNotes.add(item.id);q(&#x27;search&#x27;).value=&#x27;&#x27;;q(&#x27;month&#x27;).value=&#x27;all&#x27;;render();renderUndo();const restored=q(&#x27;items&#x27;).querySelector(&#x27;[aria-controls=&quot;cb-note-&#x27;+item.id+&#x27;&quot;]&#x27;);if(restored){restored.focus({preventScroll:true});const items=q(&#x27;items&#x27;),row=restored.closest(&#x27;.bookmark-row&#x27;);items.scrollTop+=row.getBoundingClientRect().top-items.getBoundingClientRect().top;}status(&#x27;已復原「&#x27;+item.title+&#x27;」&#x27;+(deletedBookmarks.length?&#x27;；可繼續復原上一筆刪除。&#x27;:&#x27;。&#x27;))};
+
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

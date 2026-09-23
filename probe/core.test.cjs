@@ -1,0 +1,15 @@
+const assert = require('node:assert/strict');
+const {parseMessageData, buildLinks} = require('./core.js');
+const root = parseMessageData('ykVKge;root-1,root-1,space/space_1;$99','root-1','root-1');
+const reply = parseMessageData('ykVKge;reply_2,root-1,space/space_1;$100','reply_2','root-1');
+assert.equal(parseMessageData('ykVKge;other,root-1,space/space_1;$99','root-1','root-1'),null);
+assert.equal(parseMessageData('ykVKge;reply_2,wrong,space/space_1;$99','reply_2','root-1'),null);
+assert.equal(parseMessageData('unrecognized','root','root'),null);
+const a = buildLinks(root,'https://mail.google.com/mail/u/2/#chat/home');
+const b = buildLinks(reply,'https://mail.google.com/mail/u/2/#chat/home');
+assert.equal(a.key,b.key);
+assert.equal(b.gmail,'https://mail.google.com/mail/u/2/#chat/space/space_1/root-1/reply_2');
+assert.equal(b.official,'https://chat.google.com/room/space_1/root-1/reply_2?cls=10');
+assert.throws(()=>buildLinks({...root,messageId:'../bad'},'https://mail.google.com/mail/u/0/'));
+assert.throws(()=>buildLinks(root,'https://example.com/'));
+console.log('PASS: root/reply extraction, ID mismatch rejection, thread deduplication key, account index, URL validation');
