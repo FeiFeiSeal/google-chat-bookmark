@@ -9,11 +9,11 @@
 ### Milestone 1 — Core Bookmark Loop
 
 - 在 Gmail Chat Message 上透過右鍵立即收藏。
-- 保存 Thread 身份及當時選中的 Message Anchor。
+- 保存 Thread 身份及當時選中的 Message Anchor，並以完整 Message Anchor 識別 Bookmark。
 - 新 Bookmark 放入 Uncategorized，並使用最多 30 個字元的自動標題。
 - Gmail 專用 Side Panel 顯示已收藏的單行標題。
 - 點擊標題後在承載 Side Panel 的同一 Gmail 分頁精準跳回 Message Anchor。
-- 再次收藏同一 Thread 不建立第二筆，也不改寫既有資料。
+- 再次收藏同一則訊息不建立第二筆；同一 Thread 的不同訊息可分別收藏。
 - 重新載入未封裝擴充功能後，既有 Bookmark 仍存在。
 - 診斷區提供整份本機 Library 的簡易備份與還原，供早期測試及更新前保護資料。
 - Category 管理、Note、搜尋、拖曳、置頂及 Bookmark Package 不納入這個里程碑。
@@ -22,9 +22,9 @@
 
 - 提供 Bookmark 標題及 Note 編輯。
 - 提供 Category 新增、重新命名、刪除、展開狀態及順序管理。
-- 提供 Bookmark 在 Category 內排序及跨 Category 移動。
+- 提供 Bookmark 在 Category 內排序及跨 Category 移動，拖入收合分類時自動展開並即時顯示預計落點。
 - 提供置頂、單筆刪除、Category 批次刪除及相對應的復原行為。
-- 提供標題、Note、Category 與來源聊天室搜尋。
+- 提供標題、Note 與 Category 搜尋。
 
 ### Milestone 3 — Portable Sharing
 
@@ -65,6 +65,8 @@
 - 可安全復原的單筆操作直接執行，以短暫提示回報結果。
 - 只有一次影響多筆資料或無法輕易復原的操作才要求確認。
 - 側欄以簡約、節省寬度為原則；編輯、拖曳、置頂、刪除及更多操作優先使用一致的 icon。
+- 側欄不顯示獨立產品標題列；搜尋框位於頂部，新增 Category icon 放在搜尋框右側。
+- 擴充功能內容最低支援 240px 寬度；Chrome Side Panel 外框寬度由使用者透過瀏覽器分隔線調整。
 - Icon 按鈕必須提供滑鼠提示、鍵盤焦點狀態及可供輔助技術辨識的名稱。
 - 展開箭頭與已置頂狀態持續顯示；拖曳、編輯及更多操作的 icon 在滑鼠移入或鍵盤聚焦時顯示。
 - 第一版只設計桌面版 Chrome 的滑鼠與鍵盤操作，不以觸控操作作為驗收範圍。
@@ -80,26 +82,27 @@
 - 擷取失敗提示提供以 icon 呈現的「複製診斷資訊」動作；診斷資訊不得包含訊息文字、回覆或參與者資料。
 - 手動貼上 Google 訊息連結的備援入口不納入 Milestone 1，只有實際測試顯示經常需要時才排入後續里程碑。
 - 新 Bookmark 先放入 Uncategorized，使用者可稍後整理標題、Category 及 Note。
-- 預設標題取自 Thread 起始訊息；無法取得時使用聊天室名稱與收藏日期作為暫時標題。
+- 預設標題取自使用者實際收藏的訊息內容；無法取得時使用收藏日期作為暫時標題。
 - 收藏成功後顯示短暫提示及「復原」「開啟側欄整理」動作，不自動展開側欄。
-- Bookmark 以 Thread 作為唯一對象，並保存右鍵選中的 Message Anchor。
+- Bookmark 以 Message Anchor 作為唯一對象；同一 Thread 可保存多則不同訊息。
 - 點擊 Bookmark 直接在 Gmail 開啟 Thread，並定位到保存的 Message Anchor。
 - 點擊 Bookmark 使用承載目前 Side Panel 的同一個 Gmail 分頁跳轉；即使該分頁目前位於收件匣或其他 Gmail 畫面也相同。
 - 點擊 Bookmark 標題一律執行跳轉，不使用標題點擊進入編輯。
 - 每筆 Bookmark 的「⋯」選單提供「編輯」；選取後在原位置展開標題與 Note 欄位，並提供明確的「儲存」及「取消」。
 - 只有按下「儲存」才會更新 Bookmark；按下「取消」、關閉側欄、重新載入擴充功能或離開編輯狀態時，直接捨棄未儲存內容。
 - 不保存未儲存草稿或「正在編輯」的 UI 狀態；下次開啟側欄一律回到顯示模式。
-- 再次收藏同一 Thread 時，不更改既有 Bookmark 或 Message Anchor。
-- 重複收藏不視為錯誤；顯示「這個討論已收藏」，並提供「跳到 Bookmark」及「開啟側欄」。
-- 主清單只顯示 Bookmark 標題；Note、收藏日期、Category 及來源聊天室放在可收合的詳細資訊中。
+- 再次收藏同一則訊息時，不更改既有 Bookmark 或 Message Anchor；同一 Thread 的不同訊息可各自收藏。
+- 重複收藏不視為錯誤；顯示「這則訊息已收藏」，並提供「跳到 Bookmark」及「開啟側欄」。
+- 主清單只顯示 Bookmark 標題；可收合詳細資訊只顯示 Note 與「記錄 icon＋收藏時間」，不顯示 Category 或「收藏時間」文字標籤。
 - Bookmark 標題最多 30 個使用者可見字元，主清單固定單行、不折行，超過可用寬度時以省略號顯示，完整標題可透過輔助提示查看。
-- 來源聊天室名稱保持單行顯示，超出可用寬度時以省略號截斷，完整名稱可透過輔助提示查看。
 - Side Panel 使用目前瀏覽器可用高度；工具列與搜尋區保持可見，Bookmark 列表使用內部垂直捲動，不隨資料量持續拉高頁面。
 
 ## Categories
 
 - 每筆 Bookmark 只屬於一個 Category。
 - 拖曳 Bookmark 到另一個 Category 代表移動。
+- 拖曳 Bookmark 進入收合的 Category 時會暫時展開，並在清單內即時顯示預計插入位置；放開後保存落點並維持目標 Category 展開。
+- Bookmark 與 Category 排序只產生垂直視覺位移；向左右拖曳不建立水平捲動，也不改變 Side Panel 寬度。
 - 新 Bookmark 預設屬於 Uncategorized。
 - 匯入的新 Bookmark 沿用 Bookmark Package 中的 Category；不存在的 Category 會加入收藏庫。
 - 側欄重新開啟時，恢復各 Category 上次的展開或收合狀態。
@@ -175,10 +178,10 @@
 
 ## Search
 
-- 搜尋範圍包含 Bookmark 標題、Note、Category 名稱及來源聊天室名稱。
+- 搜尋範圍包含 Bookmark 標題、Note 及 Category 名稱。
 - Note 即使處於收合狀態也參與搜尋。
 - 不搜尋或索引 Google Chat 的訊息、回覆及參與者內容。
 - 輸入搜尋文字時，以扁平清單顯示結果，不依 Category 分組。
-- 搜尋結果依序優先顯示標題符合、Category 或來源聊天室符合、Note 符合的 Bookmark；同一層級依最近開啟時間排序。
+- 搜尋結果依序優先顯示標題符合、Category 符合、Note 符合的 Bookmark；同一層級依最近開啟時間排序。
 - 清除搜尋後恢復搜尋前各 Category 的展開與收合狀態。
 - 第一版不提供月份篩選下拉選單。

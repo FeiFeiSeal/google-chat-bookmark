@@ -49,7 +49,7 @@ Repository 提供 `createIfAbsent`，直接讀取單一 identity key 判斷重�
 
 Content script 在 capture phase 監聽 `contextmenu`，只保留兩分鐘內最近一次符合已知 Message／Thread 屬性的候選資料。Service worker 收到 Chrome context menu click 後，以 `info.frameId` 向正確 frame 讀取候選；parser 必須驗證 DOM ID 一致性、字元格式與 HTTPS Google Chat link，任一條件不符就回傳結構化錯誤，不猜測欄位。
 
-標題優先從目前 Thread 可見的起始訊息第一行取得，使用 `Intl.Segmenter` 依 grapheme cluster 截成 30 字；起始訊息不可用時以來源聊天室名稱與本機日期產生 fallback。除最後的 Bookmark 標題與來源聊天室名稱外，不把訊息 body、回覆、參與者或 DOM snapshot 傳入 repository。
+標題從使用者當次收藏訊息的第一個非空白文字行取得，使用 `Intl.Segmenter` 依 grapheme cluster 截成 30 字；訊息文字不可用時以本機日期產生 fallback。只有截斷後的 Bookmark 標題會進入 repository，不保存其他訊息 body、參與者或 DOM snapshot。
 
 DOM selector 與 `jsdata` parser 集中在單一 adapter。若 Google 改版，只需更新此相容層；錯誤診斷僅含版本、頁面類型、解析階段、frame、錯誤碼與時間。
 
@@ -82,7 +82,7 @@ Service worker 依 tab URL 動態啟用或停用 tab-specific Side Panel。列�
 ## Risks / Trade-offs
 
 - **[Google 私有 DOM 或 Gmail hash route 改變]** → Parser 與 navigation adapter fail closed、集中相容邏輯、提供隱私診斷，並以真實 Gmail 人工驗收作為發布門檻。
-- **[Thread 起始訊息未載入，無法產生理想標題]** → 使用聊天室名稱與日期 fallback；Milestone 2 允許使用者再編輯標題。
+- **[被收藏訊息文字未載入，無法產生理想標題]** → 使用收藏日期 fallback；Milestone 2 允許使用者再編輯標題。
 - **[多 frame 的最近右鍵候選過期或錯配]** → 依 Chrome `frameId` 精確讀取、限制兩分鐘有效期、讀取後清除，必要 ID 不一致時拒絕。
 - **[MV3 service worker 休眠造成暫時狀態遺失]** → 關鍵 undo 與 restore marker 使用 storage；記憶體只保存可捨棄的 UI 狀態。
 - **[完整還原暫存資料使 local quota 不足]** → 還原前估算 candidate、recovery 與現有用量；空間不足時拒絕並保留原資料。

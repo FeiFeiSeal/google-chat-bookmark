@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Google Chat Bookmark",
+  "description": "在 Gmail Chat 收藏並快速返回重要討論。",
+  "version": "0.1.0",
+  "minimum_chrome_version": "116",
+  "incognito": "not_allowed",
+  "permissions": ["contextMenus", "storage", "sidePanel", "tabs"],
+  "host_permissions": ["https://mail.google.com/*", "https://chat.google.com/*"],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "開啟 Google Chat Bookmark"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.google.com/*"],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": ["content-script.js"]
+    }
+  ]
+}
