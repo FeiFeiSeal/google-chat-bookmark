@@ -5,10 +5,15 @@ import {UndoManager} from '../storage/undo';
 import {handleBookmarkContextMenu} from './bookmark-controller';
 import type {ToastMessage} from '../content/toast';
 import {buildGmailNavigationUrl} from './navigation';
-import {configureSidePanelForTab} from './side-panel';
+import {configureSidePanelForActiveTab, configureSidePanelForTab} from './side-panel';
 import type {MessageIdentity} from '../domain/identity';
+import {UNCATEGORIZED_ID} from '../domain/schema';
+import {
+  QUICK_SAVE_MENU_ID,
+  categoryIdFromMenuId,
+  rebuildBookmarkContextMenus,
+} from './context-menu';
 
-const MENU_ID = 'google-chat-bookmark-save';
 const local = new ChromeStorageAdapter(chrome.storage.local, 'local');
 const session = new ChromeStorageAdapter(chrome.storage.session, 'session');
 const repository = new BookmarkRepository(local);
@@ -20,26 +25,44 @@ const ready = (async () => {
   await repository.initialize();
 })().catch(() => undefined);
 
+let contextMenuRefresh = Promise.resolve();
+function queueContextMenuRefresh(): void {
+  contextMenuRefresh = contextMenuRefresh
+    .then(async () => {
+      await ready;
+      const view = await repository.view();
+      await rebuildBookmarkContextMenus(chrome.contextMenus, view.categories);
+    })
+    .catch(() => undefined);
+}
+
+void ready.then(queueContextMenuRefresh);
+repository.subscribe(queueContextMenuRefresh);
+
 chrome.runtime.onInstalled.addListener(() => {
   void chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: true});
-  chrome.contextMenus.removeAll(() => {
-    chrome.contextMenus.create({id: MENU_ID, title: '收藏這個討論', contexts: ['all'], documentUrlPatterns: ['https://chat.google.com/*']});
-  });
+  queueContextMenuRefresh();
   void chrome.tabs.query({}).then((tabs) => Promise.all(tabs.filter((tab) => tab.id !== undefined).map((tab) => configureSidePanelForTab(chrome.sidePanel, tab.id!, tab.url))));
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.url || changeInfo.status === 'complete') void configureSidePanelForTab(chrome.sidePanel, tabId, changeInfo.url ?? tab.url);
+  if (changeInfo.url || changeInfo.status === 'complete') void configureSidePanelForTab(chrome.sidePanel, tabId, changeInfo.url ?? tab.url, tab.active);
+});
+
+chrome.tabs.onActivated.addListener(({tabId, windowId}) => {
+  void configureSidePanelForActiveTab(chrome.sidePanel, chrome.tabs, tabId, windowId)
+    .catch(() => undefined);
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId !== MENU_ID) return;
+  const categoryId = info.menuItemId === QUICK_SAVE_MENU_ID ? UNCATEGORIZED_ID : categoryIdFromMenuId(info.menuItemId);
+  if (!categoryId) return;
   void ready.then(() => handleBookmarkContextMenu({
     repository,
     undo,
     sendMessage: (tabId, message, options) => chrome.tabs.sendMessage(tabId, message, options),
     notify: (tabId, frameId, message: ToastMessage) => chrome.tabs.sendMessage(tabId, {type: 'bookmark.show-toast', message, frameId}, {frameId}),
-  }, info, tab ?? {}));
+  }, info, tab ?? {}, categoryId));
 });
 
 chrome.runtime.onMessage.addListener((message: unknown, sender, respond) => {

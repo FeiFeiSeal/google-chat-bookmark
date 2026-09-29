@@ -10,7 +10,7 @@
 
 - 在 Gmail Chat Message 上透過右鍵立即收藏。
 - 保存 Thread 身份及當時選中的 Message Anchor，並以完整 Message Anchor 識別 Bookmark。
-- 新 Bookmark 放入 Uncategorized，並使用最多 30 個字元的自動標題。
+- 新 Bookmark 可在右鍵收藏時指定 Category；快速收藏預設放入 Uncategorized，並使用最多 30 個字元的自動標題。
 - Gmail 專用 Side Panel 顯示已收藏的單行標題。
 - 點擊標題後在承載 Side Panel 的同一 Gmail 分頁精準跳回 Message Anchor。
 - 再次收藏同一則訊息不建立第二筆；同一 Thread 的不同訊息可分別收藏。
@@ -38,6 +38,7 @@
 - 第一版最低支援 Chrome 116，不支援無痕模式。
 - 第一版只正式支援 Gmail 內嵌的 Google Chat。
 - Bookmark Side Panel 只在 `mail.google.com` 分頁啟用；切換到其他網站時不保持可用。
+- Bookmark Side Panel 開啟時，切換到非 Gmail 分頁或目前分頁導覽離開 Gmail 會自動關閉；Gmail 內 Mail 與 Chat 切換時保持開啟。
 - Side Panel 顯示在左側或右側由使用者的 Chrome 設定決定，產品不強制固定位置。
 - Bookmark 一律在 Gmail 中開啟；獨立 `chat.google.com` 不列入第一版驗收範圍。
 - Bookmark Library 保存於目前裝置及 Chrome 設定檔。
@@ -81,7 +82,7 @@
 - 若無法從右鍵目標辨識必要的 Thread 或 Message 身份，不建立 Bookmark，並顯示「目前無法讀取這則訊息，請重新整理 Gmail 後再試」。
 - 擷取失敗提示提供以 icon 呈現的「複製診斷資訊」動作；診斷資訊不得包含訊息文字、回覆或參與者資料。
 - 手動貼上 Google 訊息連結的備援入口不納入 Milestone 1，只有實際測試顯示經常需要時才排入後續里程碑。
-- 新 Bookmark 先放入 Uncategorized，使用者可稍後整理標題、Category 及 Note。
+- 右鍵選單提供「快速收藏（未分類）」及「收藏到分類」；使用者可在建立時直接指定 Category，也可稍後再整理標題、Category 及 Note。
 - 預設標題取自使用者實際收藏的訊息內容；無法取得時使用收藏日期作為暫時標題。
 - 收藏成功後顯示短暫提示及「復原」「開啟側欄整理」動作，不自動展開側欄。
 - Bookmark 以 Message Anchor 作為唯一對象；同一 Thread 可保存多則不同訊息。
@@ -103,7 +104,8 @@
 - 拖曳 Bookmark 到另一個 Category 代表移動。
 - 拖曳 Bookmark 進入收合的 Category 時會暫時展開，並在清單內即時顯示預計插入位置；放開後保存落點並維持目標 Category 展開。
 - Bookmark 與 Category 排序只產生垂直視覺位移；向左右拖曳不建立水平捲動，也不改變 Side Panel 寬度。
-- 新 Bookmark 預設屬於 Uncategorized。
+- 快速收藏的新 Bookmark 預設屬於 Uncategorized；從「收藏到分類」選取 Category 時直接屬於該 Category。
+- 「收藏到分類」依目前 Category 順序顯示，新增、重新命名、刪除與排序後會同步更新；同名 Category 以順序標示。
 - 匯入的新 Bookmark 沿用 Bookmark Package 中的 Category；不存在的 Category 會加入收藏庫。
 - 側欄重新開啟時，恢復各 Category 上次的展開或收合狀態。
 - 第一次使用及新建立或匯入的 Category 預設收合；Uncategorized 不強制展開。

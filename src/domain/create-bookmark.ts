@@ -9,6 +9,7 @@ export interface BookmarkWriter {
 export interface CreateBookmarkInput extends MessageIdentity {
   title: string;
   sourceRoomName: string;
+  categoryId?: string;
 }
 
 export type CreateBookmarkResult = {status: 'created'; bookmark: Bookmark} | {status: 'duplicate'; bookmark: Bookmark};
@@ -25,7 +26,7 @@ export async function createBookmarkIfAbsent(repository: BookmarkWriter, input: 
     url: buildCanonicalChatUrl(input),
     title: input.title,
     sourceRoomName: input.sourceRoomName,
-    categoryId: UNCATEGORIZED_ID,
+    categoryId: input.categoryId ?? UNCATEGORIZED_ID,
     note: '',
     pinned: false,
     createdAt: timestamp,

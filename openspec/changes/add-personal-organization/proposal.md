@@ -9,6 +9,7 @@
 - 提供 Category 新增、重新命名、展開／收合、刪除及拖曳排序；Category 以不可變 ID 識別並允許同名。
 - 提供 Bookmark 在 Category 內拖曳排序及直接跨 Category 移動；進入收合的目標 Category 時自動展開並即時預覽落點，不再顯示「移到分類」選單。
 - 讓右鍵收藏以 Message Anchor 識別 Bookmark；同一討論串可收藏不同訊息，但同一訊息不得重複收藏。
+- 在 Google Chat 右鍵選單保留快速收藏到未分類，並提供依目前 Category 順序建立的「收藏到分類」子選單，讓 Bookmark 建立時直接歸類。
 - 預設標題取使用者實際收藏的訊息文字，並限制為 30 個可見字元；不顯示無法可靠擷取的來源聊天室。
 - 分類重新命名、排序與刪除在實際 Chrome Side Panel 可操作，Bookmark 操作選單於滑鼠離開該列後自動關閉。
 - 提供 Bookmark 置頂、置頂區獨立排序，以及原 Category 與置頂區共用同一筆資料的雙處顯示。
@@ -16,6 +17,7 @@
 - 提供依標題、Note 與 Category 名稱搜尋的扁平結果清單。
 - 讓固定工具列與搜尋區之外的清單獨立捲動，並以 1,000 筆 Bookmark 驗證主要整理與搜尋操作。
 - 移除搜尋上方的產品標題列，將新增 Category icon 放到搜尋框右側，並讓內容在較窄 Side Panel 中保持可用。
+- 使用者切換到非 Gmail 分頁，或目前分頁導覽離開 Gmail 時，自動關閉本擴充功能的 Side Panel；Gmail 內 Mail／Chat 切換不關閉。
 - 不加入月份篩選、跨裝置同步、Bookmark Package 匯入／匯出或未儲存草稿持久化。
 
 ## Capabilities

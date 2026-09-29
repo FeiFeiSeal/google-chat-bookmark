@@ -74,3 +74,22 @@
 #### Scenario: Input approaches field limit
 - **WHEN** 使用者輸入的標題或 Note 接近欄位上限
 - **THEN** 系統顯示目前字數提示，而未接近上限時不持續顯示提示
+
+### Requirement: Side Panel follows the active Gmail tab
+系統 SHALL 只在 Gmail 分頁啟用 Bookmark Side Panel；當使用者切換到非 Gmail 分頁，或目前啟用的 Gmail 分頁導覽離開 Gmail 時，系統 SHALL 自動關閉本擴充功能的 Side Panel。
+
+#### Scenario: Switch to another website
+- **WHEN** Bookmark Side Panel 開啟且使用者切換到非 `mail.google.com` 分頁
+- **THEN** 系統停用該分頁的 Bookmark Side Panel 並自動關閉目前 panel
+
+#### Scenario: Active Gmail tab navigates away
+- **WHEN** Bookmark Side Panel 開啟且目前 Gmail 分頁導覽到其他網站
+- **THEN** 系統停用該分頁的 Bookmark Side Panel 並自動關閉目前 panel
+
+#### Scenario: Background tab navigates
+- **WHEN** 非使用中分頁導覽到其他網站
+- **THEN** 系統更新該分頁的 Side Panel 啟用狀態，但不關閉目前使用中的 Gmail panel
+
+#### Scenario: Switch between Mail and Chat in Gmail
+- **WHEN** 使用者在同一個 `mail.google.com` 分頁內切換 Mail 與 Chat
+- **THEN** Bookmark Side Panel 保持可用，不需重新開啟

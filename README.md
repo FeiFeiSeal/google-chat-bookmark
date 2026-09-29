@@ -1,6 +1,6 @@
 # Google Chat Bookmark
 
-Google Chat Bookmark 是 Chrome 116+ 的本機測試版擴充功能。它讓你在 Gmail 內嵌 Google Chat 的訊息上按右鍵收藏討論，並從 Gmail Side Panel 返回當時選中的訊息。
+Google Chat Bookmark 是 Chrome 116+ 的本機測試版擴充功能。它讓你在 Gmail 內嵌 Google Chat 的訊息上按右鍵快速收藏到未分類或直接指定分類，並從 Gmail Side Panel 返回當時選中的訊息。
 
 ## 建置
 

@@ -77,6 +77,29 @@
 - **WHEN** Category 尚未經過手動排序
 - **THEN** 系統依收藏時間由新到舊顯示，且新收藏放在 Category 最上方
 
+### Requirement: User can choose a category while bookmarking
+系統 SHALL 在 Google Chat 訊息的右鍵選單提供快速收藏到 Uncategorized，以及依目前 Category 順序排列的「收藏到分類」子選單；選擇 Category 後，系統直接在該 Category 建立 Bookmark。
+
+#### Scenario: Quick save without choosing a category
+- **WHEN** 使用者選取「快速收藏（未分類）」
+- **THEN** 系統在 Uncategorized 最上方建立 Bookmark
+
+#### Scenario: Save directly to a category
+- **WHEN** 使用者從「收藏到分類」選取一個現有 Category
+- **THEN** 系統在該 Category 最上方建立 Bookmark，且不先寫入 Uncategorized
+
+#### Scenario: Category menu follows library changes
+- **WHEN** 使用者新增、重新命名、刪除或重新排序 Category
+- **THEN** 後續開啟的 Google Chat 右鍵選單反映目前 Category 名稱與順序
+
+#### Scenario: Duplicate category names in menu
+- **WHEN** Library 有多個同名 Category
+- **THEN** 右鍵選單以順序標示同名項目，且每個選項仍以不同 Category ID 建立 Bookmark
+
+#### Scenario: Bookmark an existing message into another category
+- **WHEN** 使用者對已收藏訊息選取另一個 Category
+- **THEN** 系統仍提示重複，不建立第二筆且不移動原 Bookmark
+
 ### Requirement: Pinned bookmarks appear in two locations
 系統 SHALL 讓置頂 Bookmark 同時出現在側欄頂部置頂區與原 Category，兩處共用同一筆 Bookmark，並以獨立順序管理置頂區。
 

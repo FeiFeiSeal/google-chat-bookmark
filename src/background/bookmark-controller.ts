@@ -4,6 +4,7 @@ import type {BookmarkRepository} from '../storage/repository';
 import type {UndoManager} from '../storage/undo';
 import type {ChatCaptureCandidate} from '../content/google-chat-parser';
 import type {ToastMessage} from '../content/toast';
+import {UNCATEGORIZED_ID} from '../domain/schema';
 
 interface ContextResponse {ok: boolean; candidate?: ChatCaptureCandidate; errorCode?: string}
 interface MenuInfo {frameId?: number}
@@ -15,7 +16,7 @@ export interface BookmarkControllerDependencies {
   notify(tabId: number, frameId: number, message: ToastMessage): Promise<unknown> | unknown;
 }
 
-export async function handleBookmarkContextMenu(deps: BookmarkControllerDependencies, info: MenuInfo, tab: SourceTab): Promise<void> {
+export async function handleBookmarkContextMenu(deps: BookmarkControllerDependencies, info: MenuInfo, tab: SourceTab, categoryId: string = UNCATEGORIZED_ID): Promise<void> {
   if (tab.id === undefined || info.frameId === undefined) return;
   try {
     const response = await deps.sendMessage(tab.id, {type: 'bookmark.read-context'}, {frameId: info.frameId});
@@ -28,6 +29,7 @@ export async function handleBookmarkContextMenu(deps: BookmarkControllerDependen
       ...candidate.identity,
       title: createDefaultTitle({messageText: candidate.selectedMessageText, date: new Date()}),
       sourceRoomName: 'Google Chat',
+      categoryId,
     });
     if (result.status === 'duplicate') {
       await deps.notify(tab.id, info.frameId, {kind: 'duplicate', bookmark: {spaceId: result.bookmark.spaceId, threadId: result.bookmark.threadId, messageId: result.bookmark.messageId}});

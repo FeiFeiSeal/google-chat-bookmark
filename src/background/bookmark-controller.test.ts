@@ -9,14 +9,16 @@ const candidate = {identity: {spaceId: 'space', threadId: 'thread', messageId: '
 describe('background bookmark flow', () => {
   it('targets the exact frame and creates once', async () => {
     const repository = new BookmarkRepository(new MemoryStorageAdapter()); await repository.initialize();
+    await repository.createCategory('專案', {id: 'project'});
     const sendMessage = vi.fn().mockResolvedValue({ok: true, candidate});
     const notify = vi.fn();
     const deps = {repository, undo: new UndoManager(new MemoryStorageAdapter(), repository), sendMessage, notify};
-    await handleBookmarkContextMenu(deps, {frameId: 31}, {id: 7, url: 'https://mail.google.com/mail/u/0/'});
+    await handleBookmarkContextMenu(deps, {frameId: 31}, {id: 7, url: 'https://mail.google.com/mail/u/0/'}, 'project');
     expect(sendMessage).toHaveBeenCalledWith(7, {type: 'bookmark.read-context'}, {frameId: 31});
     expect(notify).toHaveBeenCalledWith(7, 31, expect.objectContaining({kind: 'created'}));
     expect((await repository.view()).bookmarks[0].title).toBe('被收藏的訊息');
-    await handleBookmarkContextMenu(deps, {frameId: 31}, {id: 7, url: 'https://mail.google.com/mail/u/0/'});
+    expect((await repository.view()).bookmarks[0].categoryId).toBe('project');
+    await handleBookmarkContextMenu(deps, {frameId: 31}, {id: 7, url: 'https://mail.google.com/mail/u/0/'}, 'project');
     expect(notify).toHaveBeenLastCalledWith(7, 31, {kind: 'duplicate', bookmark: {spaceId: 'space', threadId: 'thread', messageId: 'reply'}});
   });
 

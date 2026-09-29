@@ -184,8 +184,9 @@ export class BookmarkRepository {
     const key = bookmarkKey(valid);
     if ((await this.storage.get(key))[key] !== undefined) throw new Error('duplicate-bookmark');
     const view = await this.readView(expectedRevision);
-    const orderKey = `${ORDER_PREFIX}${UNCATEGORIZED_ID}`;
-    const order = view.orders[UNCATEGORIZED_ID] ?? [];
+    if (!view.categories.some(({id}) => id === valid.categoryId)) throw new Error('category-not-found');
+    const orderKey = `${ORDER_PREFIX}${valid.categoryId}`;
+    const order = view.orders[valid.categoryId] ?? [];
     await this.commit(view, {[key]: valid, [orderKey]: [key, ...order.filter((item) => item !== key)]});
     return valid;
   }

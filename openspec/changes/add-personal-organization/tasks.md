@@ -62,4 +62,6 @@
 - [x] 8.8 精簡 Bookmark 詳細資訊為 Note 與記錄 icon 加時間，並為跨 Category 拖曳加入自動展開、即時落點投影與目標 Category 視覺提示。
 - [x] 8.9 移除搜尋上方標題列，將新增 Category icon 移到搜尋框右側，並將內容最小寬度調整為 240px。
 - [x] 8.10 修正 drop 讀取舊 React state 而未保存預覽順序的問題，以同步 ref 保存最新落點；拖曳限制為垂直軸並隱藏水平溢位。
-- [ ] 8.11 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。
+- [x] 8.11 新增動態「收藏到分類」右鍵子選單，保留快速收藏到未分類，並讓 repository 在建立時直接寫入指定 Category order。
+- [x] 8.12 監聽 active tab 切換與導覽；切到非 Gmail 時，依上一個 Gmail tab 的 `tabId` 關閉 tab-specific Side Panel，並保留 Gmail 內 Mail／Chat 切換。
+- [ ] 8.13 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。

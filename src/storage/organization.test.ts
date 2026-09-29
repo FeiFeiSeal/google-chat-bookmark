@@ -82,6 +82,18 @@ describe('personal organization repository', () => {
     expect(view.metadata.pinnedOrder).toEqual([]);
   });
 
+  it('creates a bookmark directly in its selected category order', async () => {
+    const repository = new BookmarkRepository(new MemoryStorageAdapter());
+    await repository.initialize();
+    await repository.createCategory('專案', {id: 'project'});
+    const item = {...bookmark('direct-category'), categoryId: 'project'};
+    await repository.create(item);
+    const view = await repository.view();
+    expect(view.orders.uncategorized).toEqual([]);
+    expect(view.orders.project).toEqual([bookmarkStorageKey(item)]);
+    expect(view.bookmarks[0].categoryId).toBe('project');
+  });
+
   it('reorders bookmarks and pinned entries without changing category identity', async () => {
     const repository = new BookmarkRepository(new MemoryStorageAdapter());
     await repository.initialize();

@@ -77,6 +77,8 @@ repository 在刪除前建立判別聯集 snapshot：
 
 右鍵建立 Bookmark 的既有 MV3 service-worker Undo 繼續使用 `storage.session`，因為建立提示位於 Gmail frame 且 worker 可能休眠；Side Panel 刪除 Undo 的生命週期則明確跟隨 panel。
 
+Google Chat 右鍵選單保留「快速收藏（未分類）」並增加「收藏到分類」父項目。Service worker 啟動及 Library 異動後，依 repository view 的 Category 順序重建子項目；選單 ID 使用編碼後的不可變 Category ID，顯示名稱仍可重複。若多個 Category 同名，顯示第幾個同名項目以避免選擇歧義。建立 command 將 Category ID 一併交給 repository，直接更新該 Category order；同一訊息仍先依 Message Anchor 判定重複，不因選擇不同 Category 而建立第二筆或移動既有 Bookmark。
+
 ### 7. 搜尋採正規化子字串比對與穩定 ranking
 
 搜尋 trim 輸入後以 locale-aware lowercase 正規化，對 title、Category name 和 Note 做純文字子字串比對。每筆結果只取最高符合層級：title = 0、Category = 1、Note = 2；同層級依 `lastOpenedAt`、`createdAt`、穩定 Bookmark key 排序。搜尋字串非空時不渲染 Category groups，清除後直接回到保存的 Category expansion preference。
@@ -86,6 +88,8 @@ repository 在刪除前建立判別聯集 snapshot：
 ### 8. UI 拆成可獨立測試的垂直切片
 
 `App` 保留初始化、訂閱與全域狀態協調，UI 分成 Toolbar/Search、PinnedSection、CategorySection、BookmarkRow、BookmarkEditor、ConfirmDialog 與 UndoSnackbar。Side Panel 不另設產品標題列；搜尋框與新增 Category icon 共用最上方工具列，內容版面最低支援 240px。Chrome Side Panel 外框寬度由瀏覽器與使用者調整，擴充功能不假設或設定固定寬度。所有繁體中文文案放入既有 messages 模組；樣式沿用 semantic color token 及明暗模式。
+
+Service worker 同時監聽 tab update 與 activation。啟用中的分頁不是 `mail.google.com` 時，先將該 tab 的 Side Panel option 設為 disabled。由於切換後開啟中的 tab-specific panel 仍屬於上一個 Gmail tab，Chrome 141 以上會查詢同一視窗中的 Gmail tabs，逐一以其 `tabId` 呼叫 `sidePanel.close()`，並以 `windowId` 補關可能存在的 global panel。較舊 Chrome 只使用 disabled 行為相容。背景分頁更新不得關閉目前使用中的 Gmail panel；Gmail 內 Mail 與 Chat 共用 origin，因此兩者切換時維持開啟。
 
 Category 與 Bookmark 的更多操作改用受控 menu state。操作 icon 在該列 hover 或 focus-within 時顯示；滑鼠離開 Bookmark 列會關閉 Bookmark menu，防止下次移入仍保留上次彈窗。Category menu 不因移向彈窗而消失，確保重新命名與刪除可點擊。
 

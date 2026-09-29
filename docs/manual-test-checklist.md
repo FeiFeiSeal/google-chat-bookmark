@@ -4,7 +4,7 @@
 
 ## 收藏與回饋
 
-- [x] 在 Thread 訊息按右鍵選「收藏這則訊息」，確認顯示成功提示且 Side Panel 不會自動開啟。
+- [x] 在 Thread 訊息按右鍵選「快速收藏（未分類）」，確認顯示成功提示且 Side Panel 不會自動開啟。
 - [x] 從成功提示按「復原」，確認剛建立的 Bookmark 消失，Google Chat 訊息不受影響。
 - [x] 在 Thread 回覆按右鍵收藏，確認 Side Panel 新項目指向該回覆。
 - [x] 再次收藏同一 Thread，確認顯示「這個討論已收藏」，原有標題與 Message Anchor 不變。
@@ -93,6 +93,13 @@ Chrome 版本：待填
 
 ## 2026-09-24 實機回饋回歸
 
+- [ ] 在 Gmail 開啟 Side Panel 後切換到其他網站分頁，確認屬於上一個 Gmail tab 的 Bookmark Side Panel 自動關閉；切回 Gmail 時不自行重新開啟。
+- [ ] 在 Gmail 內從 Chat 切到收件匣再切回 Chat，確認 Bookmark Side Panel 保持開啟。
+- [ ] Side Panel 開啟時讓背景分頁導覽到其他網站，確認目前 Gmail panel 不被關閉。
+- [ ] 在 Google Chat 訊息按右鍵，確認有「快速收藏（未分類）」與「收藏到分類」；快速收藏後項目出現在未分類最上方。
+- [ ] 從「收藏到分類」選取一個自訂分類，確認 Bookmark 直接出現在該分類最上方，未分類沒有短暫或殘留項目。
+- [ ] 新增、重新命名、刪除及拖曳 Category 後再次開啟右鍵選單，確認名稱與順序同步；同名 Category 顯示可區分的順序。
+- [ ] 對已收藏訊息從右鍵選取另一個分類，確認仍提示重複且不移動既有 Bookmark。
 - [ ] 確認側欄頂部沒有 Google Chat／Chat Bookmark 標題列，搜尋框與新增分類 icon 顯示在同一列。
 - [ ] 將 Chrome Side Panel 拖窄，確認 240px 內容寬度下搜尋、新增分類、分類標題及 Bookmark 操作仍可使用且不產生水平捲動。
 - [ ] 一般分類右側固定顯示拖曳與更多操作 icon；更多操作可完成重新命名與刪除，Uncategorized 仍不可改名或刪除。
