@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Google Chat Bookmark",
   "description": "在 Gmail Chat 收藏並快速返回重要討論。",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minimum_chrome_version": "116",
   "incognito": "not_allowed",
   "permissions": ["contextMenus", "storage", "sidePanel", "tabs"],

@@ -79,6 +79,7 @@
 ## Capture and Navigation
 
 - 使用者在 Google Chat Message 上按右鍵即可立即建立 Bookmark，不需先填表單。
+- 收藏與跳轉同時支援聊天室（`space`）及一對一對話（`dm`），並保存各自的路由類型。
 - 若無法從右鍵目標辨識必要的 Thread 或 Message 身份，不建立 Bookmark，並顯示「目前無法讀取這則訊息，請重新整理 Gmail 後再試」。
 - 擷取失敗提示提供以 icon 呈現的「複製診斷資訊」動作；診斷資訊不得包含訊息文字、回覆或參與者資料。
 - 手動貼上 Google 訊息連結的備援入口不納入 Milestone 1，只有實際測試顯示經常需要時才排入後續里程碑。

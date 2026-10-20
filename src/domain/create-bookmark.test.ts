@@ -29,4 +29,13 @@ describe('create bookmark if absent', () => {
     const result = await createBookmarkIfAbsent(repository, {spaceId: 'space', threadId: 'thread', messageId: 'new-message', title: '另一則', sourceRoomName: '聊天室'});
     expect(result.status).toBe('created');
   });
+
+  it('stores direct-message type and canonical url', async () => {
+    const repository = {getByMessage: vi.fn().mockResolvedValue(undefined), create: vi.fn(async (value) => value)};
+    await createBookmarkIfAbsent(repository, {conversationType: 'dm', spaceId: 'woI29KAAAAE', threadId: 'thread', messageId: 'reply', title: '私訊', sourceRoomName: 'Google Chat'});
+    expect(repository.create).toHaveBeenCalledWith(expect.objectContaining({
+      conversationType: 'dm',
+      url: 'https://chat.google.com/dm/woI29KAAAAE/thread/reply?cls=10',
+    }));
+  });
 });

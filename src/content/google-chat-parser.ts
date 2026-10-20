@@ -8,12 +8,17 @@ export interface ChatCaptureCandidate {
   capturedAt: number;
 }
 
-const JSDATA_PATTERN = /^ykVKge;([A-Za-z0-9_-]+),([A-Za-z0-9_-]+),space\/([A-Za-z0-9_-]+);/u;
+const JSDATA_PATTERN = /^ykVKge;([A-Za-z0-9_-]+),([A-Za-z0-9_-]+),(space|dm)\/([A-Za-z0-9_-]+);/u;
 const MAX_AGE_MS = 120_000;
 
 export function parseMessageJsData(value: string | null, messageId: string | null, threadId: string | null): MessageIdentity | null {
   const match = JSDATA_PATTERN.exec(value ?? '');
-  const identity = match ? {messageId: match[1], threadId: match[2], spaceId: match[3]} : null;
+  const identity: MessageIdentity | null = match ? {
+    ...(match[3] === 'dm' ? {conversationType: 'dm'} : {}),
+    messageId: match[1],
+    threadId: match[2],
+    spaceId: match[4],
+  } : null;
   return identity && identity.messageId === messageId && identity.threadId === threadId && isMessageIdentity(identity) ? identity : null;
 }
 

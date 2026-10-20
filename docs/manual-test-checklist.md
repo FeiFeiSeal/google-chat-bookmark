@@ -111,6 +111,7 @@ Chrome 版本：待填
 - [ ] 從同一討論串分別收藏起始訊息與一則回覆，確認每筆預設標題取自當次被收藏的訊息。
 - [ ] 收藏一則超過 30 個可見字元的訊息，確認預設標題截為 30 字且 emoji 不被切半。
 - [ ] 在同一討論串收藏兩則不同訊息，確認建立兩筆 Bookmark 且分別跳回各自訊息；再次收藏其中同一則訊息時顯示「這則訊息已收藏」。
+- [ ] 在 Gmail 的一對一對話收藏主訊息及討論串回覆，確認不再出現 `invalid-or-stale-target`，並可從 Bookmark 跳回各自訊息。
 - [ ] 由原本 schema v2 的未封裝擴充功能直接重新載入新版 `dist/`，確認原 Bookmark、分類、順序、置頂與展開狀態保持。
 
-自動化結果：17 個測試檔、111 個測試全部通過；typecheck、lint、production build 與 OpenSpec strict validation 通過。新版 `dist/` 已完成，等待 Chrome 擴充功能頁重新載入後執行上述實機項目。
+自動化結果：18 個測試檔、124 個測試全部通過；typecheck、lint、production build 與 OpenSpec strict validation 通過。新版 `dist/` 已完成，等待 Chrome 擴充功能頁重新載入後執行上述實機項目。
