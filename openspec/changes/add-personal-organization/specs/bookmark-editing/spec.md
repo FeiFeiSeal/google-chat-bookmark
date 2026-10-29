@@ -13,7 +13,7 @@
 
 #### Scenario: Long title in narrow panel
 - **WHEN** Bookmark 標題超出列的可用寬度
-- **THEN** 系統以單行省略號顯示並提供可取得完整標題的輔助提示
+- **THEN** 系統以單行省略號顯示並提供可取得完整標題的輔助提示，且不撐寬所在分類或其他分類；右側操作按鈕仍保留在側欄可見範圍內
 
 ### Requirement: Bookmark details are collapsible
 系統 SHALL 將 Note 與收藏時間放在個別 Bookmark 的可收合詳細資訊中；收藏時間前顯示記錄 icon，不顯示「收藏時間」或 Category 文字標籤。

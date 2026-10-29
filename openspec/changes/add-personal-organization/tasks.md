@@ -66,3 +66,4 @@
 - [x] 8.12 監聽 active tab 切換與導覽；切到非 Gmail 時，依上一個 Gmail tab 的 `tabId` 關閉 tab-specific Side Panel，並保留 Gmail 內 Mail／Chat 切換。
 - [x] 8.13 支援 Google Chat 一對一對話的 `dm` DOM 身份、官方連結、Bookmark 保存與 Gmail 導覽，並以 parser、identity、schema、建立及導覽測試驗證；既有 `space` Bookmark 維持相容。
 - [ ] 8.14 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。
+- [x] 8.15 修正長標題撐寬 Grid 欄位造成全列表操作按鈕超出側欄的問題，並以真實瀏覽器驗證 240／320／360／800px、明暗模式、搜尋及編輯狀態；保留開發用極端資料 fixture。

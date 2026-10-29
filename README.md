@@ -62,3 +62,9 @@ npm run build
 ```
 
 完整人工驗收步驟見 [docs/manual-test-checklist.md](docs/manual-test-checklist.md)。
+
+## 側欄版面預覽
+
+執行 `npm run dev` 後，在開發伺服器開啟 `/tests/fixtures/sidepanel-layout.html`。
+底部可切換 Demo data、Worst case、Empty、One 與 1,000 rows，驗證長標題、長分類、置頂及窄側欄。
+預覽使用獨立記憶體資料，不連接 Chrome 收藏庫；正式擴充功能不包含此頁。
