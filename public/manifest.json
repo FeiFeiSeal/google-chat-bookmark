@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Google Chat Bookmark",
-  "description": "在 Gmail Chat 收藏並快速返回重要討論。",
+  "name": "ChatMark — Bookmarks for Google Chat™",
+  "short_name": "ChatMark",
+  "description": "獨立開發的非官方收藏工具，在 Gmail 內嵌的 Google Chat 中整理、搜尋並返回重要訊息。非由 Google 提供、贊助或背書。",
   "version": "0.1.2",
   "minimum_chrome_version": "116",
   "incognito": "not_allowed",
@@ -25,7 +26,7 @@
     "type": "module"
   },
   "action": {
-    "default_title": "開啟 Google Chat Bookmark",
+    "default_title": "開啟 ChatMark",
     "default_icon": {
       "16": "icon-16.png",
       "32": "icon-32.png"

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ChatMark 是獨立開發的非官方收藏工具，讓你在 Gmail 內嵌的 Google Chat 收藏、分類、搜尋並返回重要訊息。資料保存在你的瀏覽器。">
+    <meta name="referrer" content="no-referrer">
+    <title>ChatMark · 收藏重要訊息，隨時回到討論</title>
+    <link rel="icon" href="./icon-32.png" type="image/png">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="alternate" hreflang="zh-Hant" href="./index.html">
+    <link rel="alternate" hreflang="en" href="./index-en.html">
+  </head>
+  <body>
+    <a class="skip-link" href="#intro">跳至介紹內容</a>
+    <header class="site-header">
+      <a class="brand" href="./" aria-current="page"><img src="./icon-48.png" width="32" height="32" alt=""><span>ChatMark</span></a>
+      <div class="header-links">
+        <nav class="languages" aria-label="語言">
+          <a href="./index.html" lang="zh-Hant" hreflang="zh-Hant" aria-current="page">繁體中文</a>
+          <a href="./index-en.html" lang="en" hreflang="en">English</a>
+        </nav>
+        <a href="./privacy.html">隱私權政策</a>
+      </div>
+    </header>
+    <main id="intro" class="home" tabindex="-1">
+      <section class="home-intro" aria-labelledby="intro-heading">
+        <h1 id="intro-heading">收藏重要訊息，<br>隨時回到討論。</h1>
+        <figure class="brand-illustration">
+          <img src="./images/chatmark-overview.png" width="1572" height="1001" fetchpriority="high" decoding="async" alt="ChatMark 品牌插圖：對話泡泡與書籤標籤，旁邊是可搜尋及整理的訊息收藏清單。">
+          <figcaption>把對話裡的重要訊息收藏起來，整理好再隨時找回。</figcaption>
+        </figure>
+        <p class="home-description">連結、決議、待辦事項，常常藏在長長的對話裡。ChatMark 讓你在 Gmail 內嵌的 Google Chat 收藏訊息，用側欄整理，需要時直接回到原處。</p>
+        <p class="independent">ChatMark 是獨立開發的非官方擴充功能，並非由 Google 提供、贊助或背書。</p>
+        <div class="home-actions">
+          <a class="primary-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark#readme">查看專案與安裝說明</a>
+          <a href="#features">了解功能</a>
+        </div>
+      </section>
+
+      <figure class="product-shot">
+        <a href="./images/bookmark-demo.png" target="_blank" rel="noopener" aria-label="在新分頁查看完整操作截圖">
+          <img src="./images/bookmark-demo.png" width="1562" height="1007" loading="lazy" decoding="async" alt="Gmail 內嵌 Google Chat 的右鍵收藏選單，可直接選擇分類；右側側欄顯示依產品規劃、設計協作、開發紀錄與專案追蹤整理的收藏。">
+        </a>
+        <figcaption>在訊息上按右鍵收藏到分類，再從側欄集中整理和搜尋。<a href="./images/bookmark-demo.png" target="_blank" rel="noopener">查看原圖（新分頁）</a></figcaption>
+      </figure>
+
+      <section aria-labelledby="features">
+        <h2 id="features">讓重要的對話更好找</h2>
+        <dl class="feature-list">
+          <div><dt>從訊息直接建立收藏</dt><dd>在 Google Chat 訊息上按右鍵，快速收藏到未分類，或直接指定一個分類。相同訊息不會重複建立收藏。</dd></div>
+          <div><dt>分類完整管理</dt><dd>新增分類、重新命名或刪除不再需要的分類，也能拖曳調整分類順序。展開或收合分類，讓側欄保持清楚。</dd></div>
+          <div><dt>搜尋與編輯收藏</dt><dd>搜尋收藏標題、分類名稱和筆記。可修改標題與筆記、刪除收藏，或將常用收藏置頂。</dd></div>
+          <div><dt>拖曳整理與快速復原</dt><dd>拖曳收藏調整同一分類內的順序、移到其他分類，或排列置頂項目。刪除收藏或分類後，可立即復原最近一次刪除。</dd></div>
+          <div><dt>一點，回到原始訊息</dt><dd>從側欄點開收藏，在 Gmail 返回保存的訊息位置，接著閱讀前後文。</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="local-data">
+        <h2 id="local-data">收藏留在你的瀏覽器</h2>
+        <p>收藏資料保存在目前 Chrome 使用者設定檔，不會自動跨裝置同步，也不會自動上傳給開發者。你可以手動匯出 JSON 備份，再於需要時還原。</p>
+        <a href="./privacy.html">閱讀完整隱私權政策</a>
+      </section>
+
+      <section aria-labelledby="scope">
+        <h2 id="scope">使用前先了解</h2>
+        <p>收藏功能目前只支援 Gmail（<code>mail.google.com</code>）裡的 <strong>Chat 分頁與對話畫面</strong>。請從 <a href="https://mail.google.com/">Gmail</a> 左側導覽列開啟 Chat，再於訊息上按右鍵收藏。獨立的 <code>chat.google.com</code> 網站目前不支援。開啟收藏時，你仍需要使用有權限查看該對話的 Google 帳號。</p>
+      </section>
+
+      <section aria-labelledby="support">
+        <h2 id="support">一起讓 ChatMark 更好用</h2>
+        <p>遇到問題，或有想要的功能？歡迎到 <a href="https://github.com/FeiFeiSeal/google-chat-bookmark/issues">GitHub Issues</a> 留下回饋。公開留言請避免包含私人對話或完整備份。</p>
+        <p class="trademark">Google Chat 和 Gmail 是 Google LLC 的商標，其使用受 <a href="https://about.google/brand-resource-center/guidance/">Google Permissions</a> 規範約束。</p>
+      </section>
+    </main>
+    <footer><span>ChatMark · 獨立開發的非官方擴充功能</span><a href="./privacy.html">隱私權政策</a></footer>
+  </body>
+</html>
