@@ -59,4 +59,20 @@ describe('tab-specific Side Panel', () => {
     expect(tabs.query).not.toHaveBeenCalled();
     expect(close).not.toHaveBeenCalled();
   });
+
+  it('closes the Gmail panel when a tab outside host permissions has no URL', async () => {
+    const setOptions = vi.fn();
+    const close = vi.fn().mockResolvedValue(undefined);
+    const tabs = {
+      get: vi.fn().mockResolvedValue({id: 9, windowId: 3}),
+      query: vi.fn().mockResolvedValue([
+        {id: 4, windowId: 3, url: 'https://mail.google.com/mail/u/0/#chat/home'},
+        {id: 9, windowId: 3},
+      ]),
+    };
+    await configureSidePanelForActiveTab({setOptions, close}, tabs, 9, 3);
+    expect(setOptions).toHaveBeenCalledWith({tabId: 9, enabled: false});
+    expect(close).toHaveBeenCalledWith({tabId: 4});
+    expect(close).toHaveBeenCalledWith({windowId: 3});
+  });
 });

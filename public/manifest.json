@@ -14,8 +14,7 @@
   "permissions": [
     "contextMenus",
     "storage",
-    "sidePanel",
-    "tabs"
+    "sidePanel"
   ],
   "host_permissions": [
     "https://mail.google.com/*",
