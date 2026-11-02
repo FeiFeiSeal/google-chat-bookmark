@@ -5,24 +5,46 @@
   "version": "0.1.2",
   "minimum_chrome_version": "116",
   "incognito": "not_allowed",
-  "permissions": ["contextMenus", "storage", "sidePanel", "tabs"],
-  "host_permissions": ["https://mail.google.com/*", "https://chat.google.com/*"],
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "sidePanel",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://chat.google.com/*"
+  ],
   "background": {
     "service_worker": "service-worker.js",
     "type": "module"
   },
   "action": {
-    "default_title": "開啟 Google Chat Bookmark"
+    "default_title": "開啟 Google Chat Bookmark",
+    "default_icon": {
+      "16": "icon-16.png",
+      "32": "icon-32.png"
+    }
   },
   "side_panel": {
     "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://chat.google.com/*"],
+      "matches": [
+        "https://chat.google.com/*"
+      ],
       "all_frames": true,
       "run_at": "document_start",
-      "js": ["content-script.js"]
+      "js": [
+        "content-script.js"
+      ]
     }
   ]
 }
