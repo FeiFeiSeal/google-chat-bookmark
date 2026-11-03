@@ -273,7 +273,11 @@ export function App({repository, diagnostics, onNavigate}: {repository?: PanelRe
       catch { if (active) { setStatus(messages.readOnly); setReady(true); } }
     };
     void load();
-    const unsubscribe = repository.subscribe(() => { if (active) void repository.view().then((next) => { if (active) setView(next); }); });
+    const unsubscribe = repository.subscribe(() => {
+      if (active) void repository.view()
+        .then((next) => { if (active) setView(next); })
+        .catch(() => { if (active) setStatus(messages.readOnly); });
+    });
     return () => { active = false; unsubscribe(); };
   }, [repository]);
 
@@ -380,11 +384,17 @@ export function App({repository, diagnostics, onNavigate}: {repository?: PanelRe
   };
 
   const restoreFile = async (file?: File) => {
-    if (!file || !diagnostics) return;
+    if (!file || !repository || !diagnostics) return;
     try {
       const candidate = await diagnostics.preflight(await file.text());
-      if (!window.confirm(`還原會完整取代目前本機收藏庫（${candidate.bookmarks.length} 筆 Bookmark）。要繼續嗎？`)) return;
-      setUndo(null); await diagnostics.restore(candidate); await reload(); setStatus(messages.restoreComplete);
+      let currentCount: string;
+      try { currentCount = `${(await repository.snapshot()).bookmarks.length} 筆 Bookmark`; }
+      catch (error) {
+        if (!(error instanceof Error) || !/^(invalid-|missing-uncategorized)/u.test(error.message)) throw error;
+        currentCount = '無法讀取（資料格式異常）';
+      }
+      if (!window.confirm(`備份檔：${candidate.bookmarks.length} 筆 Bookmark\n目前收藏庫：${currentCount}\n\n還原會以備份檔完整取代目前收藏庫。要繼續嗎？`)) return;
+      setUndo(null); await diagnostics.restore(candidate); await repository.initialize(); await reload(); setStatus(messages.restoreComplete);
     } catch { setStatus(messages.restoreFailed); }
     finally { if (inputRef.current) inputRef.current.value = ''; }
   };

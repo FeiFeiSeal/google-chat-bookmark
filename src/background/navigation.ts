@@ -8,6 +8,7 @@ export function isGmailUrl(value?: string): boolean {
 export function buildGmailNavigationUrl(currentUrl: string, bookmark: MessageIdentity): string {
   if (!isGmailUrl(currentUrl) || !isMessageIdentity(bookmark)) throw new Error('invalid-gmail-navigation');
   const url = new URL(currentUrl);
-  url.hash = `chat/space/${bookmark.spaceId}/${bookmark.threadId}/${bookmark.messageId}`;
+  const route = bookmark.conversationType === 'dm' ? 'dm' : 'space';
+  url.hash = `chat/${route}/${bookmark.spaceId}/${bookmark.threadId}/${bookmark.messageId}`;
   return url.toString();
 }

@@ -1,28 +1,50 @@
 {
   "manifest_version": 3,
-  "name": "Google Chat Bookmark",
-  "description": "在 Gmail Chat 收藏並快速返回重要討論。",
-  "version": "0.1.0",
+  "name": "ChatMark — Bookmarks for Google Chat™",
+  "short_name": "ChatMark",
+  "description": "獨立開發的非官方收藏工具，在 Gmail 內嵌的 Google Chat 中整理、搜尋並返回重要訊息。非由 Google 提供、贊助或背書。",
+  "version": "0.1.2",
   "minimum_chrome_version": "116",
   "incognito": "not_allowed",
-  "permissions": ["contextMenus", "storage", "sidePanel", "tabs"],
-  "host_permissions": ["https://mail.google.com/*", "https://chat.google.com/*"],
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://chat.google.com/*"
+  ],
   "background": {
     "service_worker": "service-worker.js",
     "type": "module"
   },
   "action": {
-    "default_title": "開啟 Google Chat Bookmark"
+    "default_title": "開啟 ChatMark",
+    "default_icon": {
+      "16": "icon-16.png",
+      "32": "icon-32.png"
+    }
   },
   "side_panel": {
     "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://chat.google.com/*"],
+      "matches": [
+        "https://chat.google.com/*"
+      ],
       "all_frames": true,
       "run_at": "document_start",
-      "js": ["content-script.js"]
+      "js": [
+        "content-script.js"
+      ]
     }
   ]
 }

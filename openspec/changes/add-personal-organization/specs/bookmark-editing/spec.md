@@ -13,7 +13,7 @@
 
 #### Scenario: Long title in narrow panel
 - **WHEN** Bookmark 標題超出列的可用寬度
-- **THEN** 系統以單行省略號顯示並提供可取得完整標題的輔助提示
+- **THEN** 系統以單行省略號顯示並提供可取得完整標題的輔助提示，且不撐寬所在分類或其他分類；右側操作按鈕仍保留在側欄可見範圍內
 
 ### Requirement: Bookmark details are collapsible
 系統 SHALL 將 Note 與收藏時間放在個別 Bookmark 的可收合詳細資訊中；收藏時間前顯示記錄 icon，不顯示「收藏時間」或 Category 文字標籤。
@@ -27,7 +27,7 @@
 - **THEN** 系統只保留主要 Bookmark 列且不刪除任何資料
 
 ### Requirement: Bookmark capture preserves message identity and context
-系統 SHALL 以 `spaceId`、`threadId` 與 `messageId` 的組合識別 Bookmark，預設標題使用被收藏訊息的第一個非空白文字行並限制為 30 個 grapheme cluster。
+系統 SHALL 保存 Google Chat 對話類型，並以 `spaceId`、`threadId` 與 `messageId` 的組合識別 Bookmark；聊天室與一對一對話 SHALL 分別使用 `space` 與 `dm` 路由，預設標題使用被收藏訊息的第一個非空白文字行並限制為 30 個 grapheme cluster。
 
 #### Scenario: Bookmark different messages in one thread
 - **WHEN** 使用者收藏同一討論串中的兩則不同訊息
@@ -40,6 +40,10 @@
 #### Scenario: Create default title from selected message
 - **WHEN** 系統從 Google Chat 訊息建立 Bookmark
 - **THEN** 預設標題為使用者當次收藏訊息文字的前 30 個可見字元
+
+#### Scenario: Bookmark and reopen a direct message
+- **WHEN** 使用者在 Gmail 的一對一對話收藏訊息
+- **THEN** 系統保存 `dm` 對話類型並可從 Bookmark 返回該一對一對話的 Message Anchor
 
 ### Requirement: User can edit title and Note in place
 系統 SHALL 從 Bookmark 的更多操作選單提供「編輯」，在原位置顯示標題與 Note 欄位及明確的「儲存」「取消」操作，不得以標題點擊進入編輯。

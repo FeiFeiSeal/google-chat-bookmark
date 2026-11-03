@@ -310,6 +310,21 @@ describe('App', () => {
     const valid = new File(['{}'], 'valid.json', {type: 'application/json'}); Object.defineProperty(valid, 'text', {value: async () => '{}'});
     fireEvent.change(input, {target: {files: [valid]}});
     await waitFor(() => expect(window.confirm).toHaveBeenCalled());
+    expect(window.confirm).toHaveBeenCalledWith('備份檔：1 筆 Bookmark\n目前收藏庫：0 筆 Bookmark\n\n還原會以備份檔完整取代目前收藏庫。要繼續嗎？');
+    expect(restore).not.toHaveBeenCalled();
+  });
+
+  it('allows confirmation when the existing library metadata is unreadable', async () => {
+    const repository = new BookmarkRepository(new MemoryStorageAdapter({'library:metadata': {schemaVersion: 99}}));
+    const restore = vi.fn();
+    const diagnostics = {backup: vi.fn(), preflight: vi.fn().mockResolvedValue({bookmarks: [sampleBookmark()]}), restore};
+    vi.spyOn(window, 'confirm').mockReturnValue(false);
+    const {container} = render(<App repository={repository} diagnostics={diagnostics as never}/>);
+    expect(await screen.findByText('收藏庫資料無法讀取，請從「診斷與備份」選擇有效的完整備份還原。')).toBeInTheDocument();
+    const file = new File(['{}'], 'backup.json', {type: 'application/json'});
+    Object.defineProperty(file, 'text', {value: async () => '{}'});
+    fireEvent.change(container.querySelector('input[type="file"]')!, {target: {files: [file]}});
+    await waitFor(() => expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('目前收藏庫：無法讀取（資料格式異常）')));
     expect(restore).not.toHaveBeenCalled();
   });
 });

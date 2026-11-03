@@ -93,7 +93,7 @@ Service worker 同時監聽 tab update 與 activation。啟用中的分頁不是
 
 Category 與 Bookmark 的更多操作改用受控 menu state。操作 icon 在該列 hover 或 focus-within 時顯示；滑鼠離開 Bookmark 列會關閉 Bookmark menu，防止下次移入仍保留上次彈窗。Category menu 不因移向彈窗而消失，確保重新命名與刪除可點擊。
 
-Google Chat capture 只從使用者右鍵選取的 message body 穩定語意標記擷取第一個非空白文字行，並在送往 service worker 前截為 30 個 grapheme。若取不到文字，使用收藏日期產生安全 fallback。Google Chat 目前沒有可依賴的聊天室名稱標記，因此介面不顯示或搜尋來源聊天室；既有 storage 欄位只保留作舊資料相容。
+Google Chat capture 只從使用者右鍵選取的 message body 穩定語意標記擷取第一個非空白文字行，並在送往 service worker 前截為 30 個 grapheme。`jsdata` 的 `space/<id>` 與 `dm/<id>` 前綴分別保存為聊天室及一對一對話路由；`conversationType` 為向後相容的可選欄位，舊 Bookmark 缺省視為 `space`，storage key 仍使用既有三個 ID，因此不需要 migration。若取不到文字，使用收藏日期產生安全 fallback。Google Chat 目前沒有可依賴的聊天室名稱標記，因此介面不顯示或搜尋來源聊天室；既有 storage 欄位只保留作舊資料相容。
 
 實作順序以可操作切片進行：先 repository 與 migration，再 Bookmark 編輯／刪除，再 Category CRUD／收合，再排序／移動／置頂，最後搜尋與 1,000 筆效能。每一片先用 domain/repository 測試固定不變量，再補關鍵 React 互動測試和真實 Chrome 人工驗收。
 

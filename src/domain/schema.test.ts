@@ -28,4 +28,10 @@ describe('domain schema v3', () => {
     expect(() => validateBookmark({...validBookmark, lastOpenedAt: 'yesterday'})).toThrow('invalid-bookmark-time');
     expect(validateLibraryData({metadata: {schemaVersion: 3, revision: -1, categoryOrder: ['uncategorized'], pinnedOrder: []}, categories: [UNCATEGORIZED_CATEGORY], bookmarks: [], orders: {uncategorized: []}}).ok).toBe(false);
   });
+
+  it('accepts a direct-message bookmark and rejects unknown conversation types', () => {
+    const directMessage = {...validBookmark, conversationType: 'dm' as const, spaceId: 'woI29KAAAAE', url: 'https://chat.google.com/dm/woI29KAAAAE/thread/message?cls=10'};
+    expect(validateBookmark(directMessage)).toEqual(directMessage);
+    expect(() => validateBookmark({...directMessage, conversationType: 'group'})).toThrow('invalid-bookmark-identity');
+  });
 });
