@@ -25,17 +25,18 @@
     </header>
     <main id="intro" class="home" tabindex="-1">
       <section class="home-intro" aria-labelledby="intro-heading">
-        <h1 id="intro-heading">Save the message.<br>Return to the conversation.</h1>
+        <div class="intro-copy">
+          <h1 id="intro-heading">Save the message.<br>Return to the conversation.</h1>
+          <p class="home-description">Links, decisions, and tasks get buried in long conversations. ChatMark lets you bookmark Google Chat messages inside Gmail, organize them in a side panel, and return when you need them.</p>
+          <p class="independent">ChatMark is an independently developed, unofficial extension. It is not provided, sponsored, or endorsed by Google.</p>
+          <div class="home-actions">
+            <a class="primary-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark">View GitHub project</a>
+            <a href="#features">Explore features</a>
+          </div>
+        </div>
         <figure class="brand-illustration">
           <img src="./images/chatmark-overview.png" width="1572" height="1001" fetchpriority="high" decoding="async" alt="ChatMark illustration: a conversation bubble and bookmark tag beside a searchable, organized list of saved messages.">
-          <figcaption>Save what matters in a conversation, organize it, and find it again.</figcaption>
         </figure>
-        <p class="home-description">Links, decisions, and tasks get buried in long conversations. ChatMark lets you bookmark Google Chat messages inside Gmail, organize them in a side panel, and return when you need them.</p>
-        <p class="independent">ChatMark is an independently developed, unofficial extension. It is not provided, sponsored, or endorsed by Google.</p>
-        <div class="home-actions">
-          <a class="primary-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark#readme">View project and installation guide</a>
-          <a href="#features">Explore features</a>
-        </div>
       </section>
 
       <figure class="product-shot">
@@ -48,17 +49,18 @@
       <section aria-labelledby="features">
         <h2 id="features">Keep important conversations within reach</h2>
         <dl class="feature-list">
-          <div><dt>Bookmark directly from a message</dt><dd>Right-click a Google Chat message to save it as uncategorized or choose a category. The same message will not be bookmarked twice.</dd></div>
+          <div><dt>Bookmark directly from a message</dt><dd>Right-click a Google Chat message to save it as uncategorized or choose a category. The title is taken from the message, and you can save different messages from the same conversation separately. If you try to save the same message again, the notice lets you jump to the existing bookmark.</dd></div>
           <div><dt>Manage your categories</dt><dd>Create, rename, or delete categories, then drag them into the order you want. Expand or collapse categories to keep the side panel tidy.</dd></div>
-          <div><dt>Search and edit bookmarks</dt><dd>Search bookmark titles, category names, and notes. Edit titles and notes, delete bookmarks, or pin the ones you use most.</dd></div>
-          <div><dt>Reorder and undo with drag and drop</dt><dd>Drag bookmarks to reorder them within a category, move them to another category, or arrange pinned items. You can immediately undo the most recent bookmark or category deletion.</dd></div>
+          <div><dt>Search and edit bookmarks</dt><dd>Search bookmark titles, category names, and notes, with title matches shown first. Edit titles and notes, delete bookmarks, or pin the ones you use most. Pinned bookmarks appear at the top of the side panel and in their original category.</dd></div>
+          <div><dt>Organize with drag and drop</dt><dd>Drag bookmarks to reorder them within a category, move them to another category, or arrange pinned items. Categories remember whether you left them expanded or collapsed.</dd></div>
+          <div><dt>Undo mistakes</dt><dd>Before deleting a category, you’ll see how many bookmarks it contains and be asked to confirm. You can undo the most recent bookmark or category deletion, and undo a new save from its confirmation notice.</dd></div>
           <div><dt>Return to the original message</dt><dd>Open a bookmark from the side panel to return to its saved message location in Gmail and read the surrounding conversation.</dd></div>
         </dl>
       </section>
 
       <section aria-labelledby="local-data">
         <h2 id="local-data">Your bookmarks stay in your browser</h2>
-        <p>Bookmarks are stored in your current Chrome profile. They do not automatically sync across devices or upload to the developer. You can manually export a JSON backup and restore it when needed.</p>
+        <p>Bookmarks are stored in your current Chrome profile. They do not automatically sync across devices or upload to the developer. In the side panel’s diagnostics section, you can manually export a JSON backup of your entire library. Restoring it replaces the current library. This is a personal backup; exporting a selected category for sharing or merging imported bookmarks is not supported.</p>
         <a href="./privacy-en.html">Read the full privacy policy</a>
       </section>
 
