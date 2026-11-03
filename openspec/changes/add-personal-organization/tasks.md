@@ -64,4 +64,6 @@
 - [x] 8.10 修正 drop 讀取舊 React state 而未保存預覽順序的問題，以同步 ref 保存最新落點；拖曳限制為垂直軸並隱藏水平溢位。
 - [x] 8.11 新增動態「收藏到分類」右鍵子選單，保留快速收藏到未分類，並讓 repository 在建立時直接寫入指定 Category order。
 - [x] 8.12 監聽 active tab 切換與導覽；切到非 Gmail 時，依上一個 Gmail tab 的 `tabId` 關閉 tab-specific Side Panel，並保留 Gmail 內 Mail／Chat 切換。
-- [ ] 8.13 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。
+- [x] 8.13 支援 Google Chat 一對一對話的 `dm` DOM 身份、官方連結、Bookmark 保存與 Gmail 導覽，並以 parser、identity、schema、建立及導覽測試驗證；既有 `space` Bookmark 維持相容。
+- [ ] 8.14 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。
+- [x] 8.15 修正長標題撐寬 Grid 欄位造成全列表操作按鈕超出側欄的問題，並以真實瀏覽器驗證 240／320／360／800px、明暗模式、搜尋及編輯狀態；保留開發用極端資料 fixture。

@@ -14,6 +14,14 @@ describe('message identity', () => {
     expect(bookmarkStorageKey(parseCanonicalChatUrl(root)!)).not.toBe(bookmarkStorageKey(parseCanonicalChatUrl(reply)!));
   });
 
+  it('round trips direct-message anchors without changing the storage key', () => {
+    const identity = {conversationType: 'dm' as const, spaceId: 'woI29KAAAAE', threadId: 'thread-2', messageId: 'reply-3'};
+    const url = buildCanonicalChatUrl(identity);
+    expect(url).toBe('https://chat.google.com/dm/woI29KAAAAE/thread-2/reply-3?cls=10');
+    expect(parseCanonicalChatUrl(url)).toEqual(identity);
+    expect(bookmarkStorageKey(identity)).toBe('bookmark:woI29KAAAAE:thread-2:reply-3');
+  });
+
   it.each([
     'http://chat.google.com/room/a/b/c',
     'https://example.com/room/a/b/c',

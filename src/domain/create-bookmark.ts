@@ -20,6 +20,7 @@ export async function createBookmarkIfAbsent(repository: BookmarkWriter, input: 
   const timestamp = now().toISOString();
   const bookmark: Bookmark = {
     schemaVersion: 1,
+    ...(input.conversationType ? {conversationType: input.conversationType} : {}),
     spaceId: input.spaceId,
     threadId: input.threadId,
     messageId: input.messageId,

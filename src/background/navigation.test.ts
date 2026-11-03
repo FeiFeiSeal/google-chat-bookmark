@@ -14,4 +14,10 @@ describe('Gmail navigation adapter', () => {
     expect(() => buildGmailNavigationUrl('https://example.com/', bookmark)).toThrow();
     expect(bookmark).not.toHaveProperty('accountIndex');
   });
+
+  it('uses the dm route for a direct-message bookmark', () => {
+    expect(buildGmailNavigationUrl('https://mail.google.com/mail/u/0/#chat/home', {
+      conversationType: 'dm', spaceId: 'woI29KAAAAE', threadId: 'thread-2', messageId: 'reply-3',
+    })).toBe('https://mail.google.com/mail/u/0/#chat/dm/woI29KAAAAE/thread-2/reply-3');
+  });
 });

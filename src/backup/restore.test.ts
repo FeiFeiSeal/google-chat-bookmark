@@ -28,6 +28,33 @@ describe('safe restore', () => {
     expect(storage.writeCount).toBe(before);
   });
 
+  it('restores a valid backup when existing metadata cannot be read', async () => {
+    const original = {'library:metadata': {schemaVersion: 99}, 'category:uncategorized': {id: 'uncategorized'}, 'bookmark:unreadable': {title: 'preserve until confirmation'}};
+    const storage = new MemoryStorageAdapter(original);
+    const repository = new BookmarkRepository(storage);
+    await expect(repository.initialize()).rejects.toThrow('invalid-metadata');
+    const coordinator = new RestoreCoordinator(storage, repository);
+    const before = storage.writeCount;
+    const candidate = await coordinator.preflight(JSON.stringify(createBackup(sampleLibrary())));
+    expect(storage.writeCount).toBe(before);
+    await coordinator.restore(candidate);
+    await repository.initialize();
+    expect(repository.isReadOnly).toBe(false);
+    expect((await repository.snapshot()).bookmarks).toEqual([sampleBookmark()]);
+    expect((await storage.get())['bookmark:unreadable']).toBeUndefined();
+  });
+
+  it('recovers raw unreadable records if an interrupted restore has an invalid candidate', async () => {
+    const original = {'library:metadata': {schemaVersion: 99}, 'bookmark:unreadable': {title: 'original'}};
+    const storage = new MemoryStorageAdapter(original);
+    const repository = new BookmarkRepository(storage);
+    const coordinator = new RestoreCoordinator(storage, repository);
+    await coordinator.stageForTest({invalid: true} as never, {kind: 'raw-records', records: original});
+    await storage.set({'library:metadata': sampleLibrary().metadata});
+    expect(await coordinator.recoverInterruptedRestore()).toBe('recovered');
+    expect(await storage.get()).toEqual(original);
+  });
+
   it('finishes a valid candidate after interruption', async () => {
     const storage = new MemoryStorageAdapter();
     const repository = new BookmarkRepository(storage);

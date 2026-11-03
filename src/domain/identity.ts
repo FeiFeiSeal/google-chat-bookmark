@@ -1,4 +1,5 @@
 export interface ThreadIdentity {
+  conversationType?: 'space' | 'dm';
   spaceId: string;
   threadId: string;
 }
@@ -16,7 +17,10 @@ export function isValidChatId(value: unknown): value is string {
 export function isMessageIdentity(value: unknown): value is MessageIdentity {
   if (!value || typeof value !== 'object') return false;
   const candidate = value as Partial<MessageIdentity>;
-  return isValidChatId(candidate.spaceId) && isValidChatId(candidate.threadId) && isValidChatId(candidate.messageId);
+  return (candidate.conversationType === undefined || candidate.conversationType === 'space' || candidate.conversationType === 'dm')
+    && isValidChatId(candidate.spaceId)
+    && isValidChatId(candidate.threadId)
+    && isValidChatId(candidate.messageId);
 }
 
 export function bookmarkStorageKey(identity: MessageIdentity): string {
@@ -26,16 +30,22 @@ export function bookmarkStorageKey(identity: MessageIdentity): string {
 
 export function buildCanonicalChatUrl(identity: MessageIdentity): string {
   if (!isMessageIdentity(identity)) throw new Error('invalid-message-identity');
-  return `https://chat.google.com/room/${identity.spaceId}/${identity.threadId}/${identity.messageId}?cls=10`;
+  const route = identity.conversationType === 'dm' ? 'dm' : 'room';
+  return `https://chat.google.com/${route}/${identity.spaceId}/${identity.threadId}/${identity.messageId}?cls=10`;
 }
 
 export function parseCanonicalChatUrl(value: string): MessageIdentity | null {
   try {
     const url = new URL(value);
     if (url.protocol !== 'https:' || url.hostname !== 'chat.google.com') return null;
-    const match = url.pathname.match(/^\/room\/([^/]+)\/([^/]+)\/([^/]+)\/?$/u);
+    const match = url.pathname.match(/^\/(room|dm)\/([^/]+)\/([^/]+)\/([^/]+)\/?$/u);
     if (!match) return null;
-    const identity = {spaceId: match[1], threadId: match[2], messageId: match[3]};
+    const identity: MessageIdentity = {
+      ...(match[1] === 'dm' ? {conversationType: 'dm'} : {}),
+      spaceId: match[2],
+      threadId: match[3],
+      messageId: match[4],
+    };
     return isMessageIdentity(identity) ? identity : null;
   } catch {
     return null;

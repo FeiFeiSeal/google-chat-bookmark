@@ -18,6 +18,16 @@ describe('Google Chat DOM parser', () => {
     expect(candidate).not.toHaveProperty('participants');
   });
 
+  it('captures direct-message jsdata and builds a dm anchor', () => {
+    document.body.innerHTML = '<section data-topic-id="thread-2"><article data-id="reply-3" data-message-multiplat-item-id jsdata="ykVKge;reply-3,thread-2,dm/woI29KAAAAE;$42"><div data-message-body><span id="target">一對一訊息</span></div></article></section>';
+    expect(captureCandidateFromTarget(document.querySelector('#target'), 1000)).toEqual({
+      identity: {conversationType: 'dm', spaceId: 'woI29KAAAAE', threadId: 'thread-2', messageId: 'reply-3'},
+      canonicalUrl: 'https://chat.google.com/dm/woI29KAAAAE/thread-2/reply-3?cls=10',
+      selectedMessageText: '一對一訊息',
+      capturedAt: 1000,
+    });
+  });
+
   it('caps the selected reply text at 30 graphemes instead of using the thread root', () => {
     document.body.innerHTML = `<main><section data-topic-id="root"><article data-id="root" jsdata="ykVKge;root,root,space/space_2;"><div data-message-body>不應使用的討論串起始訊息</div></article><article data-id="reply" data-message-multiplat-item-id jsdata="ykVKge;reply,root,space/space_2;"><div data-message-body><span id="target">${'被收藏的回覆😀'.repeat(6)}</span></div></article></section></main>`;
     const candidate = captureCandidateFromTarget(document.querySelector('#target'), 1000)!;

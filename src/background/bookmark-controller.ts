@@ -32,7 +32,12 @@ export async function handleBookmarkContextMenu(deps: BookmarkControllerDependen
       categoryId,
     });
     if (result.status === 'duplicate') {
-      await deps.notify(tab.id, info.frameId, {kind: 'duplicate', bookmark: {spaceId: result.bookmark.spaceId, threadId: result.bookmark.threadId, messageId: result.bookmark.messageId}});
+      await deps.notify(tab.id, info.frameId, {kind: 'duplicate', bookmark: {
+        ...(result.bookmark.conversationType ? {conversationType: result.bookmark.conversationType} : {}),
+        spaceId: result.bookmark.spaceId,
+        threadId: result.bookmark.threadId,
+        messageId: result.bookmark.messageId,
+      }});
       return;
     }
     const token = await deps.undo.recordCreation(result.bookmark);

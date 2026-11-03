@@ -42,7 +42,7 @@ export const messages = {
   searchPlaceholder: '搜尋標題、筆記或分類',
   searchResults: '搜尋結果',
   noResults: '找不到符合的 Bookmark。',
-  readOnly: '收藏庫目前只能讀取，請先建立完整備份。',
+  readOnly: '收藏庫資料無法讀取，請從「診斷與備份」選擇有效的完整備份還原。',
   dataChanged: '資料已在另一個 Gmail 分頁更新，畫面已重新載入。',
   operationFailed: '操作未完成，請再試一次。',
   navigationFailed: '無法跳回這個討論，Bookmark 仍保留。',

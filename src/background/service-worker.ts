@@ -30,6 +30,7 @@ function queueContextMenuRefresh(): void {
   contextMenuRefresh = contextMenuRefresh
     .then(async () => {
       await ready;
+      await repository.initialize();
       const view = await repository.view();
       await rebuildBookmarkContextMenus(chrome.contextMenus, view.categories);
     })
