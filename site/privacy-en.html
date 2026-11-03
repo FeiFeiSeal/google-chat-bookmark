@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ChatMark is an independently developed, unofficial bookmarking tool for Google Chat. Read about local storage, permissions, backups, deletion, and how to contact us.">
+    <meta name="referrer" content="no-referrer">
+    <title>Privacy Policy · ChatMark</title>
+    <link rel="icon" href="./icon-32.png" type="image/png">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="alternate" hreflang="zh-Hant" href="./privacy.html">
+    <link rel="alternate" hreflang="en" href="./privacy-en.html">
+  </head>
+  <body>
+    <a class="skip-link" href="#policy">Skip to policy</a>
+    <header class="site-header">
+      <a class="brand" href="./index-en.html"><img src="./icon-48.png" width="32" height="32" alt=""><span>ChatMark</span></a>
+      <div class="header-links">
+        <nav class="languages" aria-label="Language">
+          <a href="./privacy.html" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+          <a href="./privacy-en.html" lang="en" hreflang="en" aria-current="page">English</a>
+        </nav>
+        <a href="https://github.com/FeiFeiSeal/google-chat-bookmark">GitHub project</a>
+      </div>
+    </header>
+    <main id="policy" tabindex="-1">
+      <div class="intro">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: <time datetime="2026-11-02">November 2, 2026</time></p>
+        <p class="lead">Your bookmarks stay in your browser.</p>
+        <p>ChatMark — Bookmarks for Google Chat™ helps you save, organize, and return to important messages in Google Chat embedded in Gmail. This policy explains how the extension handles data and how you can manage it.</p>
+        <p><strong>ChatMark is an independently developed, unofficial extension. It is not provided, sponsored, or endorsed by Google.</strong></p>
+        <p>Your bookmarks are stored locally in your current Chrome profile. The extension has no developer-operated server for bookmark data and includes no advertising, analytics, or tracking services.</p>
+      </div>
+      <nav class="contents" aria-label="Policy contents">
+        <a href="#data">Data we handle</a>
+        <a href="#storage">Storage and sharing</a>
+        <a href="#controls">Manage and delete</a>
+        <a href="#permissions">Permissions</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <section aria-labelledby="data">
+        <h2 id="data">Data we handle</h2>
+        <p>When you right-click a Google Chat message, the extension temporarily holds a text excerpt and identifiers for that message in the page's memory, in case you choose to bookmark it. When you choose to save a bookmark, it stores the following locally:</p>
+        <ul>
+          <li><strong>Message location:</strong> the conversation type, space or conversation ID, thread ID, message ID, and message link, used to detect duplicate bookmarks and return to the original message.</li>
+          <li><strong>Bookmark content:</strong> a default title derived from the message text, along with titles, notes, and category names you edit.</li>
+          <li><strong>Organization and activity:</strong> categories, ordering, pinned and expanded states, and timestamps for creating, updating, and most recently opening bookmarks.</li>
+        </ul>
+        <p>The extension also reads URLs of Gmail and Chat tabs covered by its site permissions to determine whether the side panel should be available and to navigate to messages. It does not build a browsing history of other websites or read your Google password or authentication cookies.</p>
+        <p>Bookmark titles or notes may contain personal information from the messages you select. This content is also handled locally as described in this policy.</p>
+      </section>
+
+      <section aria-labelledby="storage">
+        <h2 id="storage">How data is stored and used</h2>
+        <p>Data is used only to save, search, categorize, edit, reorder, pin, and open bookmarks, undo actions, and back up or restore the library. The bookmark library is stored in <code>chrome.storage.local</code>. Some undo data is held temporarily in <code>chrome.storage.session</code> or in the interface's memory. During a restore, temporary local copies are also created for recovery if the operation is interrupted; they are cleared after the restore or recovery completes.</p>
+        <p>The extension does not use Chrome Storage Sync to automatically synchronize bookmarks, and it does not automatically send bookmark content to the developer or third parties. We do not sell bookmark data or use it for advertising, credit assessments, or purposes unrelated to the bookmarking features.</p>
+        <p>When you open a bookmark, Chrome navigates to the corresponding Google Gmail or Chat URL. Google handles that connection under its services and <a href="https://policies.google.com/privacy">Privacy Policy</a>. Access to the original message still depends on your Google account and permissions for that conversation.</p>
+      </section>
+
+      <section aria-labelledby="backup">
+        <h2 id="backup">Manual backup and restore</h2>
+        <p>When you select Full backup (「完整備份」), the extension downloads your library as a JSON file containing bookmark titles, notes, message links, identifiers, categories, ordering, and related data. The extension does not add encryption to this backup file. Store it somewhere you trust.</p>
+        <p>Restore reads only a file you explicitly select. It validates the file and replaces your current library only after your confirmation. Both backup and restore take place locally. If you choose to share a backup, its recipient can read the contents; the extension does not share it automatically.</p>
+      </section>
+
+      <section aria-labelledby="controls">
+        <h2 id="controls">Managing, retaining, and deleting data</h2>
+        <p>You can view, edit, or delete bookmarks and categories in the side panel, and export a backup. The library remains stored until you delete it, replace it through a restore, or clear the extension's data. Deleting a bookmark does not delete the original Google Chat message.</p>
+        <p>Deleted or changed content may remain temporarily in undo records to support the Undo feature. Page memory and session data are cleared according to their respective lifecycles. Uninstalling the extension clears its local storage, but does not delete backup files you have downloaded, copied, or shared. You need to delete those files separately.</p>
+        <p>The developer cannot remotely access or restore your local bookmarks. The extension does not add encryption or password protection to the local library. Use a device and Chrome profile you trust.</p>
+      </section>
+
+      <section aria-labelledby="permissions">
+        <h2 id="permissions">Why we need these permissions</h2>
+        <dl class="permissions">
+          <div><dt>Context menus <code>contextMenus</code></dt><dd>Lets you quickly save a message or choose a bookmark category from its right-click menu.</dd></div>
+          <div><dt>Storage <code>storage</code></dt><dd>Saves your local bookmarks, categories, interface state, and data needed to undo actions.</dd></div>
+          <div><dt>Side panel <code>sidePanel</code></dt><dd>Displays the bookmark management interface in Gmail tabs.</dd></div>
+          <div><dt><code>mail.google.com</code></dt><dd>Identifies Gmail tabs, controls the side panel, and navigates back to bookmarked messages.</dd></div>
+          <div><dt><code>chat.google.com</code></dt><dd>Identifies the message you right-click inside Gmail's embedded Chat frame, obtains bookmark information, and displays feedback about your actions.</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="diagnostics">
+        <h2 id="diagnostics">Diagnostics and support</h2>
+        <p>If an error occurs, you can choose to copy diagnostic information. It includes the page type, frame number, processing stage, and error code. It does not include message text, notes, participants, or the page's DOM. The extension does not send diagnostics automatically.</p>
+        <p>If you choose to contact us through GitHub Issues, the developer and GitHub receive the content you submit, which is used to respond to your question and provide support. Other people can also view public issues. Do not include private conversations, complete backups, or login information.</p>
+      </section>
+
+      <section aria-labelledby="website">
+        <h2 id="website">This policy website</h2>
+        <p>This page is hosted on GitHub Pages and includes no analytics scripts, tracking tools, or external fonts. When you visit it, GitHub may process your IP address and website access logs under its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Privacy Statement</a>. These website connections are separate from the local bookmark data handled by the extension.</p>
+      </section>
+
+      <section aria-labelledby="limited-use">
+        <h2 id="limited-use">Data use commitments and policy updates</h2>
+        <p>ChatMark's use of user data complies with the <a href="https://developer.chrome.com/docs/webstore/program-policies/user-data-faq">Chrome Web Store User Data Policy</a>, including its Limited Use requirements. Data is used only for the user-facing features described in this policy, is not used for personalized advertising, and is not sold to data brokers.</p>
+        <p>If features or data handling practices change, we will update this page and the date above. If a change requires additional notice or consent under applicable law or platform policy, we will provide that notice or obtain consent before the relevant processing begins.</p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">Contact us</h2>
+        <p>This project is maintained by the GitHub account <a href="https://github.com/FeiFeiSeal">FeiFeiSeal</a>. For questions about this policy or how data is handled, contact us through <a href="https://github.com/FeiFeiSeal/google-chat-bookmark/issues">ChatMark's GitHub Issues</a>. A GitHub account is required to submit an issue.</p>
+        <p>Google Chat and Gmail are trademarks of Google LLC. Use of these trademarks is subject to <a href="https://about.google/brand-resource-center/guidance/">Google Permissions</a>.</p>
+      </section>
+    </main>
+    <footer><span>ChatMark · An independent, unofficial extension</span><a href="#policy">Back to top</a></footer>
+  </body>
+</html>
