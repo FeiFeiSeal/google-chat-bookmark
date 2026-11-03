@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ChatMark 是獨立開發的非官方 Google Chat 收藏工具。閱讀隱私權政策，了解本機儲存、使用權限、備份、刪除與聯絡方式。">
+    <meta name="referrer" content="no-referrer">
+    <title>隱私權政策 · ChatMark</title>
+    <link rel="icon" href="./icon-32.png" type="image/png">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="alternate" hreflang="zh-Hant" href="./privacy.html">
+    <link rel="alternate" hreflang="en" href="./privacy-en.html">
+  </head>
+  <body>
+    <a class="skip-link" href="#policy">跳至政策內容</a>
+    <header class="site-header">
+      <a class="brand" href="./"><img src="./icon-48.png" width="32" height="32" alt=""><span>ChatMark</span></a>
+      <div class="header-links">
+        <nav class="languages" aria-label="語言">
+          <a href="./privacy.html" lang="zh-Hant" hreflang="zh-Hant" aria-current="page">繁體中文</a>
+          <a href="./privacy-en.html" lang="en" hreflang="en">English</a>
+        </nav>
+        <a href="https://github.com/FeiFeiSeal/google-chat-bookmark">GitHub 專案</a>
+      </div>
+    </header>
+    <main id="policy" tabindex="-1">
+      <div class="intro">
+        <h1>隱私權政策</h1>
+        <p class="updated">最後更新：<time datetime="2026-11-02">2026 年 11 月 2 日</time></p>
+        <p class="lead">你的收藏，保存在你的瀏覽器。</p>
+        <p>ChatMark — Bookmarks for Google Chat™ 協助你在 Gmail 內嵌的 Google Chat 收藏、整理及返回重要訊息。本政策說明這項擴充功能如何處理資料，以及你可以如何管理資料。</p>
+        <p><strong>ChatMark 是獨立開發的非官方擴充功能，並非由 Google 提供、贊助或背書。</strong></p>
+        <p>收藏資料儲存在目前 Chrome 使用者設定檔的本機空間。擴充功能沒有開發者端的收藏資料伺服器，也沒有廣告、分析或追蹤服務。</p>
+      </div>
+      <nav class="contents" aria-label="政策目錄">
+        <a href="#data">處理哪些資料</a>
+        <a href="#storage">儲存與分享</a>
+        <a href="#controls">管理與刪除</a>
+        <a href="#permissions">使用權限</a>
+        <a href="#contact">聯絡方式</a>
+      </nav>
+
+      <section aria-labelledby="data">
+        <h2 id="data">我們處理哪些資料</h2>
+        <p>當你在 Google Chat 訊息上按右鍵時，擴充功能會在頁面記憶體中暫存目標訊息的文字摘要與識別資訊，供你接著選擇收藏。選擇收藏後，會在本機保存：</p>
+        <ul>
+          <li><strong>訊息定位資訊：</strong>對話類型、聊天室或對話 ID、討論串 ID、訊息 ID 與訊息連結，用於識別重複收藏及返回原訊息。</li>
+          <li><strong>收藏內容：</strong>由訊息文字產生的預設標題，以及你編輯的標題、筆記和分類名稱。</li>
+          <li><strong>整理與操作資訊：</strong>分類、排序、置頂與展開狀態，及建立、更新和最近開啟收藏的時間。</li>
+        </ul>
+        <p>擴充功能也會讀取已授權 Gmail／Chat 分頁的網址，判斷側欄是否可用及執行訊息導覽。它不建立其他網站的瀏覽歷史，也不讀取你的 Google 密碼或登入 Cookie。</p>
+        <p>收藏標題或筆記可能包含你選定訊息中的個人資訊；這些內容同樣依本政策在本機處理。</p>
+      </section>
+
+      <section aria-labelledby="storage">
+        <h2 id="storage">資料如何儲存與使用</h2>
+        <p>資料僅用於收藏、搜尋、分類、編輯、排序、置頂、返回訊息、復原操作及備份還原。收藏庫保存在 <code>chrome.storage.local</code>；部分復原資料暫存在 <code>chrome.storage.session</code> 或介面記憶體中。還原期間也會建立本機暫存副本，供中斷恢復使用，完成還原或恢復後清除。</p>
+        <p>擴充功能不使用 Chrome Storage Sync 自動同步收藏，也不會將收藏內容自動傳送給開發者或第三方。我們不出售收藏資料，不將它用於廣告、信用評估或與收藏功能無關的用途。</p>
+        <p>當你開啟收藏時，Chrome 會前往對應的 Google Gmail／Chat 網址；Google 會依其服務與<a href="https://policies.google.com/privacy">隱私權政策</a>處理該次連線。能否查看原訊息，仍取決於你的 Google 帳號及對話存取權限。</p>
+      </section>
+
+      <section aria-labelledby="backup">
+        <h2 id="backup">手動備份與還原</h2>
+        <p>選擇「完整備份」時，擴充功能會將收藏庫下載為 JSON 檔案，其中包含收藏標題、筆記、訊息連結、識別資訊、分類與排序等資料。備份檔案沒有由擴充功能額外加密，請保存在你信任的位置。</p>
+        <p>還原只會讀取你主動選擇的檔案，驗證後經你確認，才取代目前收藏庫。備份與還原都在本機進行。若你自行分享備份，接收者可以讀取檔案內的內容；擴充功能不會自動分享它。</p>
+      </section>
+
+      <section aria-labelledby="controls">
+        <h2 id="controls">管理、保存與刪除資料</h2>
+        <p>你可以在側欄查看、編輯或刪除收藏與分類，也可以匯出備份。收藏庫會持續保留，直到你刪除、以還原取代，或清除擴充功能資料。刪除收藏不會刪除 Google Chat 中的原始訊息。</p>
+        <p>為支援「復原」，已刪除或變更的內容可能暫留在復原記錄中；頁面記憶體及工作階段資料會隨其生命週期清除。移除擴充功能會清除該擴充功能的本機儲存資料，但不會刪除你已下載、複製或分享的備份檔案；這些檔案需要由你另外刪除。</p>
+        <p>開發者無法遠端存取或替你還原本機收藏。擴充功能未對本機收藏另加密或提供密碼保護，請使用你信任的裝置與 Chrome 使用者設定檔。</p>
+      </section>
+
+      <section aria-labelledby="permissions">
+        <h2 id="permissions">為什麼需要這些權限</h2>
+        <dl class="permissions">
+          <div><dt>右鍵選單 <code>contextMenus</code></dt><dd>讓你從訊息的右鍵選單快速收藏，或指定收藏分類。</dd></div>
+          <div><dt>儲存空間 <code>storage</code></dt><dd>保存本機收藏、分類、介面狀態與復原操作所需資料。</dd></div>
+          <div><dt>側欄 <code>sidePanel</code></dt><dd>在 Gmail 分頁顯示收藏管理介面。</dd></div>
+          <div><dt><code>mail.google.com</code></dt><dd>辨識 Gmail 分頁、控制側欄及返回收藏的訊息。</dd></div>
+          <div><dt><code>chat.google.com</code></dt><dd>在 Gmail 內嵌的 Chat 框架中辨識你右鍵操作的訊息，取得收藏資訊並顯示操作回饋。</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="diagnostics">
+        <h2 id="diagnostics">診斷資訊與支援</h2>
+        <p>遇到錯誤時，你可以主動複製診斷資訊。它包含頁面類型、框架編號、處理階段及錯誤代碼，不包含訊息文字、筆記、參與者或網頁 DOM。擴充功能不會自動送出診斷資訊。</p>
+        <p>若你主動透過 GitHub Issues 聯絡我們，開發者與 GitHub 會收到你提交的內容，並用於回覆問題與提供支援。公開 Issue 的內容也可被其他人看到，請勿貼上私人對話、完整備份或登入資訊。</p>
+      </section>
+
+      <section aria-labelledby="website">
+        <h2 id="website">這個政策網站</h2>
+        <p>本頁透過 GitHub Pages 提供，未加入分析程式、追蹤工具或外部字型。瀏覽本頁時，GitHub 可能依其<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">隱私權聲明</a>處理 IP 位址及網站存取紀錄。這些網站連線與擴充功能中的本機收藏資料是不同的資料處理。</p>
+      </section>
+
+      <section aria-labelledby="limited-use">
+        <h2 id="limited-use">資料使用承諾與政策更新</h2>
+        <p>ChatMark 對使用者資料的使用遵循 <a href="https://developer.chrome.com/docs/webstore/program-policies/user-data-faq">Chrome Web Store 使用者資料政策</a>，包括 Limited Use（有限使用）要求。資料僅用於本政策所述的使用者功能，不用於個人化廣告，也不出售給資料仲介。</p>
+        <p>功能或資料處理方式變更時，我們會更新本頁與上方日期；若變更依法或依平台政策需要另外告知或取得同意，會在相關資料處理前完成。</p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">聯絡我們</h2>
+        <p>本專案由 GitHub 帳號 <a href="https://github.com/FeiFeiSeal">FeiFeiSeal</a> 維護。如對本政策或資料處理方式有疑問，請透過 <a href="https://github.com/FeiFeiSeal/google-chat-bookmark/issues">ChatMark 的 GitHub Issues</a> 聯絡。提交 Issue 需要 GitHub 帳號。</p>
+        <p>Google Chat 和 Gmail 是 Google LLC 的商標，其使用受 <a href="https://about.google/brand-resource-center/guidance/">Google Permissions</a> 規範約束。</p>
+      </section>
+    </main>
+    <footer><span>ChatMark · 獨立開發的非官方擴充功能</span><a href="#policy">回到頁首</a></footer>
+  </body>
+</html>
