@@ -75,6 +75,16 @@ npm run build
 
 網站首頁提供[繁體中文介紹](site/index.html)與[英文介紹](site/index-en.html)，說明功能、目前支援範圍、本機儲存及非官方身分，並連到專案安裝說明與隱私政策。
 
+頁首 GitHub 連結使用 [GitHub Primer Octicons 的 mark-github-24 圖示](https://github.com/primer/octicons/blob/main/icons/mark-github-24.svg)。
+
+網站的搜尋資訊位於 `site/`：四頁各有獨立標題、描述、canonical、語言對應與社群分享預覽；首頁另有常見問題與 `SoftwareApplication` 結構化資料。`site/sitemap.xml` 列出四個正式網址。
+
+後續內容、發布與成效檢查見 [網站 SEO 與 AEO 規劃](docs/site-seo-aeo-plan.md)。
+
+中英文首頁的安裝按鈕與結構化資料指向 [ChatMark 的 Chrome 線上應用程式商店頁面](https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob)。網址不含分享時附加的追蹤參數。
+
+發布後可在 Google Search Console 登錄 `https://feifeiseal.github.io/google-chat-bookmark/` 網址前置字元資源，提交 `https://feifeiseal.github.io/google-chat-bookmark/sitemap.xml`，並使用網址審查工具確認索引狀態。GitHub Pages 專案網站無法控制 `github.io` 網域根目錄的 `robots.txt`，因此不在子目錄放置無效的檔案。更換 Pages 網址或自訂網域時，請同步更新這些絕對網址。
+
 政策頁提供[繁體中文](site/privacy.html)與[英文](site/privacy-en.html)，頁首可切換語言。兩個版本使用獨立靜態 HTML／CSS，不需要安裝套件或建置。聯絡管道為此專案的 GitHub Issues；發布前確認 Issues 已啟用，且一般使用者可存取。
 
 本機預覽：

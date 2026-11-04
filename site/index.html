@@ -3,13 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ChatMark 是獨立開發的非官方收藏工具，讓你在 Gmail 內嵌的 Google Chat 收藏、分類、搜尋並返回重要訊息。資料保存在你的瀏覽器。">
+    <meta name="description" content="ChatMark 是獨立開發的非官方 Chrome 擴充功能，讓你在 Gmail 內的 Google Chat 收藏、分類、搜尋訊息，並返回原始對話。收藏保存在你的瀏覽器。">
     <meta name="referrer" content="no-referrer">
-    <title>ChatMark · 收藏重要訊息，隨時回到討論</title>
+    <title>ChatMark｜Gmail 內 Google Chat 訊息收藏與整理</title>
+    <link rel="canonical" href="https://feifeiseal.github.io/google-chat-bookmark/">
     <link rel="icon" href="./icon-32.png" type="image/png">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="alternate" hreflang="zh-Hant" href="./index.html">
-    <link rel="alternate" hreflang="en" href="./index-en.html">
+    <link rel="alternate" hreflang="zh-Hant" href="https://feifeiseal.github.io/google-chat-bookmark/">
+    <link rel="alternate" hreflang="en" href="https://feifeiseal.github.io/google-chat-bookmark/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://feifeiseal.github.io/google-chat-bookmark/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:site_name" content="ChatMark">
+    <meta property="og:title" content="ChatMark｜Gmail 內 Google Chat 訊息收藏與整理">
+    <meta property="og:description" content="在 Gmail 內的 Google Chat 收藏重要訊息，用側欄分類、搜尋，並返回原始對話。獨立開發的非官方 Chrome 擴充功能。">
+    <meta property="og:url" content="https://feifeiseal.github.io/google-chat-bookmark/">
+    <meta property="og:image" content="https://feifeiseal.github.io/google-chat-bookmark/images/chatmark-overview.png">
+    <meta property="og:image:alt" content="ChatMark 對話收藏與分類插圖">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://feifeiseal.github.io/google-chat-bookmark/#chatmark",
+        "name": "ChatMark",
+        "url": "https://feifeiseal.github.io/google-chat-bookmark/",
+        "installUrl": "https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob",
+        "description": "在 Gmail 內嵌的 Google Chat 收藏、分類與搜尋訊息，並返回原始對話的非官方 Chrome 擴充功能。",
+        "applicationCategory": "BrowserApplication",
+        "image": "https://feifeiseal.github.io/google-chat-bookmark/images/chatmark-overview.png",
+        "inLanguage": "zh-Hant"
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#intro">跳至介紹內容</a>
@@ -20,7 +46,10 @@
           <a href="./index.html" lang="zh-Hant" hreflang="zh-Hant" aria-current="page">繁體中文</a>
           <a href="./index-en.html" lang="en" hreflang="en">English</a>
         </nav>
-        <a href="./privacy.html">隱私權政策</a>
+        <div class="site-links">
+          <a href="./privacy.html">隱私權政策</a>
+          <a class="github-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark" aria-label="GitHub 專案" title="GitHub 專案"><img src="./github-mark.svg" width="24" height="24" alt=""></a>
+        </div>
       </div>
     </header>
     <main id="intro" class="home" tabindex="-1">
@@ -30,7 +59,7 @@
           <p class="home-description">連結、決議、待辦事項，常常藏在長長的對話裡。ChatMark 讓你在 Gmail 內嵌的 Google Chat 收藏訊息，用側欄整理，需要時直接回到原處。</p>
           <p class="independent">ChatMark 是獨立開發的非官方擴充功能，並非由 Google 提供、贊助或背書。</p>
           <div class="home-actions">
-            <a class="primary-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark">查看 GitHub 專案</a>
+            <a class="primary-link" href="https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob">前往 Chrome 商店安裝</a>
             <a href="#features">了解功能</a>
           </div>
         </div>
@@ -67,6 +96,44 @@
       <section aria-labelledby="scope">
         <h2 id="scope">使用前先了解</h2>
         <p>收藏功能目前只支援 Gmail（<code>mail.google.com</code>）裡的 <strong>Chat 分頁與對話畫面</strong>。請從 <a href="https://mail.google.com/">Gmail</a> 左側導覽列開啟 Chat，再於訊息上按右鍵收藏。獨立的 <code>chat.google.com</code> 網站目前不支援。開啟收藏時，你仍需要使用有權限查看該對話的 Google 帳號。</p>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq">常見問題 Q&amp;A</h2>
+        <div class="faq-list">
+          <div>
+            <h3>ChatMark 是什麼？</h3>
+            <p>ChatMark 是一款 Chrome 擴充功能，用於收藏、分類和搜尋 Gmail 內嵌 Google Chat 的訊息，並從側欄返回原始對話。</p>
+          </div>
+          <div>
+            <h3>如何收藏 Google Chat 訊息？</h3>
+            <p>在 Gmail 左側開啟 Chat，進入對話後對目標訊息按右鍵，選擇「快速收藏（未分類）」或「收藏到分類」。收藏後可從 ChatMark 側欄找到該訊息。</p>
+          </div>
+          <div>
+            <h3>可以在獨立的 chat.google.com 網站使用嗎？</h3>
+            <p>目前不支援。收藏功能只適用於 Gmail（<code>mail.google.com</code>）內的 Chat 分頁與對話畫面。</p>
+          </div>
+          <div>
+            <h3>分類與收藏可以怎麼整理？</h3>
+            <p>可以新增、重新命名、刪除及拖曳排序分類，也能拖曳收藏調整順序或移到其他分類。側欄還支援搜尋、編輯標題與筆記，以及置頂常用收藏。</p>
+          </div>
+          <div>
+            <h3>點選收藏會回到哪裡？</h3>
+            <p>點選側欄中的收藏，會在 Gmail 返回該則訊息的位置，以便查看前後文。你仍須使用有權限查看該對話的 Google 帳號。</p>
+          </div>
+          <div>
+            <h3>收藏會同步到其他裝置嗎？</h3>
+            <p>不會。收藏保存在目前的 Chrome 使用者設定檔，不會自動跨裝置同步，也不會自動上傳給開發者。詳見<a href="./privacy.html">隱私權政策</a>。</p>
+          </div>
+          <div>
+            <h3>如何備份或還原收藏？</h3>
+            <p>可從側欄的診斷區手動匯出整份收藏庫的 JSON 備份。還原會以備份內容取代目前收藏庫，操作前請先保留需要的資料。詳見<a href="./privacy.html#backup">備份與還原說明</a>。</p>
+          </div>
+          <div>
+            <h3>ChatMark 是 Google 官方產品嗎？</h3>
+            <p>不是。ChatMark 是獨立開發的非官方擴充功能，並非由 Google 提供、贊助或背書。</p>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="support">

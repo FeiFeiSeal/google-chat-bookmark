@@ -3,13 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ChatMark is an independent, unofficial tool for saving, organizing, and finding Google Chat messages inside Gmail. Your bookmarks stay in your browser.">
+    <meta name="description" content="ChatMark is an independent, unofficial Chrome extension for bookmarking and organizing Google Chat messages inside Gmail. Search your bookmarks and return to the original conversation.">
     <meta name="referrer" content="no-referrer">
-    <title>ChatMark · Save the message. Return to the conversation.</title>
+    <title>ChatMark | Bookmark Google Chat Messages in Gmail</title>
+    <link rel="canonical" href="https://feifeiseal.github.io/google-chat-bookmark/index-en.html">
     <link rel="icon" href="./icon-32.png" type="image/png">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="alternate" hreflang="zh-Hant" href="./index.html">
-    <link rel="alternate" hreflang="en" href="./index-en.html">
+    <link rel="alternate" hreflang="zh-Hant" href="https://feifeiseal.github.io/google-chat-bookmark/">
+    <link rel="alternate" hreflang="en" href="https://feifeiseal.github.io/google-chat-bookmark/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://feifeiseal.github.io/google-chat-bookmark/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_TW">
+    <meta property="og:site_name" content="ChatMark">
+    <meta property="og:title" content="ChatMark | Bookmark Google Chat Messages in Gmail">
+    <meta property="og:description" content="Save Google Chat messages inside Gmail, organize and search them in a side panel, then return to the original conversation. An independent, unofficial extension.">
+    <meta property="og:url" content="https://feifeiseal.github.io/google-chat-bookmark/index-en.html">
+    <meta property="og:image" content="https://feifeiseal.github.io/google-chat-bookmark/images/chatmark-overview.png">
+    <meta property="og:image:alt" content="ChatMark illustration of organized conversation bookmarks">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://feifeiseal.github.io/google-chat-bookmark/#chatmark",
+        "name": "ChatMark",
+        "url": "https://feifeiseal.github.io/google-chat-bookmark/index-en.html",
+        "installUrl": "https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob",
+        "description": "An independent, unofficial Chrome extension to bookmark, organize, and search Google Chat messages inside Gmail and return to the original conversation.",
+        "applicationCategory": "BrowserApplication",
+        "image": "https://feifeiseal.github.io/google-chat-bookmark/images/chatmark-overview.png",
+        "inLanguage": "en"
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#intro">Skip to introduction</a>
@@ -20,7 +46,10 @@
           <a href="./index.html" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
           <a href="./index-en.html" lang="en" hreflang="en" aria-current="page">English</a>
         </nav>
-        <a href="./privacy-en.html">Privacy policy</a>
+        <div class="site-links">
+          <a href="./privacy-en.html">Privacy policy</a>
+          <a class="github-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark" aria-label="GitHub project" title="GitHub project"><img src="./github-mark.svg" width="24" height="24" alt=""></a>
+        </div>
       </div>
     </header>
     <main id="intro" class="home" tabindex="-1">
@@ -30,7 +59,7 @@
           <p class="home-description">Links, decisions, and tasks get buried in long conversations. ChatMark lets you bookmark Google Chat messages inside Gmail, organize them in a side panel, and return when you need them.</p>
           <p class="independent">ChatMark is an independently developed, unofficial extension. It is not provided, sponsored, or endorsed by Google.</p>
           <div class="home-actions">
-            <a class="primary-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark">View GitHub project</a>
+            <a class="primary-link" href="https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob">Install from Chrome Web Store</a>
             <a href="#features">Explore features</a>
           </div>
         </div>
@@ -67,6 +96,44 @@
       <section aria-labelledby="scope">
         <h2 id="scope">Before you get started</h2>
         <p>Bookmarking currently works only in the <strong>Chat tab and conversation views inside Gmail</strong> (<code>mail.google.com</code>). Open <a href="https://mail.google.com/">Gmail</a>, select Chat from the left navigation, then right-click a message to save it. The standalone <code>chat.google.com</code> website is not supported. You still need a Google account with access to a conversation to open its bookmarks.</p>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq">Questions &amp; answers</h2>
+        <div class="faq-list">
+          <div>
+            <h3>What is ChatMark?</h3>
+            <p>ChatMark is a Chrome extension for bookmarking, organizing, and searching Google Chat messages inside Gmail. You can return to the original conversation from its side panel.</p>
+          </div>
+          <div>
+            <h3>How do I bookmark a Google Chat message?</h3>
+            <p>Open Chat from Gmail’s left navigation, enter a conversation, and right-click the message. Choose the quick save option or a category. You can then find the message in the ChatMark side panel.</p>
+          </div>
+          <div>
+            <h3>Does ChatMark work on the standalone chat.google.com website?</h3>
+            <p>No. Bookmarking currently works only in the Chat tab and conversation views inside Gmail (<code>mail.google.com</code>).</p>
+          </div>
+          <div>
+            <h3>How can I organize categories and bookmarks?</h3>
+            <p>You can create, rename, delete, and drag categories into order. Drag bookmarks to reorder or move them between categories; you can also search, edit titles and notes, and pin frequently used bookmarks.</p>
+          </div>
+          <div>
+            <h3>Where does a bookmark take me?</h3>
+            <p>Clicking a bookmark in the side panel returns you to that message in Gmail, where you can read the surrounding conversation. Your Google account must still have access to the conversation.</p>
+          </div>
+          <div>
+            <h3>Do my bookmarks sync across devices?</h3>
+            <p>No. Bookmarks stay in your current Chrome profile. They are not automatically synced to other devices or uploaded to the developer. See the <a href="./privacy-en.html">privacy policy</a>.</p>
+          </div>
+          <div>
+            <h3>How do I back up or restore my bookmarks?</h3>
+            <p>In the side panel’s diagnostics section, you can manually export your entire bookmark library as a JSON file. Restoring a backup replaces your current library, so keep a copy of anything you need. See the <a href="./privacy-en.html#backup">backup and restore details</a>.</p>
+          </div>
+          <div>
+            <h3>Is ChatMark an official Google product?</h3>
+            <p>No. ChatMark is independently developed and unofficial. It is not provided, sponsored, or endorsed by Google.</p>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="support">

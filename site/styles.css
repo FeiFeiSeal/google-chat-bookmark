@@ -24,7 +24,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
 .brand img { flex-shrink: 0; }
 .header-links, .languages { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
 .header-links { gap: 16px 24px; }
+.site-links { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
 .header-links a { display: inline-flex; align-items: center; min-height: 36px; }
+.header-links .github-link { justify-content: center; min-width: 44px; min-height: 44px; color: var(--text); border-radius: 8px; }
+.github-link img { display: block; }
+.github-link:hover { background: var(--border); }
 .languages a[aria-current="page"] { color: var(--text); font-weight: 650; text-decoration: none; }
 main { max-width: 780px; margin: 56px auto 72px; padding: 0 32px; }
 h1 { margin: 0; font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.3; letter-spacing: -.025em; }
@@ -70,6 +74,11 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .8
 .feature-list div:first-child { padding-top: 0; }
 .feature-list dt { font-size: 1.0625rem; }
 .feature-list dd { margin-top: 0; }
+.faq-list { margin: 0; }
+.faq-list > div { padding: 20px 0; border-bottom: 1px solid var(--border); }
+.faq-list > div:first-child { padding-top: 0; }
+.faq-list h3 { margin: 0; font-size: 1.0625rem; line-height: 1.5; }
+.faq-list p { margin: 6px 0 0; }
 .trademark { margin-top: 28px; }
 @media (max-width: 759px) {
   .home-intro { display: block; padding-bottom: 40px; }
@@ -85,6 +94,7 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .8
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #17191c; --surface: #202327; --text: #e8eaed; --muted: #aeb4bc; --border: #3c4043; --accent: #a8c7fa; }
+  .github-link img { filter: invert(1); }
 }
 @media print {
   :root { color-scheme: light; --bg: #fff; --text: #000; --muted: #444; --border: #ccc; --accent: #000; font-size: 11pt; }
