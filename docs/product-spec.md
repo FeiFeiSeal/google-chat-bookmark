@@ -22,6 +22,7 @@
 
 - 提供 Bookmark 標題及 Note 編輯。
 - 提供 Category 新增、重新命名、刪除、展開狀態及順序管理。
+- 一般 Category 可在同一編輯畫面修改名稱、整張卡片的背景色與文字色；「未分類」維持預設外觀。
 - 提供 Bookmark 在 Category 內排序及跨 Category 移動，拖入收合分類時自動展開並即時顯示預計落點。
 - 提供置頂、單筆刪除、Category 批次刪除及相對應的復原行為。
 - 提供標題、Note 與 Category 搜尋。
@@ -101,6 +102,10 @@
 
 ## Categories
 
+- 一般 Category 提供常用背景色、背景與文字選色器、六位 HEX 輸入及整張卡片預覽；按儲存後才套用，取消不變。
+- 「恢復預設顏色」同時重設背景色與文字色；未設定顏色的 Category 沿用預設外觀。
+- 自訂色套用至整張 Category 卡片的文字與圖示，在明暗模式中維持相同；置頂區與搜尋結果不套用 Category 顏色。
+- 自訂色保存在本機 Category 資料，並隨完整備份還原；「未分類」不可設定顏色。
 - 每筆 Bookmark 只屬於一個 Category。
 - 拖曳 Bookmark 到另一個 Category 代表移動。
 - 拖曳 Bookmark 進入收合的 Category 時會暫時展開，並在清單內即時顯示預計插入位置；放開後保存落點並維持目標 Category 展開。

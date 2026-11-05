@@ -8,7 +8,7 @@ import {truncateGraphemes} from '../../src/domain/title';
 import {BookmarkRepository, METADATA_KEY, EXPANDED_CATEGORIES_KEY} from '../../src/storage/repository';
 import {MemoryStorageAdapter} from '../../src/storage/storage-adapter';
 
-const modes = ['Demo data', 'Worst case', 'Empty', 'One', '1,000 rows'] as const;
+const modes = ['Demo data', 'Colored', 'Worst case', 'Empty', 'One', '1,000 rows'] as const;
 type Mode = typeof modes[number];
 const worstTitles = [
   '最危險的地方就是最危險的地方就是最危險的地方就是最危險的地方就是',
@@ -20,10 +20,11 @@ const worstTitles = [
 
 function fixture(mode: Mode) {
   const worst = mode === 'Worst case' || mode === '1,000 rows';
+  const colored = mode === 'Colored';
   const date = '2026-10-29T00:00:00.000Z';
   const categories = [
     {...UNCATEGORIZED_CATEGORY},
-    {id: 'project', name: worst ? '跨部門專案技術規格與正式上線前待辦事項及問題追蹤討論分類' : '前端組', createdAt: date, updatedAt: date},
+    {id: 'project', name: worst ? '跨部門專案技術規格與正式上線前待辦事項及問題追蹤討論分類' : '前端組', ...(colored ? {backgroundColor: '#234C7C', textColor: '#FFFFFF'} : {}), createdAt: date, updatedAt: date},
   ];
   const count = mode === 'Empty' ? 0 : mode === 'One' ? 1 : mode === '1,000 rows' ? 1000 : 5;
   const bookmarks: Bookmark[] = Array.from({length: count}, (_, index) => {

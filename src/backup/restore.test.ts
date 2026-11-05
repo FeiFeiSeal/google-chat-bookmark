@@ -18,6 +18,20 @@ describe('safe restore', () => {
     expect(await repository.listUncategorized()).toEqual([sampleBookmark()]);
   });
 
+  it('round-trips category colors through a complete backup and restore', async () => {
+    const source = new BookmarkRepository(new MemoryStorageAdapter());
+    await source.initialize();
+    await source.createCategory('專案', {id: 'project'});
+    await source.updateCategory('project', {name: '已上色專案', backgroundColor: '#0044AA', textColor: '#FFFFFF'});
+    const backup = createBackup(await source.snapshot());
+    const storage = new MemoryStorageAdapter();
+    const repository = new BookmarkRepository(storage);
+    await repository.initialize();
+    const coordinator = new RestoreCoordinator(storage, repository);
+    await coordinator.restore(await coordinator.preflight(JSON.stringify(backup)));
+    expect((await repository.view()).categories.find(({id}) => id === 'project')).toMatchObject({name: '已上色專案', backgroundColor: '#0044AA', textColor: '#FFFFFF'});
+  });
+
   it('rejects invalid input and insufficient temporary space before writes', async () => {
     const storage = new MemoryStorageAdapter();
     const repository = new BookmarkRepository(storage);

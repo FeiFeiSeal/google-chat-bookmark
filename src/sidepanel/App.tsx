@@ -1,4 +1,4 @@
-import {useDeferredValue, useEffect, useMemo, useRef, useState} from 'react';
+import {useDeferredValue, useEffect, useMemo, useRef, useState, type CSSProperties} from 'react';
 import {
   DndContext,
   KeyboardSensor,
@@ -19,7 +19,7 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import {CSS} from '@dnd-kit/utilities';
+import {CSS, type Transform} from '@dnd-kit/utilities';
 import {bookmarkStorageKey, type MessageIdentity} from '../domain/identity';
 import {searchBookmarks} from '../domain/search';
 import {graphemeLength, truncateGraphemes} from '../domain/title';
@@ -35,7 +35,7 @@ export interface PanelRepository {
   updateBookmark(identity: MessageIdentity, changes: {title: string; note: string}, expectedRevision?: number): Promise<Bookmark>;
   markOpened(identity: MessageIdentity, openedAt?: Date, expectedRevision?: number): Promise<void>;
   createCategory(name: string, options?: {expectedRevision?: number}): Promise<Category>;
-  renameCategory(categoryId: string, name: string, expectedRevision?: number): Promise<Category>;
+  updateCategory(categoryId: string, changes: {name: string; backgroundColor?: string; textColor?: string}, expectedRevision?: number): Promise<Category>;
   setCategoryExpanded(categoryId: string, expanded: boolean): Promise<void>;
   reorderCategories(categoryIds: string[], expectedRevision?: number): Promise<void>;
   moveBookmark(identity: MessageIdentity, categoryId: string, targetIndex?: number, expectedRevision?: number): Promise<void>;
@@ -77,6 +77,15 @@ export function projectBookmarkOrders(view: LibraryView, preview: BookmarkDragPr
   return bookmark.categoryId === preview.targetCategoryId
     ? {...view.orders, [preview.targetCategoryId]: target}
     : {...view.orders, [bookmark.categoryId]: source, [preview.targetCategoryId]: target};
+}
+
+export function projectCategoryOrder(view: LibraryView, categoryIds: string[]): LibraryView {
+  const categoriesById = new Map(view.categories.map((category) => [category.id, category]));
+  return {
+    ...view,
+    metadata: {...view.metadata, categoryOrder: categoryIds},
+    categories: categoryIds.map((id) => categoriesById.get(id)).filter((category): category is Category => Boolean(category)),
+  };
 }
 
 export function resolveOrganizationDrop(view: LibraryView, active: SortData, over: SortData): OrganizationDrop | null {
@@ -125,6 +134,10 @@ function recordKey(bookmark: Bookmark): string {
 
 function categorySortableId(categoryId: string): string {
   return `category-row:${categoryId}`;
+}
+
+export function categoryDragTranslation(transform: Transform | null): string | undefined {
+  return CSS.Translate.toString(transform);
 }
 
 function bookmarkSortableId(key: string): string {
@@ -208,35 +221,80 @@ function SortableBookmarkRow(props: BookmarkRowProps & {sortableId: string; data
   return <li ref={setNodeRef} className={className} style={{transform: CSS.Transform.toString(transform), transition}}><BookmarkRow {...props} dragHandle={handle} /></li>;
 }
 
+const categoryColorPresets = ['#DCEBFF', '#D9F3E6', '#FFF0C2', '#FFE0D8', '#E9DFFF', '#D9F4F7', '#F7DFEA', '#E5E8EC'];
+const hexColorPattern = /^#[0-9A-Fa-f]{6}$/u;
+
+function categoryColorStyle(backgroundColor?: string, textColor?: string): CSSProperties | undefined {
+  return backgroundColor && textColor ? {'--category-background': backgroundColor, '--category-foreground': textColor} as CSSProperties : undefined;
+}
+
+function CategoryEditor({category, count, onSave, onCancel}: {category: Category; count: number; onSave: (changes: {name: string; backgroundColor?: string; textColor?: string}) => Promise<void>; onCancel: () => void}) {
+  const [name, setName] = useState(category.name);
+  const [backgroundColor, setBackgroundColor] = useState(category.backgroundColor ?? '');
+  const [textColor, setTextColor] = useState(category.textColor ?? '');
+  const [error, setError] = useState('');
+  const setBackground = (value: string) => {
+    setBackgroundColor(value);
+    if (hexColorPattern.test(value) && !textColor) setTextColor('#1F1F1F');
+    setError('');
+  };
+  const setText = (value: string) => {
+    setTextColor(value);
+    if (hexColorPattern.test(value) && !backgroundColor) setBackgroundColor('#FFFFFF');
+    setError('');
+  };
+  const save = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!name.trim()) return;
+    if ((backgroundColor || textColor) && (!hexColorPattern.test(backgroundColor) || !hexColorPattern.test(textColor))) {
+      setError(messages.invalidCategoryColor);
+      return;
+    }
+    await onSave({name: name.trim(), ...(backgroundColor && textColor ? {backgroundColor: backgroundColor.toUpperCase(), textColor: textColor.toUpperCase()} : {})});
+  };
+  const previewStyle = categoryColorStyle(hexColorPattern.test(backgroundColor) ? backgroundColor : undefined, hexColorPattern.test(textColor) ? textColor : undefined);
+  return <form className="category-editor" onSubmit={(event) => void save(event)}>
+    <label className="category-editor-name">{messages.categoryName}<input autoFocus value={name} onChange={(event) => setName(truncateGraphemes(event.target.value, 30))}/></label>
+    <fieldset className="category-colors"><legend>{messages.categoryBackgroundColor}</legend>
+      <div className="color-presets">{categoryColorPresets.map((color) => <button key={color} type="button" className="color-preset" style={{backgroundColor: color}} aria-label={`${messages.categoryBackgroundColor} ${color}`} aria-pressed={backgroundColor.toUpperCase() === color} onClick={() => setBackground(color)}/>)}</div>
+      <div className="color-controls"><label>{messages.customColor}<input aria-label={`${messages.categoryBackgroundColor} ${messages.customColor}`} type="color" value={hexColorPattern.test(backgroundColor) ? backgroundColor : '#FFFFFF'} onChange={(event) => setBackground(event.target.value)}/></label><label>{messages.hexColor}<input aria-label={`${messages.categoryBackgroundColor} ${messages.hexColor}`} value={backgroundColor} placeholder="#RRGGBB" onChange={(event) => setBackground(event.target.value)}/></label></div>
+    </fieldset>
+    <fieldset className="category-colors"><legend>{messages.categoryTextColor}</legend>
+      <div className="color-controls"><label>{messages.customColor}<input aria-label={`${messages.categoryTextColor} ${messages.customColor}`} type="color" value={hexColorPattern.test(textColor) ? textColor : '#1F1F1F'} onChange={(event) => setText(event.target.value)}/></label><label>{messages.hexColor}<input aria-label={`${messages.categoryTextColor} ${messages.hexColor}`} value={textColor} placeholder="#RRGGBB" onChange={(event) => setText(event.target.value)}/></label></div>
+    </fieldset>
+    <div className={`category-color-preview${previewStyle ? ' has-colors' : ''}`} style={previewStyle} aria-label={messages.colorPreview}>
+      <div className="category-preview-header"><span aria-hidden>▾</span><strong className="ellipsis">{name.trim() || category.name}</strong><span className="count">{count}</span><span aria-hidden>⠿ ⋯</span></div>
+      <div className="category-preview-bookmark"><span aria-hidden>▸</span><span className="ellipsis">{messages.previewBookmarkTitle}</span><span aria-hidden>★ ⠿</span></div>
+      <div className="category-preview-note">{messages.previewBookmarkNote}</div>
+    </div>
+    {error && <p className="field-error" role="alert">{error}</p>}
+    <div className="category-editor-actions"><button type="button" onClick={() => { setBackgroundColor(''); setTextColor(''); setError(''); }}>{messages.resetCategoryColors}</button><span className="category-editor-spacer"/><button type="button" onClick={onCancel}>{messages.cancel}</button><button type="submit">{messages.save}</button></div>
+  </form>;
+}
+
 interface CategorySectionProps {
   category: Category;
   bookmarks: Bookmark[];
   expanded: boolean;
   handlers: Omit<BookmarkRowProps, 'bookmark' | 'categories' | 'dragHandle'>;
   onToggle: () => void;
-  onRename: (name: string) => Promise<void>;
+  onEdit: (changes: {name: string; backgroundColor?: string; textColor?: string}) => Promise<void>;
   onDelete: () => void;
   dragTarget: boolean;
   previewKey?: string;
 }
 
-function CategorySection({category, bookmarks, expanded, handlers, onToggle, onRename, onDelete, dragTarget, previewKey}: CategorySectionProps) {
+function CategorySection({category, bookmarks, expanded, handlers, onToggle, onEdit, onDelete, dragTarget, previewKey}: CategorySectionProps) {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} = useSortable({id: categorySortableId(category.id), data: {kind: 'category', categoryId: category.id} satisfies SortData});
-  const [renaming, setRenaming] = useState(false);
-  const [name, setName] = useState(category.name);
+  const [editing, setEditing] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const saveName = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!name.trim()) return;
-    await onRename(name.trim());
-    setRenaming(false);
-  };
-  return <section ref={setNodeRef} className={`category-section${isDragging ? ' dragging' : ''}${dragTarget ? ' drag-target' : ''}`} style={{transform: CSS.Transform.toString(transform), transition}} onMouseLeave={() => setMenuOpen(false)}>
-    {renaming ? <form className="category-editor" onSubmit={(event) => void saveName(event)}><input autoFocus value={name} onChange={(event) => setName(truncateGraphemes(event.target.value, 30))} aria-label={messages.categoryName}/><button type="submit">{messages.save}</button><button type="button" onClick={() => { setName(category.name); setRenaming(false); }}>{messages.cancel}</button></form> : <div className="category-header">
+  const colorStyle = category.id === UNCATEGORIZED_ID ? undefined : categoryColorStyle(category.backgroundColor, category.textColor);
+  return <section ref={setNodeRef} className={`category-section${colorStyle ? ' has-colors' : ''}${expanded ? ' expanded' : ''}${isDragging ? ' dragging' : ''}${dragTarget ? ' drag-target' : ''}`} style={{...colorStyle, transform: categoryDragTranslation(transform), transition}} onMouseLeave={() => setMenuOpen(false)}>
+    {editing ? <CategoryEditor category={category} count={bookmarks.length} onSave={async (changes) => { await onEdit(changes); setEditing(false); }} onCancel={() => setEditing(false)}/> : <div className="category-header">
       <button className="category-toggle" type="button" onClick={onToggle} aria-expanded={expanded} title={category.name}><span aria-hidden>{expanded ? '▾' : '▸'}</span><span className="ellipsis">{category.name}</span><span className="count">{bookmarks.length}</span></button>
       <div className="row-actions">
         <IconButton label={messages.dragCategory} className="drag-handle" {...attributes} {...listeners}>⠿</IconButton>
-        {category.id !== UNCATEGORIZED_ID && <div className={`more-menu${menuOpen ? ' open' : ''}`}><IconButton label={messages.more} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>⋯</IconButton>{menuOpen && <div className="menu-popover"><button type="button" onClick={() => { setMenuOpen(false); setRenaming(true); }}>{messages.rename}</button><button className="danger-action" type="button" onClick={() => { setMenuOpen(false); onDelete(); }}>{messages.deleteCategory}</button></div>}</div>}
+        {category.id !== UNCATEGORIZED_ID && <div className={`more-menu${menuOpen ? ' open' : ''}`}><IconButton label={messages.more} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>⋯</IconButton>{menuOpen && <div className="menu-popover"><button type="button" onClick={() => { setMenuOpen(false); setEditing(true); }}>{messages.editCategory}</button><button className="danger-action" type="button" onClick={() => { setMenuOpen(false); onDelete(); }}>{messages.deleteCategory}</button></div>}</div>}
       </div>
     </div>}
     {expanded && <SortableContext items={bookmarks.map((bookmark) => bookmarkSortableId(recordKey(bookmark)))} strategy={verticalListSortingStrategy}><ul className="bookmark-list">{bookmarks.map((bookmark) => <SortableBookmarkRow key={recordKey(bookmark)} sortableId={bookmarkSortableId(recordKey(bookmark))} data={{kind: 'bookmark', categoryId: category.id, key: recordKey(bookmark)}} bookmark={bookmark} previewed={dragTarget && previewKey === recordKey(bookmark)} {...handlers} />)}</ul></SortableContext>}
@@ -368,7 +426,11 @@ export function App({repository, diagnostics, onNavigate}: {repository?: PanelRe
     if (!active || !over || !repository) { clearDragPreview(); return; }
     const drop = bookmarkDrop ?? (event.active.id === event.over?.id ? null : resolveOrganizationDrop(view, active, over));
     if (!drop) { clearDragPreview(); return; }
-    if (drop.kind === 'categories') { clearDragPreview(); void runMutation((revision) => repository.reorderCategories(drop.categoryIds, revision)); }
+    if (drop.kind === 'categories') {
+      clearDragPreview();
+      setView((current) => projectCategoryOrder(current, drop.categoryIds));
+      void runMutation((revision) => repository.reorderCategories(drop.categoryIds, revision));
+    }
     if (drop.kind === 'pinned') { clearDragPreview(); void runMutation((revision) => repository.reorderPinned(drop.keys, revision)); }
     if (drop.kind === 'bookmark') {
       const bookmark = bookmarkByKey.get(drop.key);
@@ -414,7 +476,7 @@ export function App({repository, diagnostics, onNavigate}: {repository?: PanelRe
     <div className="list-region" aria-busy={!ready}>
       {!ready ? <p>{messages.loading}</p> : view.bookmarks.length === 0 ? <div className="empty-state"><strong>{messages.emptyTitle}</strong><p>{messages.emptyDescription}</p></div> : deferredQuery.trim() ? <section aria-labelledby="search-results-title"><h2 id="search-results-title">{messages.searchResults} <span className="count">{searchResults.length}</span></h2>{searchResults.length === 0 ? <p className="no-results">{messages.noResults}</p> : <ul className="bookmark-list search-results">{searchResults.map((bookmark) => <li key={recordKey(bookmark)}><BookmarkRow bookmark={bookmark} {...rowHandlers}/></li>)}</ul>}</section> : <DndContext sensors={sensors} modifiers={dragModifiers} collisionDetection={organizationCollisionDetection} onDragOver={onDragOver} onDragCancel={clearDragPreview} onDragEnd={onDragEnd}>
         {view.metadata.pinnedOrder.length > 0 && <section className="pinned-section" aria-labelledby="pinned-title"><h2 id="pinned-title">★ {messages.pinned}</h2><SortableContext items={view.metadata.pinnedOrder.map(pinnedSortableId)} strategy={verticalListSortingStrategy}><ul className="bookmark-list">{view.metadata.pinnedOrder.map((key) => bookmarkByKey.get(key)).filter((value): value is Bookmark => Boolean(value)).map((bookmark) => <SortableBookmarkRow key={recordKey(bookmark)} sortableId={pinnedSortableId(recordKey(bookmark))} data={{kind: 'pinned', key: recordKey(bookmark)}} bookmark={bookmark} {...rowHandlers}/>)}</ul></SortableContext></section>}
-        <SortableContext items={view.metadata.categoryOrder.map(categorySortableId)} strategy={verticalListSortingStrategy}><div className="category-list">{view.categories.map((category) => <CategorySection key={category.id} category={category} bookmarks={categoryBookmarks(category.id)} expanded={view.expandedCategoryIds.includes(category.id) || dragExpandedCategoryIds.includes(category.id)} dragTarget={dragPreview?.targetCategoryId === category.id} previewKey={dragPreview?.key} handlers={rowHandlers} onToggle={() => void repository?.setCategoryExpanded(category.id, !view.expandedCategoryIds.includes(category.id)).then(reload)} onRename={(name) => runMutation((revision) => repository!.renameCategory(category.id, name, revision)).then(() => undefined)} onDelete={() => setDeleteCategoryId(category.id)}/>)}</div></SortableContext>
+        <SortableContext items={view.metadata.categoryOrder.map(categorySortableId)} strategy={verticalListSortingStrategy}><div className="category-list">{view.categories.map((category) => <CategorySection key={category.id} category={category} bookmarks={categoryBookmarks(category.id)} expanded={view.expandedCategoryIds.includes(category.id) || dragExpandedCategoryIds.includes(category.id)} dragTarget={dragPreview?.targetCategoryId === category.id} previewKey={dragPreview?.key} handlers={rowHandlers} onToggle={() => void repository?.setCategoryExpanded(category.id, !view.expandedCategoryIds.includes(category.id)).then(reload)} onEdit={(changes) => runMutation((revision) => repository!.updateCategory(category.id, changes, revision)).then(() => undefined)} onDelete={() => setDeleteCategoryId(category.id)}/>)}</div></SortableContext>
       </DndContext>}
     </div>
     {undo && <div className="undo-snackbar" role="status"><span>{undo.type === 'category' ? messages.categoryDeleted : messages.bookmarkDeleted}</span><button type="button" onClick={() => void restoreLastDeletion()}>{messages.undo}</button></div>}

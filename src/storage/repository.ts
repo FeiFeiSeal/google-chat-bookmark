@@ -230,6 +230,23 @@ export class BookmarkRepository {
     return updated;
   }
 
+  async updateCategory(categoryId: string, changes: {name: string; backgroundColor?: string; textColor?: string}, expectedRevision?: number): Promise<Category> {
+    if (categoryId === UNCATEGORIZED_ID) throw new Error('protected-category');
+    const view = await this.readView(expectedRevision);
+    const category = view.categories.find(({id}) => id === categoryId);
+    if (!category) throw new Error('category-not-found');
+    const updated = validateCategory({
+      id: category.id,
+      name: changes.name,
+      ...(changes.backgroundColor !== undefined ? {backgroundColor: changes.backgroundColor.toUpperCase()} : {}),
+      ...(changes.textColor !== undefined ? {textColor: changes.textColor.toUpperCase()} : {}),
+      createdAt: category.createdAt,
+      updatedAt: new Date().toISOString(),
+    });
+    await this.commit(view, {[`${CATEGORY_PREFIX}${categoryId}`]: updated});
+    return updated;
+  }
+
   async setCategoryExpanded(categoryId: string, expanded: boolean): Promise<void> {
     this.assertWritable();
     const view = await this.readView();

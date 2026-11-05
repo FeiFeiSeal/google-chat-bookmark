@@ -67,3 +67,7 @@
 - [x] 8.13 支援 Google Chat 一對一對話的 `dm` DOM 身份、官方連結、Bookmark 保存與 Gmail 導覽，並以 parser、identity、schema、建立及導覽測試驗證；既有 `space` Bookmark 維持相容。
 - [ ] 8.14 執行完整 test、typecheck、lint、production build 與 OpenSpec strict validation，重新載入 Chrome 未封裝擴充功能並實機核對本節修正。
 - [x] 8.15 修正長標題撐寬 Grid 欄位造成全列表操作按鈕超出側欄的問題，並以真實瀏覽器驗證 240／320／360／800px、明暗模式、搜尋及編輯狀態；保留開發用極端資料 fixture。
+- [x] 8.16 修正不同高度 Category 拖曳時的虛影縮放，僅保留位移；以縮放 transform 的回歸測試、既有拖曳測試與完整建置驗證。
+- [ ] 8.17 在 Chrome 側欄實際拖曳不同高度的 Category，依人工清單驗證虛影維持來源大小且排序可保存。
+- [x] 8.18 在 Category drop 時先投影新順序並由 repository 結果覆核，透過元件／純函式測試與完整建置驗證放下後不經過舊順序。
+- [x] 8.19 在 Chrome 側欄將 Category 往上拖曳並放開，依人工清單驗證沒有先跳回舊位置再移到新位置。

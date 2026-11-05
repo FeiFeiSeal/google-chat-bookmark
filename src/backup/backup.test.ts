@@ -32,4 +32,9 @@ describe('local diagnostic backup', () => {
     const legacy = {...old, storageSchemaVersion: 1, library: {...old.library, metadata: {schemaVersion: 1, categoryOrder: ['uncategorized'], pinnedOrder: []}, orders: {uncategorized: ['bookmark:space:thread']}}};
     expect(parseBackup(JSON.stringify(legacy)).library.metadata).toMatchObject({schemaVersion: 3, revision: 0});
   });
+
+  it('accepts existing v3 backups without category colors', () => {
+    const legacy = createBackup(sampleLibrary());
+    expect(parseBackup(JSON.stringify(legacy)).library.categories).toEqual([UNCATEGORIZED_CATEGORY]);
+  });
 });

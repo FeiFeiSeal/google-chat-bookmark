@@ -59,6 +59,34 @@ describe('personal organization repository', () => {
     await expect(repository.renameCategory('uncategorized', '其他')).rejects.toThrow('protected-category');
   });
 
+  it('updates name and colors in one write and preserves category identity and organization', async () => {
+    const storage = new MemoryStorageAdapter();
+    const repository = new BookmarkRepository(storage);
+    await repository.initialize();
+    const category = await repository.createCategory('專案', {id: 'project'});
+    const other = await repository.createCategory('其他', {id: 'other'});
+    const item = {...bookmark('colored'), categoryId: category.id};
+    await repository.create(item);
+    const originalView = await repository.view();
+    const writes = storage.writeCount;
+    const updated = await repository.updateCategory(category.id, {name: '新專案', backgroundColor: '#123abc', textColor: '#ffffff'}, originalView.metadata.revision);
+    expect(storage.writeCount).toBe(writes + 1);
+    expect(updated).toMatchObject({id: category.id, name: '新專案', backgroundColor: '#123ABC', textColor: '#FFFFFF', createdAt: category.createdAt});
+    const view = await repository.view();
+    expect(view.metadata.categoryOrder).toEqual(originalView.metadata.categoryOrder);
+    expect(view.bookmarks).toEqual(originalView.bookmarks);
+    expect(view.orders).toEqual(originalView.orders);
+    expect(view.categories.find(({id}) => id === other.id)).toEqual(other);
+    await expect(repository.updateCategory(category.id, {name: '舊資料'}, originalView.metadata.revision)).rejects.toThrow();
+    await expect(repository.updateCategory('uncategorized', {name: '不允許', backgroundColor: '#FFFFFF', textColor: '#000000'})).rejects.toThrow('protected-category');
+    await expect(repository.updateCategory(category.id, {name: '無效', backgroundColor: '#ABCDEG', textColor: '#000000'})).rejects.toThrow('invalid-category-color');
+    expect((await repository.view()).categories.find(({id}) => id === category.id)).toEqual(updated);
+    expect(await repository.updateCategory(category.id, {name: '新專案', backgroundColor: '#FFFFFF', textColor: '#FFFFFF'})).toMatchObject({backgroundColor: '#FFFFFF', textColor: '#FFFFFF'});
+    const reset = await repository.updateCategory(category.id, {name: '新專案'});
+    expect(reset.backgroundColor).toBeUndefined();
+    expect(reset.textColor).toBeUndefined();
+  });
+
   it('reorders categories, moves bookmarks atomically, and keeps pin order independent', async () => {
     const storage = new MemoryStorageAdapter();
     const repository = new BookmarkRepository(storage);
@@ -158,6 +186,7 @@ describe('personal organization repository', () => {
     await repository.create(first);
     await repository.create(second);
     await repository.createCategory('技術', {id: 'tech'});
+    await repository.updateCategory('tech', {name: '技術', backgroundColor: '#223344', textColor: '#FFFFFF'});
     await repository.moveBookmark(first, 'tech');
     await repository.moveBookmark(second, 'tech');
     await repository.setPinned(first, true);
@@ -169,6 +198,7 @@ describe('personal organization repository', () => {
     await repository.restoreDeletion(deletion);
     view = await repository.view();
     expect(view.categories.map(({id}) => id)).toContain('tech');
+    expect(view.categories.find(({id}) => id === 'tech')).toMatchObject({backgroundColor: '#223344', textColor: '#FFFFFF'});
     expect(view.orders.tech).toEqual(deletion.bookmarkOrder);
     expect(view.metadata.pinnedOrder).toContain(bookmarkStorageKey(first));
     expect(view.expandedCategoryIds).toContain('tech');

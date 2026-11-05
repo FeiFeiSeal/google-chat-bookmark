@@ -54,6 +54,7 @@
 - 效能驗收資料集至少包含 1,000 筆 Bookmark、不同大小的 Note、重複 Category 名稱及多種展開狀態。
 - 分類收合時不建立其 Bookmark 的完整可見 DOM；搜尋及展開大型 Category 時須避免一次同步工作長時間阻塞側欄互動。
 - 完整備份包含 storage schema version、Bookmark、Category、排序及置頂資料；不包含暫時性的 undo snapshot、編輯狀態或其他 session state。
+- Category 可選的六位 HEX 背景色與文字色保存在 Category 記錄中，兩者同時設定或同時清除；既有無色 Category 與舊版完整備份仍可讀取，完整備份保留顏色設定。
 - 還原流程先在記憶體中解析、驗證並遷移整份備份，再建立目前資料的 recovery snapshot 與 restore marker，最後批次寫入候選資料。
 - `chrome.storage.local` 不視為具備資料庫 transaction；啟動時若發現未完成的 restore marker，repository 必須完成還原或從 recovery snapshot 回復，成功後才清除 marker 與 snapshot。
 
@@ -76,6 +77,7 @@
 - 所有第一版繁體中文介面字串集中於單一訊息模組或 locale 資源，不把顯示文字分散硬編碼在元件中；第一版不導入完整 i18n runtime。
 - 日期及時間使用瀏覽器本機 locale 格式化，儲存值仍使用 ISO 8601 UTC。
 - 視覺樣式以語意色彩 token 建立，透過 `prefers-color-scheme` 自動切換明暗值；元件不得直接散落硬編碼的主題色。
+- 一般 Category 已儲存的自訂背景色與文字色以該卡片的局部樣式覆蓋主題 token，套用到卡片內的文字與圖示；搜尋結果與置頂區維持原主題，明暗模式切換不更改自訂色。
 - 第一版不保存使用者主題偏好，也不提供手動主題切換控制。
 - Category 的展開狀態以 Category ID 清單保存在瀏覽器本機儲存空間，與 Bookmark 記錄分開。
 - 開啟或收合 Category 時只更新這份小型偏好資料。

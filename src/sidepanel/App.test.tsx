@@ -1,7 +1,7 @@
 import {cleanup, fireEvent, render, screen, waitFor, within} from '@testing-library/react';
 import {readFileSync} from 'node:fs';
 import {afterEach, describe, expect, it, vi} from 'vitest';
-import {App, projectBookmarkOrders, resolveOrganizationDrop, type PanelRepository} from './App';
+import {App, categoryDragTranslation, projectBookmarkOrders, projectCategoryOrder, resolveOrganizationDrop, type PanelRepository} from './App';
 import {MemoryStorageAdapter} from '../storage/storage-adapter';
 import {BookmarkRepository} from '../storage/repository';
 import {sampleBookmark} from '../storage/repository.test';
@@ -30,12 +30,16 @@ async function repositoryWith(...bookmarks: Bookmark[]) {
 function fakeRepository(view: LibraryView): PanelRepository {
   return {
     initialize: vi.fn(async () => undefined), view: vi.fn(async () => view), snapshot: vi.fn(async () => view), subscribe: vi.fn(() => () => undefined),
-    updateBookmark: vi.fn(), markOpened: vi.fn(), createCategory: vi.fn(), renameCategory: vi.fn(), setCategoryExpanded: vi.fn(),
+    updateBookmark: vi.fn(), markOpened: vi.fn(), createCategory: vi.fn(), updateCategory: vi.fn(), setCategoryExpanded: vi.fn(),
     reorderCategories: vi.fn(), moveBookmark: vi.fn(), setPinned: vi.fn(), reorderPinned: vi.fn(), deleteBookmark: vi.fn(), deleteCategory: vi.fn(), restoreDeletion: vi.fn(),
   };
 }
 
 describe('App', () => {
+  it('keeps category drag translation without scaling to the target category height', () => {
+    expect(categoryDragTranslation({x: 0, y: 60, scaleX: 0.8, scaleY: 0.25})).toBe('translate3d(0px, 60px, 0)');
+  });
+
   it('resolves category reorder and cross-category bookmark drops', () => {
     const bookmark = item('drag-decision');
     const key = bookmarkStorageKey(bookmark);
@@ -47,6 +51,12 @@ describe('App', () => {
       bookmarks: [bookmark, targetBookmark], orders: {uncategorized: [key], target: [targetKey]}, expandedCategoryIds: ['uncategorized'],
     };
     expect(resolveOrganizationDrop(view, {kind: 'category', categoryId: 'uncategorized'}, {kind: 'category', categoryId: 'target'})).toEqual({kind: 'categories', categoryIds: ['target', 'uncategorized']});
+    const projected = projectCategoryOrder(view, ['target', 'uncategorized']);
+    expect(projected.metadata.categoryOrder).toEqual(['target', 'uncategorized']);
+    expect(projected.categories.map(({id}) => id)).toEqual(['target', 'uncategorized']);
+    expect(projected.metadata.revision).toBe(view.metadata.revision);
+    expect(projected.bookmarks).toBe(view.bookmarks);
+    expect(view.metadata.categoryOrder).toEqual(['uncategorized', 'target']);
     expect(resolveOrganizationDrop(view, {kind: 'bookmark', categoryId: 'uncategorized', key}, {kind: 'category', categoryId: 'target'})).toEqual({kind: 'bookmark', key, targetCategoryId: 'target', targetIndex: 0});
     expect(projectBookmarkOrders(view, {key, targetCategoryId: 'target', targetIndex: 0})).toEqual({uncategorized: [], target: [key, targetKey]});
     expect(projectBookmarkOrders(view, {key, targetCategoryId: 'target', targetIndex: 1})).toEqual({uncategorized: [], target: [targetKey, key]});
@@ -202,12 +212,92 @@ describe('App', () => {
     expect(screen.getAllByTitle('專案')).toHaveLength(2);
     const firstProjectHeader = screen.getAllByTitle('專案')[0].closest('.category-header')!;
     fireEvent.click(within(firstProjectHeader as HTMLElement).getByLabelText('更多操作'));
-    fireEvent.click(within(firstProjectHeader as HTMLElement).getByRole('button', {name: '重新命名'}));
+    fireEvent.click(within(firstProjectHeader as HTMLElement).getByRole('button', {name: '編輯分類'}));
     fireEvent.change(screen.getByRole('textbox', {name: '分類名稱'}), {target: {value: '新名稱'}});
     fireEvent.click(screen.getByRole('button', {name: '儲存'}));
     expect(await screen.findByTitle('新名稱')).toBeInTheDocument();
     const uncategorizedHeader = screen.getByTitle('未分類').closest('.category-header')!;
     expect(within(uncategorizedHeader as HTMLElement).queryByLabelText('更多操作')).not.toBeInTheDocument();
+  });
+
+  it('previews and saves category name and colors together, then resets both colors', async () => {
+    const repository = await repositoryWith(item('color-save'));
+    await repository.createCategory('專案', {id: 'project'});
+    render(<App repository={repository}/>);
+    const header = (await screen.findByTitle('專案')).closest('.category-header') as HTMLElement;
+    fireEvent.click(within(header).getByLabelText('更多操作'));
+    fireEvent.click(within(header).getByRole('button', {name: '編輯分類'}));
+    expect(screen.getByRole('textbox', {name: '群組背景色 HEX 色碼'})).toHaveValue('');
+    expect(screen.getByRole('textbox', {name: '群組文字色 HEX 色碼'})).toHaveValue('');
+    expect(screen.getByLabelText('群組背景色 自訂顏色')).toHaveAttribute('type', 'color');
+    expect(screen.getByLabelText('群組文字色 自訂顏色')).toHaveAttribute('type', 'color');
+    fireEvent.click(screen.getByRole('button', {name: '群組背景色 #DCEBFF'}));
+    expect(screen.getByRole('textbox', {name: '群組背景色 HEX 色碼'})).toHaveValue('#DCEBFF');
+    fireEvent.change(screen.getByRole('textbox', {name: '分類名稱'}), {target: {value: '新版專案'}});
+    fireEvent.change(screen.getByRole('textbox', {name: '群組文字色 HEX 色碼'}), {target: {value: '#123456'}});
+    expect(screen.getByLabelText('顏色預覽')).toHaveStyle({'--category-background': '#DCEBFF', '--category-foreground': '#123456'});
+    expect(screen.getByLabelText('顏色預覽')).toHaveTextContent('書籤標題預覽');
+    expect(screen.getByLabelText('顏色預覽')).toHaveTextContent('筆記文字預覽');
+    expect((await repository.view()).categories.find(({id}) => id === 'project')).not.toHaveProperty('backgroundColor');
+    fireEvent.click(screen.getByRole('button', {name: '儲存'}));
+    const savedHeader = (await screen.findByTitle('新版專案')).closest('.category-header') as HTMLElement;
+    expect(savedHeader.closest('.category-section')).toHaveStyle({'--category-background': '#DCEBFF', '--category-foreground': '#123456'});
+    expect((await repository.view()).categories.find(({id}) => id === 'project')).toMatchObject({name: '新版專案', backgroundColor: '#DCEBFF', textColor: '#123456'});
+    fireEvent.click(within(savedHeader).getByLabelText('更多操作'));
+    fireEvent.click(within(savedHeader).getByRole('button', {name: '編輯分類'}));
+    fireEvent.click(screen.getByRole('button', {name: '恢復預設顏色'}));
+    fireEvent.click(screen.getByRole('button', {name: '儲存'}));
+    await waitFor(async () => expect((await repository.view()).categories.find(({id}) => id === 'project')).not.toHaveProperty('backgroundColor'));
+    expect((screen.getByTitle('新版專案').closest('.category-section') as HTMLElement).classList.contains('has-colors')).toBe(false);
+  });
+
+  it('discards category color drafts and rejects invalid HEX without a partial save', async () => {
+    const repository = await repositoryWith(item('color-cancel'));
+    await repository.createCategory('專案', {id: 'project'});
+    render(<App repository={repository}/>);
+    const openEditor = () => {
+      const header = screen.getByTitle('專案').closest('.category-header') as HTMLElement;
+      fireEvent.click(within(header).getByLabelText('更多操作'));
+      fireEvent.click(within(header).getByRole('button', {name: '編輯分類'}));
+    };
+    await screen.findByTitle('專案');
+    openEditor();
+    fireEvent.click(screen.getByRole('button', {name: '群組背景色 #FFE0D8'}));
+    fireEvent.click(screen.getByRole('button', {name: '取消'}));
+    expect((await repository.view()).categories.find(({id}) => id === 'project')).not.toHaveProperty('backgroundColor');
+    openEditor();
+    fireEvent.change(screen.getByRole('textbox', {name: '分類名稱'}), {target: {value: '不應儲存'}});
+    fireEvent.change(screen.getByRole('textbox', {name: '群組背景色 HEX 色碼'}), {target: {value: '#12345'}});
+    fireEvent.click(screen.getByRole('button', {name: '儲存'}));
+    expect(screen.getByRole('alert')).toHaveTextContent('請輸入完整的六位 HEX 色碼。');
+    expect((await repository.view()).categories.find(({id}) => id === 'project')).toMatchObject({name: '專案'});
+  });
+
+  it('colors a complete category card while leaving Uncategorized, pinned rows, and search results unchanged', async () => {
+    const saved = item('colored-header', {note: '測試筆記'});
+    const repository = await repositoryWith(saved);
+    await repository.createCategory('專案', {id: 'project'});
+    await repository.moveBookmark(saved, 'project');
+    await repository.setCategoryExpanded('project', true);
+    await repository.setPinned(saved, true);
+    await repository.updateCategory('project', {name: '專案', backgroundColor: '#112233', textColor: '#F0F0F0'});
+    render(<App repository={repository}/>);
+    const projectHeader = (await screen.findByTitle('專案')).closest('.category-header') as HTMLElement;
+    const projectCard = projectHeader.closest('.category-section') as HTMLElement;
+    expect(projectCard).toHaveClass('has-colors', 'expanded');
+    expect(projectCard).toHaveStyle({'--category-background': '#112233', '--category-foreground': '#F0F0F0'});
+    const bookmarkRow = within(projectCard).getByRole('button', {name: '開啟: 標題'}).closest('.bookmark-row') as HTMLElement;
+    fireEvent.click(within(bookmarkRow).getByRole('button', {name: '展開詳細資訊'}));
+    expect(within(bookmarkRow).getByText('測試筆記')).toBeInTheDocument();
+    expect((screen.getByTitle('未分類').closest('.category-section') as HTMLElement)).not.toHaveClass('has-colors');
+    expect(screen.getByRole('heading', {name: /置頂/}).closest('.pinned-section')).not.toHaveClass('has-colors');
+    expect(styles).toContain('.category-section.has-colors { background: var(--category-background); color: var(--category-foreground); }');
+    expect(styles).toContain('.category-section.has-colors .count, .category-section.has-colors .icon-button, .category-section.has-colors .bookmark-link, .category-section.has-colors .bookmark-details, .category-section.has-colors .note-text { color: inherit; }');
+    expect(styles).toContain('.category-color-preview.has-colors { background: var(--category-background); color: var(--category-foreground); }');
+    expect(styles).toContain('@media (prefers-color-scheme: dark)');
+    fireEvent.change(screen.getByRole('searchbox', {name: '搜尋 Bookmark'}), {target: {value: '標題'}});
+    const searchResult = await screen.findByRole('button', {name: '開啟: 標題'});
+    expect(searchResult.closest('.category-section')).toBeNull();
   });
 
   it('shows a pinned bookmark twice and keeps both displays on one record', async () => {

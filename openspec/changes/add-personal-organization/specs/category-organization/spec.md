@@ -45,6 +45,14 @@
 - **WHEN** 使用者透過 Category 拖曳把手移動 Category
 - **THEN** 系統保存新的 Category 順序且不改變 Bookmark 的 Category 關聯
 
+#### Scenario: Drag categories of different heights
+- **WHEN** 使用者將展開且含多筆 Bookmark 的 Category 拖曳到高度不同的 Category 位置
+- **THEN** 被拖曳 Category 的虛影保持原本的寬度與高度，不隨目標 Category 的尺寸縮放
+
+#### Scenario: Release reordered category
+- **WHEN** 使用者將 Category 往上拖曳並放開
+- **THEN** 清單立即維持放下時的新順序，不會短暫跳回舊位置再移到新位置；若保存失敗，系統重新載入實際保存的順序
+
 #### Scenario: Reorder bookmark in category
 - **WHEN** 使用者透過 Bookmark 拖曳把手在同一 Category 內移動 Bookmark
 - **THEN** 系統保存該 Category 的自訂 Bookmark 順序

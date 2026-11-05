@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {UNCATEGORIZED_CATEGORY, validateBookmark, validateLibraryData} from './schema';
+import {UNCATEGORIZED_CATEGORY, validateBookmark, validateCategory, validateLibraryData} from './schema';
 
 const validBookmark = {
   schemaVersion: 1 as const,
@@ -33,5 +33,18 @@ describe('domain schema v3', () => {
     const directMessage = {...validBookmark, conversationType: 'dm' as const, spaceId: 'woI29KAAAAE', url: 'https://chat.google.com/dm/woI29KAAAAE/thread/message?cls=10'};
     expect(validateBookmark(directMessage)).toEqual(directMessage);
     expect(() => validateBookmark({...directMessage, conversationType: 'group'})).toThrow('invalid-bookmark-identity');
+  });
+
+  it('accepts legacy categories and a complete uppercase HEX color pair', () => {
+    expect(validateCategory(UNCATEGORIZED_CATEGORY)).toEqual(UNCATEGORIZED_CATEGORY);
+    expect(validateCategory({...UNCATEGORIZED_CATEGORY, id: 'project', backgroundColor: '#123ABC', textColor: '#FFFFFF'})).toMatchObject({backgroundColor: '#123ABC', textColor: '#FFFFFF'});
+    for (const invalid of [
+      {backgroundColor: '#12345', textColor: '#FFFFFF'},
+      {backgroundColor: '#123abc', textColor: '#FFFFFF'},
+      {backgroundColor: 'red', textColor: '#FFFFFF'},
+      {backgroundColor: '#123ABC'},
+      {textColor: '#FFFFFF'},
+    ]) expect(() => validateCategory({...UNCATEGORIZED_CATEGORY, id: 'project', ...invalid})).toThrow('invalid-category-color');
+    expect(() => validateCategory({...UNCATEGORIZED_CATEGORY, backgroundColor: '#FFFFFF', textColor: '#000000'})).toThrow('invalid-category-color');
   });
 });

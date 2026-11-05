@@ -7,6 +7,8 @@ export const UNCATEGORIZED_ID = 'uncategorized' as const;
 export interface Category {
   id: string;
   name: string;
+  backgroundColor?: string;
+  textColor?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -72,6 +74,11 @@ export function validateBookmark(value: unknown): Bookmark {
 
 export function validateCategory(value: unknown): Category {
   if (!isPlainObject(value) || typeof value.id !== 'string' || !value.id || !isSafeText(value.name, 30)) throw new Error('invalid-category');
+  const colorPattern = /^#[0-9A-F]{6}$/u;
+  if ((value.backgroundColor !== undefined && (typeof value.backgroundColor !== 'string' || !colorPattern.test(value.backgroundColor)))
+    || (value.textColor !== undefined && (typeof value.textColor !== 'string' || !colorPattern.test(value.textColor)))
+    || (value.backgroundColor === undefined) !== (value.textColor === undefined)
+    || (value.id === UNCATEGORIZED_ID && value.backgroundColor !== undefined)) throw new Error('invalid-category-color');
   if (!isIsoDate(value.createdAt) || !isIsoDate(value.updatedAt)) throw new Error('invalid-category-time');
   return value as unknown as Category;
 }

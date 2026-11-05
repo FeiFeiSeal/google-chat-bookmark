@@ -74,6 +74,11 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .8
 .feature-list div:first-child { padding-top: 0; }
 .feature-list dt { font-size: 1.0625rem; }
 .feature-list dd { margin-top: 0; }
+.color-feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); align-items: center; gap: clamp(24px, 5vw, 56px); }
+.color-feature figure { margin: 0; }
+.color-feature figure a { display: block; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.color-feature figure img { display: block; width: 100%; height: auto; }
+.color-feature figcaption { margin-top: 10px; color: var(--muted); font-size: .875rem; }
 .faq-list { margin: 0; }
 .faq-list > div { padding: 20px 0; border-bottom: 1px solid var(--border); }
 .faq-list > div:first-child { padding-top: 0; }
@@ -85,6 +90,8 @@ footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .8
   .brand-illustration { margin-top: 28px; }
   .feature-list div { display: block; padding: 20px 0; }
   .feature-list dd { margin-top: 6px; }
+  .color-feature { grid-template-columns: minmax(0, 1fr); }
+  .color-feature figure { width: min(100%, 400px); margin-inline: auto; }
 }
 @media (max-width: 540px) {
   .site-header, footer { padding: 20px; flex-wrap: wrap; }
