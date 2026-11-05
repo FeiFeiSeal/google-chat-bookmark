@@ -7,7 +7,8 @@
     <meta name="referrer" content="no-referrer">
     <title>ChatMark｜Gmail 內 Google Chat 訊息收藏與整理</title>
     <link rel="canonical" href="https://feifeiseal.github.io/google-chat-bookmark/">
-    <link rel="icon" href="./icon-32.png" type="image/png">
+    <link rel="icon" href="./icon-16.png?v=0.1.3" type="image/png" sizes="16x16">
+    <link rel="icon" href="./icon-32.png?v=0.1.3" type="image/png" sizes="32x32">
     <link rel="stylesheet" href="./styles.css">
     <link rel="alternate" hreflang="zh-Hant" href="https://feifeiseal.github.io/google-chat-bookmark/">
     <link rel="alternate" hreflang="en" href="https://feifeiseal.github.io/google-chat-bookmark/index-en.html">
@@ -40,7 +41,7 @@
   <body>
     <a class="skip-link" href="#intro">跳至介紹內容</a>
     <header class="site-header">
-      <a class="brand" href="./" aria-current="page"><img src="./icon-48.png" width="32" height="32" alt=""><span>ChatMark</span></a>
+      <a class="brand" href="./" aria-current="page"><img src="./icon-48.png?v=0.1.3" width="32" height="32" alt=""><span>ChatMark</span></a>
       <div class="header-links">
         <nav class="languages" aria-label="語言">
           <a href="./index.html" lang="zh-Hant" hreflang="zh-Hant" aria-current="page">繁體中文</a>
@@ -70,21 +71,33 @@
 
       <figure class="product-shot">
         <a href="./images/bookmark-demo.png" target="_blank" rel="noopener" aria-label="在新分頁查看完整操作截圖">
-          <img src="./images/bookmark-demo.png" width="1562" height="1007" loading="lazy" decoding="async" alt="Gmail 內嵌 Google Chat 的右鍵收藏選單，可直接選擇分類；右側側欄顯示依產品規劃、設計協作、開發紀錄與專案追蹤整理的收藏。">
+          <img src="./images/bookmark-demo.png" width="1200" height="800" loading="lazy" decoding="async" alt="Gmail 內嵌 Google Chat 的右鍵收藏選單，可直接選擇分類；右側 ChatMark 側欄顯示粉色與藍綠色的自訂分類卡片。">
         </a>
-        <figcaption>在訊息上按右鍵收藏到分類，再從側欄集中整理和搜尋。<a href="./images/bookmark-demo.png" target="_blank" rel="noopener">查看原圖（新分頁）</a></figcaption>
+        <figcaption>在訊息上按右鍵收藏到分類，再從側欄集中整理和搜尋；分類可以使用自訂顏色。<a href="./images/bookmark-demo.png" target="_blank" rel="noopener">查看原圖（新分頁）</a></figcaption>
       </figure>
 
       <section aria-labelledby="features">
         <h2 id="features">讓重要的對話更好找</h2>
         <dl class="feature-list">
           <div><dt>從訊息直接建立收藏</dt><dd>在 Google Chat 訊息上按右鍵，快速收藏到未分類，或直接指定一個分類。標題會自動取自訊息內容；同一段對話中的不同訊息也能分別收藏。若重複收藏，提示可讓你跳到既有收藏。</dd></div>
-          <div><dt>分類完整管理</dt><dd>新增分類、重新命名或刪除不再需要的分類，也能拖曳調整分類順序。展開或收合分類，讓側欄保持清楚。</dd></div>
+          <div><dt>分類完整管理</dt><dd>新增分類、重新命名或刪除不再需要的分類，也能拖曳調整分類順序。從「⋯ → 編輯分類」設定整張卡片的背景色與文字色，讓不同主題更容易辨識；展開或收合分類，讓側欄保持清楚。</dd></div>
           <div><dt>搜尋與編輯收藏</dt><dd>搜尋收藏標題、分類名稱和筆記，標題符合的結果會優先顯示。可修改標題與筆記、刪除收藏，或將常用收藏置頂；置頂項目會同時出現在側欄頂端與原分類。</dd></div>
           <div><dt>拖曳整理順序</dt><dd>拖曳收藏調整同一分類內的順序、移到其他分類，或排列置頂項目。分類展開或收合的狀態會保留。</dd></div>
           <div><dt>操作錯誤可復原</dt><dd>刪除分類前會顯示其中的收藏筆數並要求確認；刪除收藏或分類後可立即復原。剛收藏的訊息也能從提示中復原。</dd></div>
           <div><dt>一點，回到原始訊息</dt><dd>從側欄點開收藏，在 Gmail 返回保存的訊息位置，接著閱讀前後文。</dd></div>
         </dl>
+      </section>
+
+      <section class="color-feature" aria-labelledby="category-colors">
+        <div>
+          <h2 id="category-colors">用顏色辨識不同分類</h2>
+          <p>從分類右上角的「⋯ → 編輯分類」設定整張卡片的背景色與文字色。背景色可選常用色，兩種顏色都能用選色器或六位 HEX 色碼精確設定。</p>
+          <p>編輯時可先預覽標題、收藏與筆記，儲存後才會套用；需要時可一次恢復兩種預設顏色。「未分類」維持原本外觀。</p>
+        </div>
+        <figure>
+          <a href="./images/category-colors.png" target="_blank" rel="noopener" aria-label="在新分頁查看分類顏色設定截圖"><img src="./images/category-colors.png" width="400" height="600" loading="lazy" decoding="async" alt="ChatMark 分類編輯畫面：選擇粉色背景、深色文字，並預覽套色後的整張分類卡片。"></a>
+          <figcaption>分類顏色編輯與即時預覽</figcaption>
+        </figure>
       </section>
 
       <section aria-labelledby="local-data">
@@ -115,7 +128,11 @@
           </div>
           <div>
             <h3>分類與收藏可以怎麼整理？</h3>
-            <p>可以新增、重新命名、刪除及拖曳排序分類，也能拖曳收藏調整順序或移到其他分類。側欄還支援搜尋、編輯標題與筆記，以及置頂常用收藏。</p>
+            <p>可以新增、重新命名、刪除及拖曳排序分類，也能為一般分類自訂整張卡片的背景色與文字色。收藏可拖曳調整順序或移到其他分類；側欄還支援搜尋、編輯標題與筆記，以及置頂常用收藏。</p>
+          </div>
+          <div>
+            <h3>如何設定或重設分類顏色？</h3>
+            <p>在一般分類右上角選擇「⋯ → 編輯分類」，可選常用背景色，或用選色器、六位 HEX 色碼設定背景色和文字色。編輯時可預覽整張卡片，按「儲存」後套用；「恢復預設顏色」會同時重設兩種顏色。「未分類」不可改色。</p>
           </div>
           <div>
             <h3>點選收藏會回到哪裡？</h3>
