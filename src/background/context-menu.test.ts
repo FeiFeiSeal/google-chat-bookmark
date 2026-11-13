@@ -2,6 +2,7 @@ import {describe, expect, it, vi} from 'vitest';
 import {UNCATEGORIZED_CATEGORY, type Category} from '../domain/schema';
 import {
   QUICK_SAVE_MENU_ID,
+  OFFICIAL_WEBSITE_MENU_ID,
   SAVE_TO_CATEGORY_MENU_ID,
   buildBookmarkContextMenuEntries,
   categoryIdFromMenuId,
@@ -38,6 +39,7 @@ describe('bookmark context menus', () => {
       create: vi.fn((entry: chrome.contextMenus.CreateProperties, callback?: () => void) => { calls.push(String(entry.id)); callback?.(); return String(entry.id); }),
     };
     await rebuildBookmarkContextMenus(writer, [UNCATEGORIZED_CATEGORY, category('project', '專案')]);
-    expect(calls).toEqual(['remove', QUICK_SAVE_MENU_ID, SAVE_TO_CATEGORY_MENU_ID, categoryMenuId('uncategorized'), categoryMenuId('project')]);
+    expect(calls).toEqual(['remove', OFFICIAL_WEBSITE_MENU_ID, QUICK_SAVE_MENU_ID, SAVE_TO_CATEGORY_MENU_ID, categoryMenuId('uncategorized'), categoryMenuId('project')]);
+    expect(writer.create).toHaveBeenCalledWith({id: OFFICIAL_WEBSITE_MENU_ID, title: '官方網站', contexts: ['action']}, expect.any(Function));
   });
 });

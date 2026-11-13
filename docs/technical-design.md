@@ -19,16 +19,18 @@
 ## Supported Surface
 
 - Manifest 使用 Version 3，設定 `minimum_chrome_version` 為 `116`，並以 `incognito: "not_allowed"` 明確停用無痕模式。
-- 第一版的使用者入口與跳轉目標是 `https://mail.google.com/` 內嵌的 Google Chat。
-- Side Panel 採用 tab-specific 設定，只對 `mail.google.com` 分頁啟用；導覽目標固定為開啟該 panel 的 `tabId`。
-- 不實作跨視窗或跨分頁的 Gmail 目標選擇；不同 Gmail 分頁的 panel instance 共用同一份 Bookmark Library，並透過 storage change event 反映已提交的異動。
+- 使用者入口與跳轉目標支援 `https://chat.google.com/` 獨立網站及 `https://mail.google.com/` 內嵌的 Google Chat。
+- Side Panel 採用 tab-specific 設定，對上述兩個網站啟用；導覽目標固定為開啟該 panel 的 `tabId`。切換至其他網站時關閉原側欄。
+- 不實作跨視窗或跨分頁的目標選擇；Gmail 與獨立 Chat 分頁的 panel instance 共用同一份 Bookmark Library，並透過 storage change event 反映已提交的異動。
 - Panel 左右位置沿用 Chrome 使用者設定，不在擴充功能中提供重複的方向設定。
-- Content script 仍需注入 `https://chat.google.com/*`，因為 Gmail 將 Chat 內容載入跨網域 iframe。
-- Gmail 跳轉路徑只由 `spaceId / threadId / messageId` 建立，不保存或套用 Gmail 帳號索引。
+- Content script 注入 `https://chat.google.com/*` 並啟用 `all_frames`，同時處理獨立 Chat 主頁（frame 0）與 Gmail 的跨網域 Chat iframe，不新增權限。
+- Gmail 跳轉保留目前分頁的帳號路徑並建立 `#chat/space/…` 或 `#chat/dm/…`。獨立 Chat 將導覽指令送至 frame 0，由 content script 使用 `/app/chat/<spaceId>/topic/<threadId>/message/<messageId>` 站內路由，以 `history.pushState` 與 `popstate` 通知 Chat 切換，不使用 `tabs.update` 開啟 canonical 分享連結，避免整頁重新載入。舊版 `#chat/…` 頁面則只更新 hash。
+- 獨立 Chat 導覽保留目前分頁的 `/u/<index>/` 路徑前綴與 query（包含 `authuser`）；帳號選擇不寫入 Bookmark。收藏資料仍保存既有 canonical 訊息連結，不需資料遷移。
+- 若獨立 Chat content script 尚未載入，導覽回報失敗，不自動退回整頁導覽；使用者可重新整理分頁以載入新版程式。
 - Bookmark Library 的儲存命名空間以 Chrome Profile 為邊界，不再依 Google 帳號或 Gmail 帳號索引分區。
 - 第一版不建立 Google 帳號識別資料，也不實作同一 Chrome Profile 內的帳號選擇或切換邏輯。
-- 收藏及跳轉操作使用觸發操作時所在的 Gmail 分頁；Google 帳號不得作為 Bookmark 身份、擁有者或匯入比對條件。
-- 獨立 Google Chat 的互動與回歸測試留待後續版本。
+- 收藏及跳轉操作使用觸發操作時所在的 Gmail 或獨立 Chat 分頁；Google 帳號不得作為 Bookmark 身份、擁有者或匯入比對條件。
+- 獨立 Google Chat 的右鍵收藏、側欄與精確訊息跳轉需依人工驗收清單確認；自動測試涵蓋兩站共用收藏庫、frame 0、網址建構與側欄啟閉。
 - 第一版不得加入 analytics、remote logging、crash reporting 或產品後端端點；執行期間不因產品功能主動向非 Google Chat／Gmail 服務送出網路請求。
 
 ## Bookmark Identity and Lookup

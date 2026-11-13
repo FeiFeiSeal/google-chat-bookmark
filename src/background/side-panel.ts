@@ -1,4 +1,4 @@
-import {isGmailUrl} from './navigation';
+import {isSupportedChatUrl} from './navigation';
 
 interface SidePanelOptionsApi {
   setOptions(options: chrome.sidePanel.PanelOptions): Promise<void>;
@@ -11,7 +11,7 @@ interface TabsApi {
 }
 
 export async function configureSidePanelForTab(api: SidePanelOptionsApi, tabId: number, url?: string, closeWhenDisabled = false): Promise<void> {
-  if (isGmailUrl(url)) await api.setOptions({tabId, path: 'sidepanel.html', enabled: true});
+  if (isSupportedChatUrl(url)) await api.setOptions({tabId, path: 'sidepanel.html', enabled: true});
   else {
     await api.setOptions({tabId, enabled: false});
     if (closeWhenDisabled && api.close) {
@@ -23,9 +23,9 @@ export async function configureSidePanelForTab(api: SidePanelOptionsApi, tabId: 
 export async function configureSidePanelForActiveTab(api: SidePanelOptionsApi, tabs: TabsApi, tabId: number, windowId: number): Promise<void> {
   const activeTab = await tabs.get(tabId);
   await configureSidePanelForTab(api, tabId, activeTab.url);
-  if (isGmailUrl(activeTab.url) || !api.close) return;
+  if (isSupportedChatUrl(activeTab.url) || !api.close) return;
   const windowTabs = await tabs.query({windowId});
-  const gmailTabIds = windowTabs.filter((tab) => tab.id !== undefined && isGmailUrl(tab.url)).map((tab) => tab.id!);
-  await Promise.allSettled(gmailTabIds.map((gmailTabId) => api.close!({tabId: gmailTabId})));
+  const supportedTabIds = windowTabs.filter((tab) => tab.id !== undefined && isSupportedChatUrl(tab.url)).map((tab) => tab.id!);
+  await Promise.allSettled(supportedTabIds.map((supportedTabId) => api.close!({tabId: supportedTabId})));
   try { await api.close({windowId}); } catch { /* No global panel is open. */ }
 }

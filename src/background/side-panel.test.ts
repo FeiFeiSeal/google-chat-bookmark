@@ -2,12 +2,14 @@ import {describe, expect, it, vi} from 'vitest';
 import {configureSidePanelForActiveTab, configureSidePanelForTab} from './side-panel';
 
 describe('tab-specific Side Panel', () => {
-  it('enables Gmail tabs including inbox and disables other sites', async () => {
+  it('enables Gmail and standalone Chat tabs and disables other sites', async () => {
     const setOptions = vi.fn();
     await configureSidePanelForTab({setOptions}, 1, 'https://mail.google.com/mail/u/0/#inbox');
     await configureSidePanelForTab({setOptions}, 2, 'https://example.com/');
     expect(setOptions).toHaveBeenNthCalledWith(1, {tabId: 1, path: 'sidepanel.html', enabled: true});
     expect(setOptions).toHaveBeenNthCalledWith(2, {tabId: 2, enabled: false});
+    await configureSidePanelForTab({setOptions}, 3, 'https://chat.google.com/u/0/app/home');
+    expect(setOptions).toHaveBeenLastCalledWith({tabId: 3, path: 'sidepanel.html', enabled: true});
   });
 
   it('closes the panel when the active tab leaves Gmail', async () => {
@@ -38,20 +40,22 @@ describe('tab-specific Side Panel', () => {
       get: vi.fn().mockResolvedValue({id: 9, windowId: 3, url: 'https://example.com/'}),
       query: vi.fn().mockResolvedValue([
         {id: 4, windowId: 3, url: 'https://mail.google.com/mail/u/0/#chat/home'},
+        {id: 5, windowId: 3, url: 'https://chat.google.com/u/0/app/home'},
         {id: 9, windowId: 3, url: 'https://example.com/'},
       ]),
     };
     await configureSidePanelForActiveTab({setOptions, close}, tabs, 9, 3);
     expect(setOptions).toHaveBeenCalledWith({tabId: 9, enabled: false});
     expect(close).toHaveBeenCalledWith({tabId: 4});
+    expect(close).toHaveBeenCalledWith({tabId: 5});
     expect(close).toHaveBeenCalledWith({windowId: 3});
   });
 
-  it('keeps the panel when another Gmail tab becomes active', async () => {
+  it.each(['https://mail.google.com/mail/u/0/#inbox', 'https://chat.google.com/u/0/app/home'])('keeps the panel when a supported tab becomes active: %s', async (url) => {
     const setOptions = vi.fn();
     const close = vi.fn();
     const tabs = {
-      get: vi.fn().mockResolvedValue({id: 5, windowId: 3, url: 'https://mail.google.com/mail/u/0/#inbox'}),
+      get: vi.fn().mockResolvedValue({id: 5, windowId: 3, url}),
       query: vi.fn(),
     };
     await configureSidePanelForActiveTab({setOptions, close}, tabs, 5, 3);

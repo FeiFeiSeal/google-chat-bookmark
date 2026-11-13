@@ -2,17 +2,17 @@
 
 ## Product Goal
 
-協助使用者在 Gmail 內的 Google Chat 快速收藏、整理及重新開啟持續進行的討論，並能把整理結果以副本交給同事。
+協助使用者在 Google Chat 獨立網站或 Gmail 內的 Chat 快速收藏、整理及重新開啟持續進行的討論，並能把整理結果以副本交給同事。
 
 ## Delivery Milestones
 
 ### Milestone 1 — Core Bookmark Loop
 
-- 在 Gmail Chat Message 上透過右鍵立即收藏。
+- 在 Google Chat 或 Gmail 內嵌 Chat 的 Message 上透過右鍵立即收藏。
 - 保存 Thread 身份及當時選中的 Message Anchor，並以完整 Message Anchor 識別 Bookmark。
 - 新 Bookmark 可在右鍵收藏時指定 Category；快速收藏預設放入 Uncategorized，並使用最多 30 個字元的自動標題。
-- Gmail 專用 Side Panel 顯示已收藏的單行標題。
-- 點擊標題後在承載 Side Panel 的同一 Gmail 分頁精準跳回 Message Anchor。
+- Gmail 與 Google Chat 的 Side Panel 顯示已收藏的單行標題。
+- 點擊標題後在承載 Side Panel 的同一分頁精準跳回 Message Anchor。
 - 再次收藏同一則訊息不建立第二筆；同一 Thread 的不同訊息可分別收藏。
 - 重新載入未封裝擴充功能後，既有 Bookmark 仍存在。
 - 診斷區提供整份本機 Library 的簡易備份與還原，供早期測試及更新前保護資料。
@@ -37,14 +37,14 @@
 
 - Google Chrome 擴充功能；第一版不支援 Microsoft Edge 或 Firefox。
 - 第一版最低支援 Chrome 116，不支援無痕模式。
-- 第一版只正式支援 Gmail 內嵌的 Google Chat。
-- Bookmark Side Panel 只在 `mail.google.com` 分頁啟用；切換到其他網站時不保持可用。
-- Bookmark Side Panel 開啟時，切換到非 Gmail 分頁或目前分頁導覽離開 Gmail 會自動關閉；Gmail 內 Mail 與 Chat 切換時保持開啟。
+- 支援 Gmail 內嵌的 Google Chat 及獨立 `chat.google.com` 網站。
+- Bookmark Side Panel 在 `mail.google.com` 與 `chat.google.com` 分頁啟用；切換到其他網站時不保持可用。
+- Bookmark Side Panel 開啟時，切換到非支援網站分頁或目前分頁導覽離開支援網站會自動關閉；Gmail 內 Mail 與 Chat 切換時保持開啟。
 - Side Panel 顯示在左側或右側由使用者的 Chrome 設定決定，產品不強制固定位置。
-- Bookmark 一律在 Gmail 中開啟；獨立 `chat.google.com` 不列入第一版驗收範圍。
+- Bookmark 在目前側欄所屬分頁開啟：Gmail 側欄返回 Gmail，獨立 Chat 側欄返回 Google Chat。兩站共用同一 Chrome Profile 的收藏庫。
 - Bookmark Library 保存於目前裝置及 Chrome 設定檔。
 - 每個 Chrome Profile 各自保存一份 Bookmark Library。
-- 第一版的收藏與跳轉以目前開啟的 Gmail 帳號為準，不提供同一個 Chrome Profile 內的多帳號辨識、切換或資料管理。
+- 第一版的收藏與跳轉以目前分頁的 Google 帳號為準，不提供同一個 Chrome Profile 內的多帳號辨識、切換或資料管理。
 - 第一版不提供跨裝置同步；未來希望使用 Chrome Sync，讓使用者登入 Chrome 並啟用同步後，自動在自己的裝置間同步。
 - 第一版跨裝置移轉或同事分享只使用 Bookmark Package 的手動匯出／匯入，不讀寫 Chrome 原生書籤。
 - 使用者接受未來將核心 Bookmark 放入 Chrome 原生書籤的「Google Chat Bookmark」專屬資料夾；這些項目也會出現在 Chrome 書籤管理員中。
@@ -81,15 +81,15 @@
 
 - 使用者在 Google Chat Message 上按右鍵即可立即建立 Bookmark，不需先填表單。
 - 收藏與跳轉同時支援聊天室（`space`）及一對一對話（`dm`），並保存各自的路由類型。
-- 若無法從右鍵目標辨識必要的 Thread 或 Message 身份，不建立 Bookmark，並顯示「目前無法讀取這則訊息，請重新整理 Gmail 後再試」。
+- 若無法從右鍵目標辨識必要的 Thread 或 Message 身份，不建立 Bookmark，並顯示「目前無法讀取這則訊息，請重新整理目前的 Google Chat 或 Gmail 分頁後再試」。
 - 擷取失敗提示提供以 icon 呈現的「複製診斷資訊」動作；診斷資訊不得包含訊息文字、回覆或參與者資料。
 - 手動貼上 Google 訊息連結的備援入口不納入 Milestone 1，只有實際測試顯示經常需要時才排入後續里程碑。
 - 右鍵選單提供「快速收藏（未分類）」及「收藏到分類」；使用者可在建立時直接指定 Category，也可稍後再整理標題、Category 及 Note。
 - 預設標題取自使用者實際收藏的訊息內容；無法取得時使用收藏日期作為暫時標題。
 - 收藏成功後顯示短暫提示及「復原」「開啟側欄整理」動作，不自動展開側欄。
 - Bookmark 以 Message Anchor 作為唯一對象；同一 Thread 可保存多則不同訊息。
-- 點擊 Bookmark 直接在 Gmail 開啟 Thread，並定位到保存的 Message Anchor。
-- 點擊 Bookmark 使用承載目前 Side Panel 的同一個 Gmail 分頁跳轉；即使該分頁目前位於收件匣或其他 Gmail 畫面也相同。
+- 點擊 Bookmark 直接在目前分頁的網站開啟 Thread，並定位到保存的 Message Anchor。
+- 點擊 Bookmark 使用承載目前 Side Panel 的同一個 Gmail 或獨立 Chat 分頁跳轉；即使 Gmail 分頁目前位於收件匣或其他畫面也相同。
 - 點擊 Bookmark 標題一律執行跳轉，不使用標題點擊進入編輯。
 - 每筆 Bookmark 的「⋯」選單提供「編輯」；選取後在原位置展開標題與 Note 欄位，並提供明確的「儲存」及「取消」。
 - 只有按下「儲存」才會更新 Bookmark；按下「取消」、關閉側欄、重新載入擴充功能或離開編輯狀態時，直接捨棄未儲存內容。

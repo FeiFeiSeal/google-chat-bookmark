@@ -31,4 +31,17 @@ describe('background bookmark flow', () => {
     await handleBookmarkContextMenu({repository, undo: new UndoManager(new MemoryStorageAdapter(), repository), sendMessage: vi.fn().mockResolvedValue({ok: true, candidate}), notify}, {frameId: 2}, {id: 1, url: 'https://mail.google.com/'});
     expect(notify).toHaveBeenLastCalledWith(1, 2, expect.objectContaining({kind: 'error', errorCode: 'repository-read-only'}));
   });
+
+  it('captures standalone Chat in frame 0 and shares duplicate detection with Gmail', async () => {
+    const repository = new BookmarkRepository(new MemoryStorageAdapter()); await repository.initialize();
+    const sendMessage = vi.fn().mockResolvedValue({ok: true, candidate});
+    const notify = vi.fn();
+    const deps = {repository, undo: new UndoManager(new MemoryStorageAdapter(), repository), sendMessage, notify};
+    await handleBookmarkContextMenu(deps, {frameId: 0}, {id: 8, url: 'https://chat.google.com/u/0/app/home'});
+    expect(sendMessage).toHaveBeenCalledWith(8, {type: 'bookmark.read-context'}, {frameId: 0});
+    expect(notify).toHaveBeenCalledWith(8, 0, expect.objectContaining({kind: 'created'}));
+    await handleBookmarkContextMenu(deps, {frameId: 31}, {id: 7, url: 'https://mail.google.com/mail/u/0/'});
+    expect(notify).toHaveBeenLastCalledWith(7, 31, expect.objectContaining({kind: 'duplicate'}));
+    expect((await repository.view()).bookmarks).toHaveLength(1);
+  });
 });

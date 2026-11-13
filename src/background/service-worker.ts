@@ -4,11 +4,13 @@ import {BookmarkRepository} from '../storage/repository';
 import {UndoManager} from '../storage/undo';
 import {handleBookmarkContextMenu} from './bookmark-controller';
 import type {ToastMessage} from '../content/toast';
-import {buildGmailNavigationUrl} from './navigation';
+import {navigateBookmarkInTab} from './navigation';
 import {configureSidePanelForActiveTab, configureSidePanelForTab} from './side-panel';
 import type {MessageIdentity} from '../domain/identity';
 import {UNCATEGORIZED_ID} from '../domain/schema';
+import {OFFICIAL_WEBSITE_URL} from '../shared/links';
 import {
+  OFFICIAL_WEBSITE_MENU_ID,
   QUICK_SAVE_MENU_ID,
   categoryIdFromMenuId,
   rebuildBookmarkContextMenus,
@@ -56,6 +58,10 @@ chrome.tabs.onActivated.addListener(({tabId, windowId}) => {
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === OFFICIAL_WEBSITE_MENU_ID) {
+    void chrome.tabs.create({url: OFFICIAL_WEBSITE_URL});
+    return;
+  }
   const categoryId = info.menuItemId === QUICK_SAVE_MENU_ID ? UNCATEGORIZED_ID : categoryIdFromMenuId(info.menuItemId);
   if (!categoryId) return;
   void ready.then(() => handleBookmarkContextMenu({
@@ -79,9 +85,8 @@ chrome.runtime.onMessage.addListener((message: unknown, sender, respond) => {
   if ((command.type === 'bookmark.navigate' || command.type === 'bookmark.jump-bookmark') && command.bookmark) {
     const tabId = command.tabId ?? sender.tab?.id;
     if (tabId !== undefined) {
-      void chrome.tabs.get(tabId)
-        .then((tab) => chrome.tabs.update(tabId, {url: buildGmailNavigationUrl(tab.url ?? '', command.bookmark!), active: true}))
-        .then(() => respond(true), () => respond(false));
+      void navigateBookmarkInTab(chrome.tabs, tabId, command.bookmark)
+        .then(respond, () => respond(false));
       return true;
     }
     respond(false);

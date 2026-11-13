@@ -1,8 +1,10 @@
 # ChatMark — Bookmarks for Google Chat™
 
-ChatMark 是獨立開發、適用於 Chrome 116+ 的非官方收藏擴充功能。它讓你在 Gmail 內嵌 Google Chat 的聊天室或一對一訊息上按右鍵快速收藏到未分類或直接指定分類，並從 Gmail Side Panel 返回當時選中的訊息。
+ChatMark 是獨立開發、適用於 Chrome 116+ 的非官方收藏擴充功能。它讓你在 Google Chat 獨立網站或 Gmail 內嵌 Chat 的聊天室或一對一訊息上按右鍵快速收藏到未分類或直接指定分類，並從 Side Panel 在同一分頁返回當時選中的訊息。
 
 側欄可新增、編輯、刪除及拖曳分類。一般分類可在「⋯ → 編輯分類」自訂整張卡片的背景色與文字色；背景色提供常用色，兩種顏色都可用選色器或六位 HEX 色碼設定，也能同時恢復預設顏色。「未分類」維持預設外觀。自訂顏色保存在本機，完整備份與還原會保留設定。
+
+需要查看操作說明時，可在 Chrome 工具列對 ChatMark 圖示按右鍵，選擇「官方網站」，或點擊側欄底部的「官方網站與使用說明」。兩個入口皆會在新分頁開啟 [ChatMark 官方網站](https://feifeiseal.github.io/google-chat-bookmark/)。
 
 本擴充功能並非由 Google 提供、贊助或背書。Google Chat 和 Gmail 是 Google LLC 的商標，其使用受 Google Permissions 規範約束。
 
@@ -43,16 +45,16 @@ RELEASE_DATE=2026-09-30 npm run package:test
 2. 執行 `npm run build`。
 3. 在 Chrome 開啟 `chrome://extensions`，啟用「開發人員模式」。
 4. 選擇「載入未封裝項目」，選取 `~/Codes/google-chat-bookmark/dist`。
-5. 重新整理已開啟的 Gmail 分頁。
+5. 重新整理已開啟的 Gmail 或 Google Chat 分頁。
 
-擴充功能只支援 `mail.google.com` 內嵌的 Google Chat。資料保存在目前 Chrome Profile 的 `chrome.storage.local`，不會跨 Profile 或跨裝置同步。
+擴充功能支援 `chat.google.com` 獨立網站及 `mail.google.com` 內嵌的 Google Chat。兩個網站共用目前 Chrome Profile 的收藏庫；點擊收藏時會在目前側欄所屬分頁，依該分頁的網站與帳號跳轉。資料保存在 `chrome.storage.local`，不會跨 Profile 或跨裝置同步。
 
 ## 更新
 
 1. 更新前，先從 Side Panel 的「診斷與備份」下載完整備份。
 2. 在原本固定的專案資料夾覆蓋程式並重新執行 `npm install`、`npm run build`。
 3. 回到 `chrome://extensions`，在同一個擴充功能卡片按「重新載入」。
-4. 重新整理 Gmail，確認原有 Bookmark 仍存在。
+4. 重新整理 Gmail 或 Google Chat，確認原有 Bookmark 仍存在。
 
 不要以「移除擴充功能再重新安裝」作為一般更新方式；移除擴充功能會讓 Chrome 清除該 Extension ID 的本機資料。也不要從新的資料夾載入另一份副本，因為 Chrome 可能把它視為不同的擴充功能。
 

@@ -1,6 +1,6 @@
 # Milestone 1 人工驗收清單
 
-環境：Chrome 116+、一般模式、Gmail 內嵌 Google Chat、從固定的 `dist/` 資料夾載入未封裝項目。
+環境：Chrome 116+、一般模式、Gmail 內嵌 Google Chat 與獨立 `chat.google.com`、從固定的 `dist/` 資料夾載入未封裝項目。
 
 ## 收藏與回饋
 
@@ -138,3 +138,38 @@ Chrome 版本：待填
 - [x] 點收藏能返回原訊息。
 
 自動化結果：側欄與導覽相關的 10 個測試、typecheck、lint 及 production build 全部通過。
+
+## 2026-11-13 獨立 Google Chat 支援
+
+- [ ] 在原有擴充功能的 `chrome://extensions` 頁重新載入新版 `dist/`，再重新整理 Gmail 與 `https://chat.google.com/`。
+- [ ] 在獨立 Chat 點擴充功能 action，確認側欄可開啟，並看見 Gmail 中原有的收藏與分類。
+- [ ] 在獨立 Chat 的聊天室及一對一對話，分別右鍵收藏主訊息與討論串回覆；測試快速收藏、指定分類及成功提示的「復原」「開啟側欄」。
+- [ ] 在獨立 Chat 側欄點收藏，確認同一分頁返回正確討論串並定位 Message Anchor，且不切到 Gmail。
+- [ ] 同一則訊息先在 Gmail 收藏，再到獨立 Chat 收藏，確認提示重複；點「跳到 Bookmark」仍在獨立 Chat 定位。
+- [ ] 在獨立 Chat 新增或編輯收藏後，確認另一個 Gmail 側欄同步更新；在 Gmail 開啟收藏仍使用原 Gmail 分頁。
+- [ ] 在非預設 Google 帳號的獨立 Chat 分頁點收藏，確認沿用該分頁帳號，不跳回預設帳號。
+- [ ] 在 Gmail 與獨立 Chat 間切換，確認側欄可用；切至其他網站或目前分頁導覽離開支援網站時，確認側欄關閉。
+- [ ] 重新載入擴充功能及重新整理兩個網站，確認原有收藏庫保持。
+
+自動化結果：18 個測試檔、153 個測試全部通過；typecheck、lint、production build 與 `git diff --check` 通過。本次瀏覽器自動化連線發生錯誤，未完成以上實機驗收，不將自動測試視為 Google 私有 DOM 與精確定位的驗證。
+
+### 同日修正：收藏跳轉不重新載入整頁
+
+原因：獨立 Chat 透過 `tabs.update` 開啟 `/room/…?cls=10` 分享連結，會載入新文件再轉至 `/app/chat/…`。改由 content script 使用 Chat 站內路由與 History API；Gmail 保留原有 hash 跳轉。
+
+- [x] 透過 Chrome 原生介面重新載入既有 ChatMark（ID：`ddcmoojeibdkbieomjejkkjooonkfibb`），重新整理獨立 Chat 一次以載入新版 content script。
+- [x] 開啟側欄，確認既有收藏與分類仍可讀取。
+- [x] 從「AI 技巧分享串」點側欄「測試討論串」，確認站內路由變更並實際顯示目標討論串與回覆，過程未出現整頁載入畫面。
+- [x] 再點「AI 技巧分享串」，確認返回原討論串且未出現整頁載入畫面。
+- [ ] 非預設帳號、獨立 Chat 一對一對話、特定回覆錨點及瀏覽器上一頁／下一頁仍待實機驗證。
+
+自動化結果：19 個測試檔、162 個測試全部通過；typecheck、lint 與 production build 通過。新增站內導覽測試，確認獨立 Chat 不呼叫 `tabs.update`，content script 不可用時不以整頁導覽作為備援。
+
+## 2026-11-13 官方網站入口
+
+- [x] 重新載入既有 ChatMark 0.2.0，確認工具列圖示的右鍵選單顯示「官方網站」，且不混入訊息收藏選單。
+- [x] 點選右鍵選單「官方網站」，確認以新分頁開啟 `https://feifeiseal.github.io/google-chat-bookmark/` 並載入網站。
+- [x] 側欄最下方顯示「官方網站與使用說明」，在收藏清單可捲動時仍可見。
+- [x] 點選側欄連結，確認以新分頁開啟相同官方網站，原 Chat 分頁保留。
+
+驗證：162 個測試、typecheck、lint、production build 與 `git diff --check` 通過；調整訊息選單適用範圍後，重跑 context-menu 測試、typecheck、lint 與建置亦通過。

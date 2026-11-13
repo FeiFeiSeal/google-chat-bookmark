@@ -26,6 +26,7 @@ import {graphemeLength, truncateGraphemes} from '../domain/title';
 import {CURRENT_STORAGE_SCHEMA_VERSION, UNCATEGORIZED_ID, type Bookmark, type Category, type LibraryData, type LibraryView} from '../domain/schema';
 import type {DeletionSnapshot} from '../storage/repository';
 import {messages} from '../shared/messages';
+import {OFFICIAL_WEBSITE_URL} from '../shared/links';
 
 export interface PanelRepository {
   initialize(): Promise<void>;
@@ -483,5 +484,6 @@ export function App({repository, diagnostics, onNavigate}: {repository?: PanelRe
     {status && <p className="global-status" role="status">{status}</p>}
     {selectedDeleteCategory && <div className="dialog-backdrop"><div role="dialog" aria-modal="true" aria-labelledby="delete-dialog-title" className="confirm-dialog"><h2 id="delete-dialog-title">{messages.deleteCategory}</h2><p>{`這個分類包含 ${selectedDeleteCount} 筆 Bookmark`}</p><p className="muted">{messages.deleteCategoryDescription}</p><div><button type="button" onClick={() => setDeleteCategoryId(null)}>{messages.cancel}</button><button className="danger-button" type="button" onClick={() => void confirmDeleteCategory()}>{messages.confirmDelete}</button></div></div></div>}
     {repository && diagnostics && <details className="diagnostics"><summary>{messages.diagnostics}</summary><div className="diagnostic-actions"><button type="button" onClick={() => void repository.snapshot().then(diagnostics.backup)}>完整備份</button><button type="button" onClick={() => inputRef.current?.click()}>完整還原</button><input ref={inputRef} type="file" accept="application/json,.json" hidden onChange={(event) => void restoreFile(event.target.files?.[0])}/></div></details>}
+    <footer className="help-footer"><a href={OFFICIAL_WEBSITE_URL} target="_blank" rel="noopener noreferrer" title={messages.opensInNewTab}>{messages.websiteHelp}</a></footer>
   </main>;
 }

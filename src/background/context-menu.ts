@@ -1,7 +1,9 @@
 import type {Category} from '../domain/schema';
+import {messages} from '../shared/messages';
 
 export const QUICK_SAVE_MENU_ID = 'google-chat-bookmark-save';
 export const SAVE_TO_CATEGORY_MENU_ID = 'google-chat-bookmark-save-to-category';
+export const OFFICIAL_WEBSITE_MENU_ID = 'google-chat-bookmark-official-website';
 const CATEGORY_MENU_PREFIX = 'google-chat-bookmark-category:';
 const CHAT_DOCUMENT_PATTERNS = ['https://chat.google.com/*'];
 
@@ -33,7 +35,10 @@ function displayNames(categories: Category[]): Map<string, string> {
 
 export function buildBookmarkContextMenuEntries(categories: Category[]): chrome.contextMenus.CreateProperties[] {
   const names = displayNames(categories);
-  const shared = {contexts: ['all'] as ['all'], documentUrlPatterns: CHAT_DOCUMENT_PATTERNS};
+  const shared: Pick<chrome.contextMenus.CreateProperties, 'contexts' | 'documentUrlPatterns'> = {
+    contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio'],
+    documentUrlPatterns: CHAT_DOCUMENT_PATTERNS,
+  };
   return [
     {id: QUICK_SAVE_MENU_ID, title: '快速收藏（未分類）', ...shared},
     {id: SAVE_TO_CATEGORY_MENU_ID, title: '收藏到分類', ...shared},
@@ -61,5 +66,6 @@ function create(writer: ContextMenuWriter, properties: chrome.contextMenus.Creat
 
 export async function rebuildBookmarkContextMenus(writer: ContextMenuWriter, categories: Category[]): Promise<void> {
   await removeAll(writer);
+  await create(writer, {id: OFFICIAL_WEBSITE_MENU_ID, title: messages.officialWebsite, contexts: ['action']});
   for (const entry of buildBookmarkContextMenuEntries(categories)) await create(writer, entry);
 }
