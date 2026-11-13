@@ -4,7 +4,7 @@
 
 讓搜尋「Google Chat 訊息收藏」的人能找到 ChatMark、理解目前的使用範圍，並前往 Chrome 線上應用程式商店安裝。網站同時要能直接回答使用方式、資料儲存與產品身分等常見問題。
 
-所有內容都以目前產品實況為準：ChatMark 是獨立開發的非官方擴充功能；收藏功能只支援 `mail.google.com` 裡的 Chat 分頁與對話畫面；收藏保存在目前 Chrome 使用者設定檔，不會自動跨裝置同步。不要把獨立的 `chat.google.com` 網站寫成已支援。
+所有內容都以目前產品實況為準：ChatMark 是獨立開發的非官方擴充功能；收藏功能已加入 `chat.google.com` 獨立網站及 `mail.google.com` 裡的 Chat 分頁與對話畫面支援，獨立網站的實機驗收狀態見 `manual-test-checklist.md`；收藏保存在目前 Chrome 使用者設定檔，兩站共用，不會自動跨裝置同步。公開網站與商店說明應隨新版擴充功能驗收及發布一併更新。
 
 Google 表示，AI Overviews 與 AI Mode 沿用一般搜尋的基礎做法，沒有額外的 AEO 專用標記要求。結構化資料應與頁面可見內容一致，也不能保證搜尋結果會顯示特殊版型。參考：[AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)、[Optimizing for generative AI features](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)。
 
@@ -21,16 +21,18 @@ Google 表示，AI Overviews 與 AI Mode 沿用一般搜尋的基礎做法，沒
 
 ## 階段一：發布與確認基礎設定
 
+2026-11-13 發布限制：0.2.0 的獨立 Google Chat 支援、頁面內訊息跳轉、官方網站入口，以及對應中英文介紹、搜尋摘要、結構化資料與隱私權政策先在本機準備。須等擴充功能套件審核通過後，才推送網站變更及發佈；目前不執行遠端推送或 Pages workflow。詳細順序見 `release-v0.2.0.md`。
+
 目前在 `feat/site-seo-aeo` 分支已完成：中英文首頁與政策頁的標題、描述、canonical、`hreflang`、社群分享資訊；首頁的常見問題、`SoftwareApplication` JSON-LD、商店安裝連結；四頁的 `sitemap.xml`。這些修改尚未提交或部署。
 
 接下來：
 
 1. 將網站修改提交並合併到 `main`，確認 GitHub Pages 部署成功。
 2. 檢查四個公開頁面與 sitemap 都能開啟，標題、語言對應、分享圖片和安裝連結正確。
-3. 在 Google Search Console 建立 `https://feifeiseal.github.io/google-chat-bookmark/` 的網址前置字元資源，完成擁有權驗證，提交 `https://feifeiseal.github.io/google-chat-bookmark/sitemap.xml`。
+3. 在 Google Search Console 建立 `https://chat-mark.josui.space/` 的網址前置字元資源，完成擁有權驗證，提交 `https://chat-mark.josui.space/sitemap.xml`。
 4. 用網址審查確認中英文首頁及政策頁可供索引，並留意 Google 選擇的 canonical。提交 sitemap 只是提供網址線索，不保證收錄。
 
-GitHub Pages 的專案網站無法控制 `github.io` 網域根目錄的 `robots.txt`；不在 `/google-chat-bookmark/` 放一個無效的 `robots.txt`。參考：[Build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)。
+正式網址已改用自訂網域 `chat-mark.josui.space`，`site/CNAME` 與 sitemap 同步採用此網域；發布時需核對 Pages 自訂網域、DNS 與 HTTPS 設定。參考：[Build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)。
 
 ## 階段二：擴充首頁 Q&A 與操作教學
 
@@ -40,9 +42,9 @@ GitHub Pages 的專案網站無法控制 `github.io` 網域根目錄的 `robots.
 | --- | --- | --- |
 | ChatMark 是什麼？ | 在 Gmail 內嵌 Chat 收藏、整理並返回訊息的非官方 Chrome 擴充功能。 | 已實作 |
 | 如何收藏 Google Chat 訊息？ | 在 Gmail 的 Chat 對話中，對訊息按右鍵選擇快速收藏或分類。 | 已實作 |
-| 可以在 `chat.google.com` 使用嗎？ | 目前只支援 `mail.google.com` 內的 Chat，不支援獨立網站。 | 已實作 |
+| 可以在 `chat.google.com` 使用嗎？ | 支援獨立網站及 Gmail 內嵌 Chat，兩站共用同一 Chrome 使用者設定檔的收藏庫。 | 已實作，待實機驗收與發布 |
 | 分類與收藏可以怎麼整理？ | 可新增、更名、刪除、拖曳分類與收藏，也能搜尋、編輯筆記及置頂。 | 已實作 |
-| 點選收藏會回到哪裡？ | 返回 Gmail 中的原始訊息；仍需有權限查看該對話。 | 已實作 |
+| 點選收藏會回到哪裡？ | 在目前側欄所屬的 Google Chat 或 Gmail 分頁返回原始訊息；仍需有權限查看該對話。 | 已實作 |
 | 收藏會同步到其他裝置嗎？ | 保存在目前 Chrome 使用者設定檔，不會自動同步或上傳給開發者。 | 已實作 |
 | 如何備份與還原？ | 手動匯出整份 JSON；還原會取代目前收藏庫。 | 已實作 |
 | ChatMark 是 Google 官方產品嗎？ | 獨立開發，並非由 Google 提供、贊助或背書。 | 已實作 |
@@ -51,7 +53,7 @@ Q&A 放在首頁功能與支援範圍說明之後、支援連結之前。先讓�
 
 這個區塊的目標是讓人快速取得正確答案，而非堆砌關鍵字。Google 說明 AI 搜尋沿用一般搜尋的基礎做法，沒有特殊的 AEO schema 要求；不依賴 `FAQPage` 或 `QAPage` 標記來取得特殊搜尋版型。參考：[AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)、[Changes to HowTo and FAQ rich results](https://developers.google.com/search/blog/2023/08/howto-faq-changes)、[QAPage guidelines](https://developers.google.com/search/docs/appearance/structured-data/qapage)。
 
-優先增加一篇中英文對應的「如何在 Gmail 的 Google Chat 收藏訊息」操作教學：包含開啟 Gmail Chat、右鍵收藏、分類與搜尋、返回原訊息的步驟，配上現有的實際操作截圖。教學明示獨立 `chat.google.com` 不支援，以及查看原訊息仍需對話存取權。從首頁連到教學，教學也連回安裝頁和隱私權政策。
+優先增加一篇中英文對應的「如何在 Google Chat 收藏訊息」操作教學：包含開啟獨立 Chat 或 Gmail Chat、右鍵收藏、分類與搜尋、返回原訊息的步驟，配上實際操作截圖。教學明示兩站共用本機收藏庫，以及查看原訊息仍需對話存取權。從首頁連到教學，教學也連回安裝頁和隱私權政策。
 
 內容採用讀者會問的標題與簡短直接的答案，再提供必要的操作細節。不要重複產生多篇只改關鍵字的薄內容，也不加入未實作的功能、虛構評價或星等。
 
