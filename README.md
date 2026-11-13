@@ -1,64 +1,74 @@
 # ChatMark — Bookmarks for Google Chat™
 
-ChatMark 是獨立開發、適用於 Chrome 116+ 的非官方收藏擴充功能。它讓你在 Google Chat 獨立網站或 Gmail 內嵌 Chat 的聊天室或一對一訊息上按右鍵快速收藏到未分類或直接指定分類，並從 Side Panel 在同一分頁返回當時選中的訊息。
+ChatMark 是獨立開發、適用於 Chrome 116+ 的非官方收藏擴充功能，協助你在 Google Chat 獨立網站與 Gmail 內嵌 Chat 收藏、整理及重新找到重要訊息。
 
-側欄可新增、編輯、刪除及拖曳分類。一般分類可在「⋯ → 編輯分類」自訂整張卡片的背景色與文字色；背景色提供常用色，兩種顏色都可用選色器或六位 HEX 色碼設定，也能同時恢復預設顏色。「未分類」維持預設外觀。自訂顏色保存在本機，完整備份與還原會保留設定。
+[ChatMark 官網與使用說明](https://chat-mark.josui.space/) · [Chrome 線上應用程式商店](https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob) · [問題回報](https://github.com/FeiFeiSeal/google-chat-bookmark/issues)
 
-需要查看操作說明時，可在 Chrome 工具列對 ChatMark 圖示按右鍵，選擇「官方網站」，或點擊側欄底部的「官方網站與使用說明」。兩個入口皆會在新分頁開啟 [ChatMark 官方網站](https://feifeiseal.github.io/google-chat-bookmark/)。
+目前專案版本為 **0.2.0**。
 
-本擴充功能並非由 Google 提供、贊助或背書。Google Chat 和 Gmail 是 Google LLC 的商標，其使用受 Google Permissions 規範約束。
+本擴充功能並非由 Google 提供、贊助或背書。Google Chat 和 Gmail 是 Google LLC 的商標。
 
-## 建置
+## 功能與使用方式
+
+- **右鍵收藏訊息**：在聊天室或一對一對話的訊息上按右鍵，選擇快速收藏到「未分類」，或直接指定分類。預設標題取自被收藏的訊息；同一討論串中的不同訊息可分別收藏。
+- **在側欄整理**：點擊 Chrome 工具列的 ChatMark 圖示開啟側欄。可搜尋標題、筆記或分類，編輯標題與筆記、置頂常用收藏，以及拖曳調整順序或移動分類。
+- **設定分類顏色**：從一般分類的「⋯ → 編輯分類」修改名稱、整張卡片的背景色與文字色，可預覽、使用選色器或六位 HEX 色碼，也能恢復預設顏色。「未分類」維持預設外觀。
+- **返回原訊息**：點擊收藏標題，會在目前側欄所屬的同一分頁開啟訊息。獨立 Google Chat 使用頁面內切換；Gmail 沿用原本的訊息跳轉方式。
+- **重新查看說明**：在工具列對 ChatMark 圖示按右鍵，或從側欄最下方，點選「ChatMark 官網與使用說明」，即可在新分頁開啟官網。
+- **備份與復原**：剛收藏或刪除後可依提示復原；側欄的「診斷與備份」可下載整份收藏庫 JSON，或從完整備份還原。還原會取代目前收藏庫。
+
+## 支援範圍與資料保存
+
+支援 `https://chat.google.com/` 及 `https://mail.google.com/` 內嵌的 Google Chat，兩個網站共用目前 Chrome 使用者設定檔（Profile）的收藏庫。側欄只在這兩個網站可用，開啟收藏時沿用目前分頁的 Google 帳號；使用者仍需有權查看原對話。
+
+收藏與分類保存在 `chrome.storage.local`，不會自動跨 Profile 或跨裝置同步。完整備份會保留分類顏色等設定；目前不提供選擇分類分享或合併匯入。產品不連接開發者後端、不收集遙測，也不自動上傳收藏內容。不支援無痕模式。
+
+隱私權政策：[繁體中文](https://chat-mark.josui.space/privacy.html) · [English](https://chat-mark.josui.space/privacy-en.html)。
+
+## 建置與安裝測試版
 
 ```bash
 npm install
 npm run build
 ```
 
-建置結果位於 `dist/`。
+建置結果位於 `dist/`。在 Chrome 載入未封裝項目：
 
-## 產出同事測試 ZIP
+1. 將專案保留在固定資料夾，往後更新也使用同一路徑。
+2. 開啟 `chrome://extensions`，啟用「開發人員模式」。
+3. 選擇「載入未封裝項目」，選取本專案的 `dist/` 資料夾。
+4. 重新整理已開啟的 Gmail 或 Google Chat 分頁。
 
-執行：
+### 更新既有測試版
+
+1. 先從側欄的「診斷與備份」下載完整備份。
+2. 在原本固定的專案資料夾更新檔案，再執行 `npm install`、`npm run build`。
+3. 回到 `chrome://extensions`，在同一個擴充功能卡片按「重新載入」。
+4. 重新整理 Gmail 或 Google Chat，確認既有收藏仍存在。
+
+不要以移除後重裝作為一般更新方式：移除擴充功能會清除該 Extension ID 的本機資料。從不同資料夾載入，也可能被 Chrome 視為另一個擴充功能。
+
+### 產出同事測試 ZIP
 
 ```bash
 npm run package:test
 ```
 
-腳本會依序建立最新 production build、讀取 `dist/manifest.json` 的版本號、檢查 ZIP 完整性，並輸出：
+腳本會建立最新 production build、核對套件與 manifest 版號、檢查 ZIP 完整性，並輸出：
 
 ```text
 releases/google-chat-bookmark-v<版本>-test-<日期>.zip
 ```
 
-同一天重跑會安全覆蓋相同檔名，不會把舊 build 的 hashed assets 留在 ZIP。若需要指定日期，可執行：
+同一天重跑會覆蓋相同檔名，ZIP 不會包含上次建置遺留的 hashed assets。需要指定檔名日期時：
 
 ```bash
-RELEASE_DATE=2026-09-30 npm run package:test
+RELEASE_DATE=2026-11-13 npm run package:test
 ```
 
-將 ZIP 傳給測試者；測試者解壓後，在 `chrome://extensions` 啟用「開發人員模式」，選取「載入未封裝項目」，再選擇內含 `manifest.json` 的解壓資料夾。
+測試者解壓後，在 `chrome://extensions` 選擇「載入未封裝項目」，指定內含 `manifest.json` 的資料夾。收到新版時，繼續覆蓋同一資料夾並重新載入。
 
-## 安裝未封裝測試版
-
-1. 將整個專案固定放在 `~/Codes/google-chat-bookmark`，不要在更新時改用另一個資料夾。
-2. 執行 `npm run build`。
-3. 在 Chrome 開啟 `chrome://extensions`，啟用「開發人員模式」。
-4. 選擇「載入未封裝項目」，選取 `~/Codes/google-chat-bookmark/dist`。
-5. 重新整理已開啟的 Gmail 或 Google Chat 分頁。
-
-擴充功能支援 `chat.google.com` 獨立網站及 `mail.google.com` 內嵌的 Google Chat。兩個網站共用目前 Chrome Profile 的收藏庫；點擊收藏時會在目前側欄所屬分頁，依該分頁的網站與帳號跳轉。資料保存在 `chrome.storage.local`，不會跨 Profile 或跨裝置同步。
-
-## 更新
-
-1. 更新前，先從 Side Panel 的「診斷與備份」下載完整備份。
-2. 在原本固定的專案資料夾覆蓋程式並重新執行 `npm install`、`npm run build`。
-3. 回到 `chrome://extensions`，在同一個擴充功能卡片按「重新載入」。
-4. 重新整理 Gmail 或 Google Chat，確認原有 Bookmark 仍存在。
-
-不要以「移除擴充功能再重新安裝」作為一般更新方式；移除擴充功能會讓 Chrome 清除該 Extension ID 的本機資料。也不要從新的資料夾載入另一份副本，因為 Chrome 可能把它視為不同的擴充功能。
-
-## 開發檢查
+## 開發與驗證
 
 ```bash
 npm run typecheck
@@ -67,43 +77,6 @@ npm test
 npm run build
 ```
 
-完整人工驗收步驟見 [docs/manual-test-checklist.md](docs/manual-test-checklist.md)。
+Google Chat 的 DOM 擷取、訊息定位、帳號與擴充功能更新行為仍需實機驗證，進度見 [人工驗收清單](docs/manual-test-checklist.md)。
 
-## 側欄版面預覽
-
-執行 `npm run dev` 後，在開發伺服器開啟 `/tests/fixtures/sidepanel-layout.html`。
-底部可切換 Demo data、Worst case、Empty、One 與 1,000 rows，驗證長標題、長分類、置頂及窄側欄。
-預覽使用獨立記憶體資料，不連接 Chrome 收藏庫；正式擴充功能不包含此頁。
-
-## 介紹網站、隱私權政策與 GitHub Pages
-
-網站首頁提供[繁體中文介紹](site/index.html)與[英文介紹](site/index-en.html)，說明功能、目前支援範圍、本機儲存及非官方身分，並連到專案安裝說明與隱私政策。
-
-頁首 GitHub 連結使用 [GitHub Primer Octicons 的 mark-github-24 圖示](https://github.com/primer/octicons/blob/main/icons/mark-github-24.svg)。
-
-網站的搜尋資訊位於 `site/`：四頁各有獨立標題、描述、canonical、語言對應與社群分享預覽；首頁另有常見問題與 `SoftwareApplication` 結構化資料。`site/sitemap.xml` 列出四個正式網址。
-
-後續內容、發布與成效檢查見 [網站 SEO 與 AEO 規劃](docs/site-seo-aeo-plan.md)。
-
-中英文首頁的安裝按鈕與結構化資料指向 [ChatMark 的 Chrome 線上應用程式商店頁面](https://chromewebstore.google.com/detail/ldnpokbaolfcnjbpgckmigahjcckmeob)。網址不含分享時附加的追蹤參數。
-
-發布後可在 Google Search Console 登錄 `https://feifeiseal.github.io/google-chat-bookmark/` 網址前置字元資源，提交 `https://feifeiseal.github.io/google-chat-bookmark/sitemap.xml`，並使用網址審查工具確認索引狀態。GitHub Pages 專案網站無法控制 `github.io` 網域根目錄的 `robots.txt`，因此不在子目錄放置無效的檔案。更換 Pages 網址或自訂網域時，請同步更新這些絕對網址。
-
-政策頁提供[繁體中文](site/privacy.html)與[英文](site/privacy-en.html)，頁首可切換語言。兩個版本使用獨立靜態 HTML／CSS，不需要安裝套件或建置。聯絡管道為此專案的 GitHub Issues；發布前確認 Issues 已啟用，且一般使用者可存取。
-
-本機預覽：
-
-```bash
-python3 -m http.server 4173 --directory site --bind 127.0.0.1
-```
-
-首頁為 `http://127.0.0.1:4173/`，英文首頁為 `http://127.0.0.1:4173/index-en.html`。政策頁為 `http://127.0.0.1:4173/privacy.html`；英文版為 `http://127.0.0.1:4173/privacy-en.html`。
-
-首次發布：
-
-1. 在 GitHub repository 的 **Settings → Pages → Build and deployment → Source** 選擇 **GitHub Actions**。確認 repository 的可見性與 GitHub 方案支援 Pages。
-2. 將 `site/` 與 `.github/workflows/pages.yml` 的變更依專案流程合併並推送至 `main`。
-3. 在 **Actions** 確認「Deploy privacy policy to GitHub Pages」執行成功。若設定 Pages 前已推送，可選擇 `main` 手動執行此 workflow。
-4. 未設定自訂網域時，預期中文政策網址為 `https://feifeiseal.github.io/google-chat-bookmark/privacy.html`，英文版為 `https://feifeiseal.github.io/google-chat-bookmark/privacy-en.html`。以未登入的瀏覽器確認可公開讀取後，再將選用語言的網址填入 Chrome Web Store 的隱私政策網址欄位。
-
-Workflow 只發布 `site/`，不包含 `docs/`、擴充功能 `dist/` 或原始碼。後續 `main` 上的網站或 workflow 變更會自動觸發部署。更新資料處理方式時，請同步修改中英文政策內容、最後更新日期及商店申報。
+執行 `npm run dev` 後，可開啟 `/tests/fixtures/sidepanel-layout.html` 預覽側欄。頁面提供 Demo data、Worst case、Empty、One 與 1,000 rows，供驗證長標題、長分類、置頂及窄側欄。預覽使用獨立記憶體資料，不連接 Chrome 收藏庫，正式擴充功能不包含此頁。

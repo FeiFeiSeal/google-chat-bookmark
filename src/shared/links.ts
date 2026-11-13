@@ -1,1 +1,1 @@
-export const OFFICIAL_WEBSITE_URL = 'https://feifeiseal.github.io/google-chat-bookmark/';
+export const OFFICIAL_WEBSITE_URL = 'https://chat-mark.josui.space/';

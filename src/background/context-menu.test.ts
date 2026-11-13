@@ -40,6 +40,6 @@ describe('bookmark context menus', () => {
     };
     await rebuildBookmarkContextMenus(writer, [UNCATEGORIZED_CATEGORY, category('project', '專案')]);
     expect(calls).toEqual(['remove', OFFICIAL_WEBSITE_MENU_ID, QUICK_SAVE_MENU_ID, SAVE_TO_CATEGORY_MENU_ID, categoryMenuId('uncategorized'), categoryMenuId('project')]);
-    expect(writer.create).toHaveBeenCalledWith({id: OFFICIAL_WEBSITE_MENU_ID, title: '官方網站', contexts: ['action']}, expect.any(Function));
+    expect(writer.create).toHaveBeenCalledWith({id: OFFICIAL_WEBSITE_MENU_ID, title: 'ChatMark 官網與使用說明', contexts: ['action']}, expect.any(Function));
   });
 });
