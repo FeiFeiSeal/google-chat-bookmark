@@ -6,20 +6,20 @@
     <meta name="description" content="ChatMark is an independently developed, unofficial bookmarking tool for Google Chat. Read about local storage, permissions, backups, deletion, and how to contact us.">
     <meta name="referrer" content="no-referrer">
     <title>Privacy Policy · ChatMark</title>
-    <link rel="canonical" href="https://feifeiseal.github.io/google-chat-bookmark/privacy-en.html">
+    <link rel="canonical" href="https://chat-mark.josui.space/privacy-en.html">
     <link rel="icon" href="./icon-16.png?v=0.1.3" type="image/png" sizes="16x16">
     <link rel="icon" href="./icon-32.png?v=0.1.3" type="image/png" sizes="32x32">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="alternate" hreflang="zh-Hant" href="https://feifeiseal.github.io/google-chat-bookmark/privacy.html">
-    <link rel="alternate" hreflang="en" href="https://feifeiseal.github.io/google-chat-bookmark/privacy-en.html">
-    <link rel="alternate" hreflang="x-default" href="https://feifeiseal.github.io/google-chat-bookmark/privacy.html">
+    <link rel="stylesheet" href="./styles.css?v=0.2.0">
+    <link rel="alternate" hreflang="zh-Hant" href="https://chat-mark.josui.space/privacy.html">
+    <link rel="alternate" hreflang="en" href="https://chat-mark.josui.space/privacy-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://chat-mark.josui.space/privacy.html">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="ChatMark">
     <meta property="og:title" content="Privacy Policy · ChatMark">
     <meta property="og:description" content="Learn how ChatMark stores and manages Google Chat bookmarks locally, including permissions, backups, deletion, and support.">
-    <meta property="og:url" content="https://feifeiseal.github.io/google-chat-bookmark/privacy-en.html">
-    <meta property="og:image" content="https://feifeiseal.github.io/google-chat-bookmark/images/chatmark-overview.png">
+    <meta property="og:url" content="https://chat-mark.josui.space/privacy-en.html">
+    <meta property="og:image" content="https://chat-mark.josui.space/images/chatmark-overview.png">
     <meta property="og:image:alt" content="ChatMark illustration of organized conversation bookmarks">
     <meta name="twitter:card" content="summary_large_image">
   </head>
@@ -28,19 +28,20 @@
     <header class="site-header">
       <a class="brand" href="./index-en.html"><img src="./icon-48.png?v=0.1.3" width="32" height="32" alt=""><span>ChatMark</span></a>
       <div class="header-links">
+        <button class="updates-trigger" type="button" data-open-release hidden>What’s new</button>
+        <a class="github-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark" aria-label="GitHub project" title="GitHub project"><img src="./github-mark.svg" width="24" height="24" alt=""></a>
         <nav class="languages" aria-label="Language">
           <a href="./privacy.html" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
           <a href="./privacy-en.html" lang="en" hreflang="en" aria-current="page">English</a>
         </nav>
-        <a class="github-link" href="https://github.com/FeiFeiSeal/google-chat-bookmark" aria-label="GitHub project" title="GitHub project"><img src="./github-mark.svg" width="24" height="24" alt=""></a>
       </div>
     </header>
     <main id="policy" tabindex="-1">
       <div class="intro">
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: <time datetime="2026-11-04">November 4, 2026</time></p>
+        <p class="updated">Last updated: <time datetime="2026-11-13">November 13, 2026</time></p>
         <p class="lead">Your bookmarks stay in your browser.</p>
-        <p>ChatMark — Bookmarks for Google Chat™ helps you save, organize, and return to important messages in Google Chat embedded in Gmail. This policy explains how the extension handles data and how you can manage it.</p>
+        <p>ChatMark — Bookmarks for Google Chat™ helps you save, organize, and return to important messages on the standalone Google Chat website or in Chat embedded in Gmail. This policy explains how the extension handles data and how you can manage it.</p>
         <p><strong>ChatMark is an independently developed, unofficial extension. It is not provided, sponsored, or endorsed by Google.</strong></p>
         <p>Your bookmarks are stored locally in your current Chrome profile. The extension has no developer-operated server for bookmark data and includes no advertising, analytics, or tracking services.</p>
       </div>
@@ -87,11 +88,11 @@
       <section aria-labelledby="permissions">
         <h2 id="permissions">Why we need these permissions</h2>
         <dl class="permissions">
-          <div><dt>Context menus <code>contextMenus</code></dt><dd>Lets you quickly save a message or choose a bookmark category from its right-click menu.</dd></div>
+          <div><dt>Context menus <code>contextMenus</code></dt><dd>Lets you quickly save a message or choose a bookmark category from its right-click menu, and open the official website from the toolbar icon’s right-click menu.</dd></div>
           <div><dt>Storage <code>storage</code></dt><dd>Saves your local bookmarks, categories, interface state, and data needed to undo actions.</dd></div>
-          <div><dt>Side panel <code>sidePanel</code></dt><dd>Displays the bookmark management interface in Gmail tabs.</dd></div>
+          <div><dt>Side panel <code>sidePanel</code></dt><dd>Displays the bookmark management interface in Gmail or Google Chat tabs.</dd></div>
           <div><dt><code>mail.google.com</code></dt><dd>Identifies Gmail tabs, controls the side panel, and navigates back to bookmarked messages.</dd></div>
-          <div><dt><code>chat.google.com</code></dt><dd>Identifies the message you right-click inside Gmail's embedded Chat frame, obtains bookmark information, and displays feedback about your actions.</dd></div>
+          <div><dt><code>chat.google.com</code></dt><dd>Identifies the message you right-click on standalone Google Chat or inside Gmail's embedded Chat frame, obtains bookmark information, and displays feedback about your actions. It also controls the side panel and navigates to bookmarked messages on the standalone website.</dd></div>
         </dl>
       </section>
 
@@ -103,6 +104,8 @@
 
       <section aria-labelledby="website">
         <h2 id="website">This policy website</h2>
+        <p>The website stores the version of the update notice you have dismissed in this browser’s <code>localStorage</code>, so it does not appear on every visit. This record contains no identity or bookmark data and is not sent to the developer. Clearing website data may make the notice appear again.</p>
+        <p>These website links open a new tab only when you select 「ChatMark 官網與使用說明」 (ChatMark website and instructions) from the toolbar icon’s right-click menu or 「ChatMark 官網與使用說明」 (ChatMark website and instructions) at the bottom of the side panel. The extension does not attach bookmark titles, notes, message links, or your Google account to the website URL.</p>
         <p>This page is hosted on GitHub Pages and includes no analytics scripts, tracking tools, or external fonts. When you visit it, GitHub may process your IP address and website access logs under its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Privacy Statement</a>. These website connections are separate from the local bookmark data handled by the extension.</p>
       </section>
 
@@ -119,5 +122,18 @@
       </section>
     </main>
     <footer><span>ChatMark · An independent, unofficial extension</span><a href="#policy">Back to top</a></footer>
+    <dialog id="release-dialog" class="release-dialog" data-version="0.2.0" aria-labelledby="release-title" aria-describedby="release-intro">
+      <h2 id="release-title">What’s new in ChatMark 0.2.0</h2>
+      <p id="release-intro">Use your bookmarks in more places, and find the instructions whenever you need them.</p>
+      <ul>
+        <li><strong>Standalone Google Chat is supported</strong>Use chat.google.com or Chat inside Gmail. Both share the bookmarks and categories in your current Chrome profile.</li>
+        <li><strong>Find the instructions again</strong>Right-click the toolbar icon and choose 「ChatMark 官網與使用說明」, or select 「ChatMark 官網與使用說明」 at the bottom of the side panel. Both open this website in a new tab.</li>
+      </ul>
+      <form method="dialog">
+        <a href="./index-en.html#features" data-release-guide>Read the instructions</a>
+        <button class="primary-link" value="dismiss" autofocus>Got it</button>
+      </form>
+    </dialog>
+    <script src="./updates.js?v=0.2.0" defer></script>
   </body>
 </html>
